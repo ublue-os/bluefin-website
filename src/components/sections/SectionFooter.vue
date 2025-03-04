@@ -25,7 +25,7 @@ import IframeResizer from "@iframe-resizer/vue/sfc"
           id="contributor-container"
           src="/contributors.html"
           loading="lazy"
-          style="width: 100%; height: 300px;"
+          style="width: 100%; height: 200px;"
         ></IframeResizer>
       </div>
     </section>
