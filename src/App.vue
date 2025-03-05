@@ -75,10 +75,9 @@ onBeforeMount(() => {
 import { i18n } from "./locales/schema"
 
 let urlParams = new URLSearchParams(window.location.search)
-if (urlParams.has("lang")) {
-  ;(i18n.global as any).locale = urlParams.get("lang") ?? "en-US"
-} else {
-  ;(i18n.global as any).locale = window.navigator.language ?? "en-US"
+const currentLocale = urlParams.get("lang") || window.navigator.language
+if (i18n.global.availableLocales.includes(currentLocale)) {
+  ;(i18n.global as any).locale = currentLocale
 }
 
 import { useI18n } from "vue-i18n"
