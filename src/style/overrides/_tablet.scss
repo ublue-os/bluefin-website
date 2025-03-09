@@ -97,7 +97,6 @@
 
   #scene-landing {
     padding-top: 0;
-    margin-top: -40px;
 
     .title {
       @include mixins.flex(0px, center, center, column-reverse);
