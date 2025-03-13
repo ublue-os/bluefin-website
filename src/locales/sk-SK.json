@@ -74,7 +74,7 @@
     "QuestionsArray": {
       "0": {
         "question": "Čo to má byť? Prečo ste vyrobili Linuxovú distribúciu?",
-        "answer": "Bluefin využíva funkcií bootc OCI kontajnerov pre zostavenie ISO obrazu. Na tento proces dohliada dobre štrukturovaná komunita ktorá sa usiluje o automatizáciu a udržateľnosť. Finálny produkt je podobný výsledkom konfiguračných management nástrojov ako Ansible alebo Salt, ale bez obvyklých problémov ktoré idú ruku v ruke s udržiavaním vlastnej distribúcie. Termín ktorý používame je \"custom image\" na opísanie tohoto prístupu. Je to ako keby ste mali niekoho kto vám nainštaluje, nastavý a bude udržiavať vyladený systém za vás. \n\n Alebo inými slovami, je to ako keď vám váš technický kamarát pomáha nastaviť počítač, ale robíme to spoločne ako komunita, aby sme si navzájom pomohli. \n\n[OSTree Native Containers](https://containers.github.io/bootc/)"
+        "answer": "Bluefin využíva funkcií bootc OCI kontajnerov pre zostavenie ISO obrazu. Na tento proces dohliada dobre štrukturovaná komunita ktorá sa usiluje o automatizáciu a udržateľnosť. Finálny produkt je podobný výsledkom konfiguračných management nástrojov ako Ansible alebo Salt, ale bez obvyklých problémov ktoré idú ruku v ruke s udržiavaním vlastnej distribúcie. Termín ktorý používame je \"custom image\" na opísanie tohoto prístupu. Je to ako keby ste mali niekoho kto vám nainštaluje, nastavý a bude udržiavať vyladený systém za vás. \n\n Alebo inými slovami, je to ako keď vám váš technický kamarát pomáha nastaviť počítač, ale robíme to spoločne ako komunita, aby sme si navzájom pomohli. \n\n[OSTree Native Containers](https://bootc-dev.github.io/bootc/)"
       },
       "1": {
         "question": "Čím sa to odlišuje od ostatných systémov?",

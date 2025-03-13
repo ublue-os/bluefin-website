@@ -73,7 +73,7 @@
     "QuestionsArray": {
       "0": {
         "question": "Kio ĝuste estas ĉi tio? Kial vi kreis Linuksan distribuaĵon?",
-        "answer": "Bluefin uzas la OCI-kontenilajn funkciojn de bootc por komponi kaj konstrui OS-bildon. Ĉi tiu procezo estas superrigardita de bone strukturita komunumo kiu estas dediĉita al aŭtomatigo kaj daŭripovo. La fina rezulto similas al konfigurada administra ilo kiel Ansible aŭ Salt, sed sen la tipaj defioj asociitaj kun prizorgado de propra distribuaĵo. Ni uzas la terminon „propra bildo” por priskribi ĉi tiun aliron. Estas kvazaŭ havi iun instali, agordi, kaj prizorgi polurita agordaron por vi. \n\n Estas kvazaŭ via nerda amiko helpas vin agordi vian komputilon, krom ke ni faras tion kune kiel komunumo por helpi unu la alian. \n\n[OSTree Native Containers](https://containers.github.io/bootc/)"
+        "answer": "Bluefin uzas la OCI-kontenilajn funkciojn de bootc por komponi kaj konstrui OS-bildon. Ĉi tiu procezo estas superrigardita de bone strukturita komunumo kiu estas dediĉita al aŭtomatigo kaj daŭripovo. La fina rezulto similas al konfigurada administra ilo kiel Ansible aŭ Salt, sed sen la tipaj defioj asociitaj kun prizorgado de propra distribuaĵo. Ni uzas la terminon „propra bildo” por priskribi ĉi tiun aliron. Estas kvazaŭ havi iun instali, agordi, kaj prizorgi polurita agordaron por vi. \n\n Estas kvazaŭ via nerda amiko helpas vin agordi vian komputilon, krom ke ni faras tion kune kiel komunumo por helpi unu la alian. \n\n[OSTree Native Containers](https://bootc-dev.github.io/bootc/)"
       },
       "1": {
         "question": "Kiel ĉi tio malsamas de aliaj labortabloj?",
