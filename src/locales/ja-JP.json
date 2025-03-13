@@ -1,6 +1,6 @@
 {
   "Landing": {
-    "Title": "信頼性、パフォーマンス、持続可能性のために設計された次世代Linuxワークステーション。",
+    "Title": "信頼性、パフォーマンス、持続可能性のために設計された次世代 Linux ワークステーション。",
     "DiscoverButton": "詳しく見る",
     "TryOutButton": "試してみる"
   },
@@ -8,7 +8,7 @@
     "Text": "Bluefin はあなたのコンピュータのためのオペレーティングシステムです。Chromebook の信頼性と使いやすさに、GNOME デスクトップのパワーを兼ね備えた、両方の良いところを持ち合わせています。",
     "Tag": "向け",
     "Title": "ユーザー",
-    "Appendix": "自動イメージベースの更新とシンプルなグラフィカルアプリケーションストアを特徴とし、Bluefin はあなたの邪魔をしないように設計されています。システムの安定性を犠牲にすることなく、あなたが望むものを手に入れられます。Linux クライアントは進化し、次世代のためのクリーンスタートを切りました。詳細については、[発表ブログ記事](https://www.ypsidanger.com/announcing-project-bluefin/) と [入門ドキュメント] (https://docs.projectbluefin.io)をご覧ください。",
+    "Appendix": "自動イメージベースの更新とシンプルなグラフィカルアプリケーションストアを特徴とし、Bluefin はあなたの邪魔をしないように設計されています。システムの安定性を犠牲にすることなく、あなたが望むものを手に入れられます。Linux クライアントは進化し、次世代のためのクリーンスタートを切りました。詳細については、 [発表ブログ記事](https://www.ypsidanger.com/announcing-project-bluefin/) と [入門ドキュメント] (https://docs.projectbluefin.io) をご覧ください。",
     "ArtworkDescription": "キャラクター Bluefin のアートワーク",
     "Box1": "Flathub によるアプリケーション",
     "Box2": "ほぼメンテナンス不要",
@@ -30,17 +30,17 @@
   "Mission": {
     "Tag": "私たちの",
     "Title": "ミッション",
-    "Text": "Bluefin は単なるソフトウェアではなく、巨人が支配するエコシステムの厳しさの中で家族を守りながら生き残るために適応した、新しい種類の生き物です。\n\n私たちは、デスクトップ体験を変える必要があると信じています。テクノロジーは、あなたが触れるローカルコンピュータ、つまりデバイスから始まり、それは Linux エコシステムの他の部分と同様に不可欠であるべきです。\n\nクラウドネイティブなパターンをデスクトップに導入することで、次世代のオープンソース貢献者に応えながら、デスクトップコンピューティングへの関心を高めることを期待しています。Bluefin は、あなたが最も得意とすることを行うために頼りにできるツールとして設計されています。現在の Linux デスクトップはそこに到達できませんでしたが、私たちは作られたものは解体できると信じています。より良いものを作りましょう。\n\nBluefin は持続可能性に関するものであり、ソフトウェア、ハードウェア、そして人々を包括しています。\n\n> 光を広める方法は二つある：ろうそくになるか、それを反射する鏡になるかだ。\n> <cite>[イーディス・ウォートン][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Edith_Wharton\n\nあるいは、彼女が途中で私たちを八つ裂きにするかもしれません。賢い女の子です。",
+    "Text": "Bluefin は単なるソフトウェアではなく、巨人が支配するエコシステムの厳しさの中で家族を守りながら生き残るために適応した、新しい種類の生き物です。\n\n私たちは、デスクトップ体験を変える必要があると信じています。テクノロジーは、あなたが触れるローカルコンピュータ、つまりデバイスから始まり、それは Linux エコシステムの他の部分と同様に不可欠であるべきです。\n\nクラウドネイティブなパターンをデスクトップに導入することで、次世代のオープンソース貢献者に応えながら、デスクトップコンピューティングへの関心を高めることを期待しています。Bluefin は、あなたが最も得意とすることを行うために頼りにできるツールとして設計されています。現在の Linux デスクトップはそこに到達できませんでしたが、私たちは作られたものは解体できると信じています。より良いものを作りましょう。\n\nBluefin は持続可能性に関するものであり、ソフトウェア、ハードウェア、そして人々を包括しています。\n\n> 光を広める方法は二つある：ろうそくになるか、それを反射する鏡になるかだ。\n> <cite>[Edith Wharton][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Edith_Wharton\n\nあるいは、彼女が途中で私たちを八つ裂きにするかもしれません。賢い女の子です。",
     "BluefinChillAlt": "くつろいで横たわる Bluefin"
   },
   "Video": {
     "Url": "https://www.youtube.com/embed/Nz-yyDwTfRM&autoplay=1",
     "Title": "Bluefin Linux 紹介",
-    "AppendixText": "Project Bluefin は完成した製品ではなく、より信頼性が高く保守可能な Linux デスクトップ体験を求める[クラウドネイティブ愛好家](https://github.com/ublue-os/bluefin/graphs/contributors)によって維持されている継続的な情熱プロジェクトです。[未解決の課題](https://github.com/ublue-os/bluefin/issues)をご覧ください。\n\n彼女は最先端を代表しています…美しくユニークな生き物です。必然的に課題に直面する世界のための完璧な捕食者。私たちは適応しなければなりません。**一緒に**それができるのです。"
+    "AppendixText": "Project Bluefin は完成した製品ではなく、より信頼性が高く保守可能な Linux デスクトップ体験を求める [クラウドネイティブ愛好家](https://github.com/ublue-os/bluefin/graphs/contributors) によって維持されている継続的な情熱プロジェクトです。[未解決の課題](https://github.com/ublue-os/bluefin/issues) をご覧ください。\n\n彼女は最先端を代表しています…美しくユニークな生き物です。必然的に課題に直面する世界のための完璧な捕食者。私たちは適応しなければなりません。**一緒に**それができるのです。"
   },
   "TryBluefin": {
     "Title": "Bluefin を試す",
-    "Description": "以下のフォームを使用して、お使いのハードウェアとユースケースに適した ISO ダウンロードリンクを取得してください。チームは、インストールメディアを作成するために<a href='https://flathub.org/apps/org.fedoraproject.MediaWriter'>Fedora Media Writer</a>を推奨しています：",
+    "Description": "以下のフォームを使用して、お使いのハードウェアとユースケースに適した ISO ダウンロードリンクを取得してください。チームは、インストールメディアを作成するために<a href='https://flathub.org/apps/org.fedoraproject.MediaWriter'>Fedora Media Writer</a> を推奨しています：",
     "Developer": {
       "Question": "開発者ですか？",
       "DefaultSelection": "開発者ツールを含める",
@@ -49,7 +49,7 @@
     },
     "Gpu": {
       "Question": "主要 GPU のベンダーは誰ですか？",
-      "DefaultSelection": "主要GPUベンダーを選択"
+      "DefaultSelection": "主要 GPU ベンダーを選択"
     },
     "Stream": {
       "Question": "更新の積極性はどの程度がいいですか？",
@@ -60,8 +60,8 @@
       "Iso": "{isoname} ISO をダウンロード",
       "Registry": "GitHub Container Registry で詳細を表示",
       "Checksum": "検証 (SHA256)",
-      "DocumentationURL": "[Bluefinドキュメント](https://docs.projectbluefin.io/)をご覧ください。約 15 分で読め、インストール手順書も含まれています - 成功への準備をしてください、あなたは新しい世界に向かっています。<br/><br/><span style='font-weight: 900'>Bluefin GTS をお探しですか？</span> GTS ISO は現在利用できませんが、2025 年春に復活予定です。",
-      "DeveloperNote": "[Bluefin DXの紹介](https://docs.projectbluefin.io/bluefin-dx) をご覧ください。",
+      "DocumentationURL": "[Bluefin ドキュメント](https://docs.projectbluefin.io/), をご覧ください。約 15 分で読め、インストール手順書も含まれています - 成功への準備をしてください、あなたは新しい世界に向かっています。<br/><br/><span style='font-weight: 900'>Bluefin GTS をお探しですか？</span> GTS ISO は現在利用できませんが、2025 年春に復活予定です。",
+      "DeveloperNote": "[Bluefin DX の紹介](https://docs.projectbluefin.io/bluefin-dx) をご覧ください。",
       "DollyChill": "ISO リンクの近くでくつろぐ Dolly"
     }
   },
@@ -69,11 +69,11 @@
   "Faq": {
     "Tag": "不明点は？",
     "Title": "よくある質問",
-    "Text": "質問が解決しない場合は、\n[Discourseフォーラム](https://universal-blue.discourse.group/c/bluefin/6) で私たちを見つけたり、[docs.projectbluefin.io](https://docs.projectbluefin.io) をチェックしたりできます",
+    "Text": "質問が解決しない場合は、\n[Discourse フォーラム](https://universal-blue.discourse.group/c/bluefin/6) で私たちを見つけたり、[docs.projectbluefin.io](https://docs.projectbluefin.io) をチェックしたりできます",
     "QuestionsArray": {
       "0": {
         "question": "これは正確には何ですか？なぜ Linux ディストリビューションを作ったのですか？",
-        "answer": "Bluefin は bootc の OCI コンテナ機能を活用して OS イメージを構成・構築します。このプロセスは、自動化と持続可能性に取り組む整然としたコミュニティによって監督されています。最終的な結果は、Ansible や Salt のような構成管理ツールに似ていますが、カスタムディストリビューションの維持に通常伴う典型的な課題がありません。私たちはこのアプローチを説明するために「カスタムイメージ」という用語を使用しています。誰かがあなたのために洗練されたセットアップをインストール、構成、維持するようなものです。\n\nそれはあなたのオタク友達があなたのコンピュータのセットアップを手伝うようなものですが、私たちはコミュニティとして互いを助け合うために一緒にそれを行います。\n\n[OSTreeネイティブコンテナ](https://bootc-dev.github.io/bootc/)"
+        "answer": "Bluefin は bootc の OCI コンテナ機能を活用して OS イメージを構成・構築します。このプロセスは、自動化と持続可能性に取り組む整然としたコミュニティによって監督されています。最終的な結果は、Ansible や Salt のような構成管理ツールに似ていますが、カスタムディストリビューションの維持に通常伴う典型的な課題がありません。私たちはこのアプローチを説明するために「カスタムイメージ」という用語を使用しています。誰かがあなたのために洗練されたセットアップをインストール、構成、維持するようなものです。\n\nそれはあなたのオタク友達があなたのコンピュータのセットアップを手伝うようなものですが、私たちはコミュニティとして互いを助け合うために一緒にそれを行います。\n\n[OSTree ネイティブコンテナ](https://bootc-dev.github.io/bootc/)"
       },
       "1": {
         "question": "他のデスクトップとどう違いますか？",
@@ -81,11 +81,11 @@
       },
       "2": {
         "question": "機能の詳細はどこで見つけられますか？",
-        "answer": "詳細情報は私たちの GitHub リポジトリで見つけることができます。\n\n [GitHub](https://github.com/ublue-os/bluefin#readme) \n [Bluefinドキュメント](https://docs.projectbluefin.io) [開発者ドキュメント](https://docs.projectbluefin.io/bluefin-dx)"
+        "answer": "詳細情報は私たちの GitHub リポジトリで見つけることができます。\n\n [GitHub](https://github.com/ublue-os/bluefin#readme) \n [Bluefin ドキュメント](https://docs.projectbluefin.io) [開発者ドキュメント](https://docs.projectbluefin.io/bluefin-dx)"
       },
       "3": {
         "question": "なぜ恐竜なのですか？",
-        "answer": "Bluefin は、名前が「恐ろしい爪」を意味する獣脚類恐竜、デイノニクス・アンティロプスです。1960 年代に発見され、彼女は恐竜に対する私たちの理解を革命的に変えました。デイノニクス以前、恐竜はしばしば鈍重で頭の悪い生き物と見なされていました。しかし、彼女はこれらの誤解を打ち砕き、温血で急速に進化し、その領域の主であった動物たちのダイナミックな世界への洞察を提供しました。私たちは、私たちのデスクトップが同様の俊敏性を体現することを目指しています。パワーと適応性。\n\n [デイノニクス](https://en.wikipedia.org/wiki/Deinonychus)"
+        "answer": "Bluefin は、名前が「恐ろしい爪」を意味する獣脚類恐竜、デイノニクス・アンティロプスです。1960 年代に発見され、彼女は恐竜に対する私たちの理解を革命的に変えました。デイノニクス以前、恐竜はしばしば鈍重で頭の悪い生き物と見なされていました。しかし、彼女はこれらの誤解を打ち砕き、温血で急速に進化し、その領域の主であった動物たちのダイナミックな世界への洞察を提供しました。私たちは、私たちのデスクトップが同様の俊敏性を体現することを目指しています。パワーと適応性。\n\n [Deinonychus](https://en.wikipedia.org/wiki/Deinonychus)"
       },
       "4": {
         "question": "プロジェクトをどのように持続可能にする計画ですか？",
