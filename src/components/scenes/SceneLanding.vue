@@ -77,8 +77,8 @@ const { t } = useI18n<MessageSchema>({
             </select>
           </div>
         </div>
-        <div class="img-wrap">
-          <img class="container" :src="LangLandingBluefinImageURL" alt="Bluefin" />
+        <div class="">
+          <img class="container sm:h-full sm:w-full object-contain my-3 w-1/2 h-1/2" :src="LangLandingBluefinImageURL" alt="Bluefin" />
         </div>
       </div>
     </div>
