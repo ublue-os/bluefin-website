@@ -23,14 +23,14 @@
     "BoxTwo": "Giao diện dòng lệnh tích hợp trong container",
     "BoxThree": "Devpod cho môi trường phát triển dưới dạng mã nguồn",
     "BoxFour": "Homebrew sẵn sàng sử dụng",
-    "Appendix": "Việc tích hợp [container runtime](https://podman.io) giúp khai phóng tiềm năng của đội bạn. Trải nghiệm sức mạnh của những công cụ đang vận hành internet hiện đại - giờ đây ngay trên chiếc máy tính cá nhân của bạn. Bluefin đồng hành cùng bạn từ phát triển đến triển khai. \n\nChúng tôi hướng đến những người làm việc trên Linux không sử dụng Linux trên máy tính cá nhân vì những trải nghiệm không như mong đợi trước đây. Chính vì vậy, chúng tôi đang biến đổi thế giới máy tính Linux, đưa nó vào kỷ nguyên công nghệ đám mây và cùng cùng nhau kiến tạo nó như một cộng đồng thống nhất. \n\n> Hãy là người tiên phong, chứ không phải là người dõi theo.\n> <cite>[Zavala][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Lance_Reddick",
+    "Appendix": "Việc tích hợp [container runtime](https://podman.io) giúp khai phóng tiềm năng của đội bạn. Trải nghiệm sức mạnh của những công cụ đang vận hành internet hiện đại - giờ đây ngay trên chiếc máy tính cá nhân của bạn. Bluefin đồng hành cùng bạn từ phát triển đến triển khai. \n\nChúng tôi hướng đến những người làm việc trên Linux không sử dụng Linux trên máy tính cá nhân vì những trải nghiệm không như mong đợi trước đây. Chính vì vậy, chúng tôi đang biến đổi thế giới máy tính Linux, đưa nó vào kỷ nguyên công nghệ đám mây và cùng nhau kiến tạo nó như một cộng đồng thống nhất. \n\n> Hãy là người tiên phong, chứ không phải là người dõi theo.\n> <cite>[Zavala][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Lance_Reddick",
     "ArtworkDescription": "Character tower artwork",
     "TowerJoke": "<b>Vươn cao</b> vượt qua mọi Thách thức!"
   },
   "Mission": {
     "Tag": "Chúng tôi",
     "Title": "Sứ mệnh",
-    "Text": "Bluefin không chỉ là một phần mềm - cô ấy còn là một sinh vật mới đầy kiêu hãnh, được thiên nhiên ban cho sức mạnh để vươn mình trong một thế giới đầy thử thách, nơi những gã khổng lồ thống trị, đồng thời dùng sức mạnh của mình để bảo vệ gia đình - những người dùng mà cô ấy trân quý. \n\nChúng tôi tin rằng đã đến lúc tái định nghĩa trải nghiệm trên máy tính. Công nghệ khởi nguồn từ chiếc máy tính cá nhân, thiết bị bạn chạm vào mỗi ngày, và nó xứng đáng trở thành một phần thiết yếu, không thể tách rời khỏi hệ sinh thái Linux.\n\nBằng việc tích hợp các mẫu hình cloud-native vào desktop, chúng tôi khao khát làm sống lại niềm say mê với máy tính cá nhân và truyền cảm hứng cho thế hệ tiếp theo của cộng đồng mã nguồn mở. Bluefin được thiết kế để trở thành nền tảng vững chắc để bạn tự tin bứt phá trong những gì bạn giỏi nhất. Linux desktop hiện tại chưa đưa chúng ta đến với những kì vọng chúng ta mong muốn, nhưng chúng tôi tin rằng mọi thứ đều có thể thay đổi và trở nên tốt hơn. Hãy cùng nhau xây dựng nên phiên bản tốt hơn.\n\nBluefin hướng đến sự bền vững, bao gồm cả phần mềm, phần cứng, và con người.\n\n> Có hai cách để lan tỏa ánh sáng: trở thành ngọn nến, hoặc là tấm gương phản chiếu nó.\n> <cite>[Edith Wharton][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Edith_Wharton\n\nOr Hoặc có lẽ cô ấy sẽ săn chúng ta trên đường đi. Quả là cô nàng thông minh.",
+    "Text": "Bluefin không chỉ là một phần mềm - cô ấy còn là một sinh vật mới đầy kiêu hãnh, được thiên nhiên ban cho sức mạnh để vươn mình trong một thế giới đầy thử thách, nơi những gã khổng lồ thống trị, đồng thời dùng sức mạnh của mình để bảo vệ gia đình - những người dùng mà cô ấy trân quý. \n\nChúng tôi tin rằng đã đến lúc tái định nghĩa trải nghiệm trên máy tính. Công nghệ khởi nguồn từ chiếc máy tính cá nhân, thiết bị bạn chạm vào mỗi ngày, và nó xứng đáng trở thành một phần thiết yếu, không thể tách rời khỏi hệ sinh thái Linux.\n\nBằng việc tích hợp các mẫu hình cloud-native vào desktop, chúng tôi khao khát làm sống lại niềm say mê với máy tính cá nhân và truyền cảm hứng cho thế hệ tiếp theo của cộng đồng mã nguồn mở. Bluefin được thiết kế để trở thành nền tảng vững chắc để bạn tự tin bứt phá trong những gì bạn giỏi nhất. Linux desktop hiện tại chưa đưa chúng ta đến với những kì vọng chúng ta mong muốn, nhưng chúng tôi tin rằng mọi thứ đều có thể thay đổi và trở nên tốt hơn. Hãy cùng nhau xây dựng nên phiên bản tốt hơn.\n\nBluefin hướng đến sự bền vững, bao gồm cả phần mềm, phần cứng, và con người.\n\n> Có hai cách để lan tỏa ánh sáng: trở thành ngọn nến, hoặc là tấm gương phản chiếu nó.\n> <cite>[Edith Wharton][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Edith_Wharton\n\nHoặc có lẽ cô ấy sẽ săn chúng ta trên đường đi. Quả là cô nàng thông minh.",
     "BluefinChillAlt": "Bluefin laying down and chilling"
   },
   "Video": {
@@ -115,7 +115,7 @@
   "Navbar": {
     "ForYou": "Dành cho Bạn",
     "ForDevs": "Lập trình viên",
-    "OurMission": "Sứ mệnh của Chúng tôi",
+    "OurMission": "Sứ mệnh",
     "TryOut": "Dùng thử",
     "FAQ": "FAQ"
   }
