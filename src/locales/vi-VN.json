@@ -72,7 +72,7 @@
     "Text": "Nếu câu hỏi của bạn vẫn chưa được trả lời, \nbạn có thể tìm chúng tôi [trên diễn đàn Discourse của chúng tôi](https://universal-blue.discourse.group/c/bluefin/6) và xem thêm tại [docs.projectbluefin.io](https://docs.projectbluefin.io)",
     "QuestionsArray": {
       "0": {
-        "question": "WĐây chính xác là gì? Tại sao chúng tôi tạo ra một bản phân phối Linux mới?",
+        "question": "Đây chính xác là gì? Tại sao chúng tôi tạo ra một bản phân phối Linux mới?",
         "answer": "Bluefin sử dụng các tính năng container OCI của bootc để tổng hợp và xây dựng bản sao hệ điều hành (OS image). Quá trình này được điều phối bởi một cộng đồng có tổ chức chặt chẽ, với cam kết mạnh mẽ về tự động hóa và phát triển bền vững. Đây là kết quả của sản phẩm tương tự như một công cụ quản lý hệ thống tùy chỉnh như Ansible hoặc Salt, nhưng loại bỏ được những trở ngại quen thuộc thường gặp trong việc duy trì một bản phân phối được tùy chỉnh riêng. Chúng tôi gọi đây là \"bản sao tùy chỉnh\" để mô tả cách tiếp cận này. Nó giống như việc ai đó đang cài đặt, tùy chỉnh, và bảo trì một hệ thống hoàn chỉnh dành cho bạn. \n\n Điều này tương tự như bạn có một người bạn am hiểu công nghệ hỗ trợ bạn thiết lập máy tình của mình, nhưng ở đây chúng tôi làm điều đó cùng nhau như một cộng đồng để hỗ trợ lẫn nhau. \n\n[OSTree Native Containers](https://containers.github.io/bootc/)"
       },
       "1": {
