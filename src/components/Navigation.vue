@@ -7,7 +7,7 @@ import {
   IconFaceManShimmer,
   IconDownload
 } from "@iconify-prerendered/vue-mdi"
-import { useEventListener } from "@vueuse/core/index.cjs"
+import { useEventListener } from "@vueuse/core"
 
 interface Link {
   name: string
