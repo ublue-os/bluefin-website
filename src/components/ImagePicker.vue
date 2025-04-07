@@ -27,7 +27,7 @@ const getFormattedImageName = () => {
   }
 
   if (imageName.value.gpu === "nvidia") {
-    final_name += "-nvidia"
+    final_name += "-nvidia-open"
   }
 
   switch (imageName.value.stream) {
@@ -93,7 +93,7 @@ const { t } = useI18n<MessageSchema>({
                 {{ t("TryBluefin.Gpu.DefaultSelection") }}
               </option>
               <option :value="'amd'">AMD</option>
-              <option :value="'nvidia'">Nvidia (GeForce 10 Series+)</option>
+              <option :value="'nvidia'">Nvidia (RTX Series | GTX 16xx+ Series)</option>
               <option :value="'intel'">Intel</option>
             </select>
           </div>
