@@ -57,7 +57,7 @@
       "Stable": "Bluefin (dành cho người đam mê, dựa trên Fedora {version})"
     },
     "Download": {
-      "Iso": "Tải xuống bản {isoname} ISO",
+      "Iso": "Tải xuống bản ISO",
       "Registry": "Xem chi tiết bản cài đặt trên GitHub Container Registry",
       "Checksum": "Kiểm tra (SHA256)",
       "DocumentationURL": "Hãy ghé thăm trang [Tài liệu về Bluefin](https://docs.projectbluefin.io/), chỉ mất khoảng 15 phút và bao gồm các hướng dẫn cài đặt chi tiết - hãy sẵn sàng cho thành công của mình, bạn đang bước vào một thế giới mới. <br/><br/><span style='font-weight: 900'>Bạn đang tìm Bluefin GTS?</span> Hiện tại các bản GTS ISOs chưa sẵn sàng nhưng sẽ quay trở lại vào Mùa xuân 2025.",

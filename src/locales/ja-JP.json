@@ -57,7 +57,7 @@
       "Stable": "Bluefin（愛好家向け、Fedora {version} ベース）"
     },
     "Download": {
-      "Iso": "{isoname} ISO をダウンロード",
+      "Iso": "ISO をダウンロード",
       "Registry": "GitHub Container Registry で詳細を表示",
       "Checksum": "検証 (SHA256)",
       "DocumentationURL": "[Bluefin ドキュメント](https://docs.projectbluefin.io/), をご覧ください。約 15 分で読め、インストール手順書も含まれています - 成功への準備をしてください、あなたは新しい世界に向かっています。<br/><br/><span style='font-weight: 900'>Bluefin GTS をお探しですか？</span> GTS ISO は現在利用できませんが、2025 年春に復活予定です。",
