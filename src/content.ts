@@ -44,7 +44,7 @@ export const LangDevsTag = 'For'
 export const LangDevsTitle = 'Developers'
 export const LangDevsText = 'Bluefin comes with an optional "developer mode" that transforms your device into a powerful workstation. It features container-focused workflows to get you started depending on where you\'re coming from, or bring your own. Wield the [industry\'s leading tools](https://landscape.cncf.io/) at your fingertips.'
 
-export const LangDevsBoxOne = 'Visual Studio Code with devcontainers.'
+export const LangDevsBoxOne = 'Visual Studio Code with devcontainers'
 export const LangDevsBoxTwo = 'Container centric terminal'
 export const LangDevsBoxThree = 'Devpod for developer environments as code'
 export const LangDevsBoxFour = 'Homebrew on-tap'
