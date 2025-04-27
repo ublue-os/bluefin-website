@@ -22,7 +22,7 @@ const imageName: Ref<{
 })
 
 const getFormattedImageName = () => {
-  let final_name = imageName.value.base + "-live"
+  let final_name = imageName.value.base
 
   https://download.projectbluefin.io/bluefin-live-nvidia-open-stable-amd64.iso
 
