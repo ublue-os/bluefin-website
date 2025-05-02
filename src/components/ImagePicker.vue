@@ -169,7 +169,7 @@ const { t } = useI18n<MessageSchema>({
                 {{ t("TryBluefin.Gpu.DefaultSelection") }}
               </option>
               <option :value="'amd'">AMD | Intel</option>
-              <option :value="'nvidia'">Nvidia (RTX Series | GTX 16xx+ Series, older cards are unsupported)</option>
+              <option :value="'nvidia'">Nvidia (RTX Series | GTX 16xx+ Series)</option>
             </select>
           </div>
         </div>
