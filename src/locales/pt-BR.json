@@ -57,7 +57,7 @@
       "Stable": "Bluefin (para entusiastas, baseado no Fedora {version})"
     },
     "Download": {
-      "Iso": "Baixe a ISO {isoname}",
+      "Iso": "Baixe a ISO",
       "Registry": "Veja mais detalhes no GitHub Container Registry",
       "Checksum": "Checksum (SHA256)",
       "DocumentationURL": "Confira a [Documentação](https://docs.projectbluefin.io/), leva só uns 15 minutos e inclui um guia de instalação - apronte-se bem, você está alçando a um mundo novo.",

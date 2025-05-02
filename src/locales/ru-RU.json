@@ -57,7 +57,7 @@
       "Stable": "Bluefin (для энтузиастов, основано на Fedora {version})"
     },
     "Download": {
-      "Iso": "Загрузить {isoname} ISO",
+      "Iso": "Загрузить ISO",
       "Registry": "Посмотреть детали на GitHub",
       "Checksum": "Верификация (SHA256)",
       "DocumentationURL": "Также смотрите [Документацию Bluefin](https://docs.projectbluefin.io/), это займёт около 15 минут и содержит в себе пособие по установке - настройте себя на успех, вы направляетесь в новый мир. <br/><br/><span style='font-weight: 900'>Ищете Bluefin GTS?</span> GTS образы в данный момент недоступны но вернутся весной 2025 года.",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue"
+import { Ref, ref, watch } from "vue"
 import { marked } from "marked"
 import {
   IconCheckCircle,
@@ -8,38 +8,91 @@ import {
 } from "@iconify-prerendered/vue-mdi"
 
 const imageName: Ref<{
+  arch: string | undefined
   base: string | undefined
-  developer: string | undefined
   gpu: string | undefined
   stream: string | undefined
+  imagesrc: string | undefined
 }> = ref({
+  arch: "x86",
   base: "bluefin",
-  developer: undefined,
   gpu: undefined,
-  stream: undefined
+  stream: "gts",
+  imagesrc: "./characters/dolly.webp"
 })
 
-const getFormattedImageName = () => {
-  let final_name = imageName.value.base
+const getNewFormatting = (final_name: string): string => {
+  final_name += "-live"
 
-  if (imageName.value.developer) {
-    final_name += "-dx"
-  }
-
-  if (imageName.value.gpu === "nvidia") {
-    final_name += "-nvidia-open"
+  if (imageName.value.gpu == "nvidia") {
+    if (imageName.value.stream == "lts") {
+      final_name += "-gdx"
+    } else {
+      final_name += "-nvidia-open"
+    }
   }
 
   switch (imageName.value.stream) {
     case "latest":
-    case "gts": 
-      final_name += "-"+imageName.value.stream
+    case "lts":
+    case "gts":
+      final_name += "-" + imageName.value.stream
       break;
     default:
       final_name += "-stable";
   }
 
+  switch (imageName.value.arch) {
+    case "arm":
+      final_name += "-arm64"
+      break;
+    case "x86":
+      final_name += "-amd64"
+      break
+  }
   return final_name
+}
+
+const getFormattedImageName = () => {
+  let final_name = imageName.value.base
+
+  switch (imageName.value.stream) {
+    case "lts":
+    case "gts":
+      final_name = getNewFormatting(final_name)
+      break;
+    default:
+      if (imageName.value.gpu == "nvidia") {
+        final_name += "-nvidia-open"
+      }
+      final_name += "-stable";
+      break;
+  }
+
+  return final_name
+}
+
+const selectCuteDino = () => {
+  let target_image = ""
+  switch (imageName.value.stream) {
+    case 'lts':
+      target_image = './characters/achillobator.webp';
+      break;
+    case 'gts':
+      target_image = './characters/dolly.webp';
+      break;
+    case 'stable':
+      target_image = './characters/angry.webp';
+      break;
+    default:
+  }
+  imageName.value.imagesrc = target_image;
+}
+
+const fixupStreamHandling = () => {
+  if (imageName.value.arch == "arm" && imageName.value.stream != "lts") {
+    imageName.value.stream = 'lts'
+  }
 }
 
 const BLUEFIN_DOWNLOAD_URL = "https://download.projectbluefin.io/%TEMPLATE%"
@@ -51,166 +104,145 @@ const { t } = useI18n<MessageSchema>({
 })
 </script>
 
-// Ofc this is inneficient, but its much better than the old solution.
 <style>
 @import "tailwindcss";
 
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
 .question-select {
-  @apply rounded-xl bg-black p-5 text-white w-full xl:w-full xl:max-w-xl border-blue-500 border-s-8 text-2xl;
+  @apply rounded-xl bg-black p-7 text-white w-full xl:w-full xl:max-w-xl border-blue-500 border-s-8 text-2xl;
 }
+
 .question-container {
-  @apply my-7 w-full;
+  @apply mt-10 w-full;
 }
+
 .question-title {
   @apply mb-2 text-white text-2xl;
 }
+
 #downloadtexts a {
   color: #FFFFFF !important;
 }
 </style>
 
-
 <template>
-  <div
-    class="flex pt-20 flex-wrap xl:flex-nowrap font-inter w-full xl:w-auto text-[11pt]"
-  >
-    <form autocomplete="off" class="container-xl w-full">
+  <div class="flex pt-20 flex-wrap xl:flex-nowrap font-inter w-full xl:w-auto text-[11pt] h-screen">
+    <div class="container w-full">
       <Transition name="fade">
-        <div
-          class="gpu question-container"
-        >
+        <div class="question-container">
+          <label for="archVendor" class="question-title">{{ t("TryBluefin.Architecture.Question") }}</label>
+          <div>
+            <select @change="() => { fixupStreamHandling(); selectCuteDino(); }" v-model="imageName.arch"
+              id="archVendor" name="archVendor" class="question-select">
+              <option :value="'x86'" selected>{{ t("TryBluefin.Architecture.x86") }}</option>
+              <option :value="'arm'">{{ t("TryBluefin.Architecture.arm") }}</option>
+            </select>
+          </div>
+        </div>
+      </Transition>
+
+      <Transition name="fade">
+        <div class="gpu question-container" v-if="imageName.arch != undefined">
           <label for="gpuVendor" class="question-title">{{
             t("TryBluefin.Gpu.Question")
           }}</label>
           <div>
-            <select
-              v-model="imageName.gpu"
-              id="gpuVendor"
-              name="gpuVendor"
-              class="question-select"
-            >
+            <select v-model="imageName.gpu" id="gpuVendor" name="gpuVendor" class="question-select">
               <option :value="undefined" disabled selected>
                 {{ t("TryBluefin.Gpu.DefaultSelection") }}
               </option>
-              <option :value="'amd'">AMD</option>
+              <option :value="'amd'">AMD | Intel</option>
               <option :value="'nvidia'">Nvidia (RTX Series | GTX 16xx+ Series)</option>
-              <option :value="'intel'">Intel</option>
             </select>
           </div>
         </div>
       </Transition>
 
       <Transition name="fade">
-        <div 
-          class="question-container"
-          v-if="imageName.gpu != undefined"
-        >
-          <label for="isDeveloper" class="question-title">{{
-            t("TryBluefin.Developer.Question")
+        <div class="question-container" v-if="imageName.gpu != undefined">
+          <label for="isGts" class="question-title">{{
+            t("TryBluefin.Stream.Question")
           }}</label>
-          <div>
-            <select
-              v-model="imageName.developer"
-              id="isDeveloper"
-              name="isDeveloper"
-              class="question-select"
-            >
-              <option :value="undefined" disabled selected>
-                {{ t("TryBluefin.Developer.DefaultSelection") }}
+          <div class="select">
+            <select v-model="imageName.stream" id="isGts" name="isGts" class="question-select" @change="selectCuteDino">
+              <option disabled selected :value="undefined">
+                {{ t("TryBluefin.Stream.DefaultSelection") }}
               </option>
-              <option :value="true">{{ t("TryBluefin.Developer.Yes") }}</option>
-              <option :value="false">{{ t("TryBluefin.Developer.No") }}</option>
+              <option :value="'lts'">
+                {{ t("TryBluefin.Stream.LTS", { version: "10" }) }}
+              </option>
+              <option :value="'gts'" :disabled="imageName.arch == 'arm'">
+                {{ t("TryBluefin.Stream.Gts") }}
+              </option>
+              <option :value="'stable'" :disabled="imageName.arch == 'arm'">
+                {{ t("TryBluefin.Stream.Stable") }}
+              </option>
+              <!-- Do not add Latest or Beta, it is way too unstable for new users -->
             </select>
           </div>
         </div>
       </Transition>
-      <!-- GTS is entirely broken right now, we gotta disable it. -->
-      <!-- <Transition name="fade"> -->
-        <!-- <div class="question-container" v-if="imageName.developer != undefined"> -->
-          <!-- <label for="isGts" class="question-title">{{ -->
-            <!-- t("TryBluefin.Stream.Question") -->
-          <!-- }}</label> -->
-          <!-- <div class="select"> -->
-            <!-- <select -->
-              <!-- v-model="imageName.stream" -->
-              <!-- id="isGts" -->
-              <!-- name="isGts" -->
-              <!-- class="question-select" -->
-            <!-- > -->
-              <!-- <option disabled selected :value="undefined"> -->
-                <!-- {{ t("TryBluefin.Stream.DefaultSelection") }} -->
-              <!-- </option> -->
-              <!-- <option :value="'gts'"> -->
-                <!-- {{ t("TryBluefin.Stream.Gts", { version: "40" }) }} -->
-              <!-- </option> -->
-              <!-- <option :value="'stable'"> -->
-                <!-- {{ t("TryBluefin.Stream.Stable", { version: "41" }) }} -->
-              <!-- </option> -->
-              <!-- Do not add Latest, it is way too unstable for new users -->
-            <!-- </select> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </Transition> -->
-    </form>
+    </div>
 
     <Transition name="fade">
-      <div
-        v-if="
-          imageName.developer != undefined &&
-          imageName.gpu != undefined 
-          // && imageName.stream != undefined
-        "
-        class="w-full mt-20 xl:m-auto container-xl justify-center flex flex-col text-white items-center xl:items-start xl:justify-left"
-      >
+      <div v-if="
+        imageName.arch != undefined &&
+        imageName.gpu != undefined &&
+        imageName.stream != undefined
+      " @load="selectCuteDino"
+        class="w-full mt-20 flex flex-col xl:m-auto container-xl text-white items-center xl:items-start xl:justify-left">
         <div class="flex flex-row items-center" id="downloadtexts">
-          <a
-            class="bg-blue-500 rounded-3xl max-w-md flex flex-row flex-nowrap justify-center grow items-center" style="padding: 1.5rem; margin-top: 2.5rem; margin-bottom: 2.5rem; margin-right: 1.5rem; font-size: 1.5rem; line-height: 2rem;  "
-            :href="
-              BLUEFIN_DOWNLOAD_URL.replace(
-                '%TEMPLATE%',
-                (getFormattedImageName() ?? '') + '.iso'
-              )
-            "
-          >
+          <a class="bg-blue-500 rounded-3xl max-w-xl max-h-xl flex flex-row flex-nowrap justify-center items-center"
+            style="padding: 1.5rem; margin-top: 2.5rem; margin-bottom: 2.5rem; margin-right: 1.5rem; font-size: 1.5rem; line-height: 2rem;  "
+            :href="BLUEFIN_DOWNLOAD_URL.replace(
+              '%TEMPLATE%',
+              (getFormattedImageName() ?? '') + '.iso'
+            )
+              ">
             {{
-              t("TryBluefin.Download.Iso", {
-                isoname: getFormattedImageName()?.replace("-stable", "") ?? ""
-              })
+              t("TryBluefin.Download.Iso")
             }}
             <IconDownload class="w-[2rem] h-[2rem] shrink grow-0" />
           </a>
-          <a
-            class="px-3"
-            :title="t('TryBluefin.Download.Checksum')"
-            :href="
-              BLUEFIN_DOWNLOAD_URL.replace(
-                '%TEMPLATE%',
-                (getFormattedImageName() ?? '') + '.iso-CHECKSUM'
-              )
-            "
-          >
+          <a class="px-3" :title="t('TryBluefin.Download.Checksum')" :href="BLUEFIN_DOWNLOAD_URL.replace(
+            '%TEMPLATE%',
+            (getFormattedImageName() ?? '') + '.iso-CHECKSUM'
+          )
+            ">
             <IconCheckCircle class="w-[3rem] h-[3rem]" />
           </a>
-          <a
-            :title="t('TryBluefin.Download.Registry')"
-            href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin"
-            target="_blank"
-          >
+          <a :title="t('TryBluefin.Download.Registry')"
+            href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin" target="_blank">
             <IconGithubCircle class="w-[3rem] h-[3rem]" />
           </a>
         </div>
 
         <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
-        <p
-          v-if="imageName.developer"
-          v-html="marked.parse(t('TryBluefin.Download.DeveloperNote'))"
-        />
+        <p v-if="imageName.developer" v-html="marked.parse(t('TryBluefin.Download.DeveloperNote'))" />
 
-        <img
-          class="dolly"
-          :src="'./characters/dolly.webp'"
-          :title="t('TryBluefin.Download.DollyChill')"
-        />
+        <div class="container">
+          <Transition name="slide-fade">
+            <img class="dolly xl:absolute top-0 left-0 right-0 m-auto text-center" :key="imageName.stream"
+              :src="imageName.imagesrc" :title="t('TryBluefin.Download.DollyChill')" />
+          </Transition>
+        </div>
       </div>
     </Transition>
   </div>

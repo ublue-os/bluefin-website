@@ -47,6 +47,11 @@
       "Yes": "Yes",
       "No": "No"
     },
+    "Architecture": {
+      "Question": "Which architecture will you install Bluefin on?",
+      "x86": "x86_64 (Standard for most computers)",
+      "arm": "ARM64 (For Snapdragon hardware)"
+    },
     "Gpu": {
       "Question": "Who is the vendor of your primary GPU? ",
       "DefaultSelection": "Select your primary GPU vendor"
@@ -54,13 +59,15 @@
     "Stream": {
       "Question": "How aggressive do you like your updates? ",
       "DefaultSelection": "Select your update stream",
-      "Stable": "Bluefin (for enthusiasts, based on Fedora {version})"
+      "Stable": "Bluefin Stable (for enthusiasts)",
+      "Gts": "Bluefin GTS (for regular people)",
+      "LTS": "Bluefin LTS (for the tired dad)"
     },
     "Download": {
-      "Iso": "Download the {isoname} ISO",
+      "Iso": "Download the ISO",
       "Registry": "View details on the GitHub Container Registry",
       "Checksum": "Verify (SHA256)",
-      "DocumentationURL": "Check out the [Bluefin Documentation](https://docs.projectbluefin.io/), it takes about 15 minutes and includes an installation runbook - set yourself up for success, you are headed into a new world. <br/><br/><span style='font-weight: 900'>Looking for Bluefin GTS?</span> GTS ISOs are currently unavailable but will return in Spring 2025.",
+      "DocumentationURL": "Check out the [Bluefin Documentation](https://docs.projectbluefin.io/), it takes about 15 minutes and includes an installation runbook - set yourself up for success, you are headed into a new world. <br/><br/>",
       "DeveloperNote": "Check out [Introduction to Bluefin DX](https://docs.projectbluefin.io/bluefin-dx).",
       "DollyChill": "Dolly chilling near your ISO link"
     }
