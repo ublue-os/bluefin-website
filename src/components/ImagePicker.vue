@@ -21,10 +21,8 @@ const imageName: Ref<{
   imagesrc: "./characters/dolly.webp"
 })
 
-const getFormattedImageName = () => {
-  let final_name = imageName.value.base
-
-  https://download.projectbluefin.io/bluefin-live-nvidia-open-stable-amd64.iso
+const getNewFormatting = (final_name: string): string => {
+  final_name += "-live"
 
   if (imageName.value.gpu == "nvidia") {
     if (imageName.value.stream == "lts") {
@@ -36,6 +34,7 @@ const getFormattedImageName = () => {
 
   switch (imageName.value.stream) {
     case "latest":
+    case "lts":
     case "gts":
       final_name += "-" + imageName.value.stream
       break;
@@ -50,6 +49,24 @@ const getFormattedImageName = () => {
     case "x86":
       final_name += "-amd64"
       break
+  }
+  return final_name
+}
+
+const getFormattedImageName = () => {
+  let final_name = imageName.value.base
+
+  switch (imageName.value.stream) {
+    case "lts":
+    case "gts":
+      final_name = getNewFormatting(final_name)
+      break;
+    default:
+      if (imageName.value.gpu == "nvidia") {
+        final_name += "-nvidia-open"
+      }
+      final_name += "-stable";
+      break;
   }
 
   return final_name
@@ -145,7 +162,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="gpu question-container" v-if="imageName.arch != undefined">
           <label for="gpuVendor" class="question-title">{{
             t("TryBluefin.Gpu.Question")
-            }}</label>
+          }}</label>
           <div>
             <select v-model="imageName.gpu" id="gpuVendor" name="gpuVendor" class="question-select">
               <option :value="undefined" disabled selected>
@@ -162,7 +179,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="question-container" v-if="imageName.gpu != undefined">
           <label for="isGts" class="question-title">{{
             t("TryBluefin.Stream.Question")
-            }}</label>
+          }}</label>
           <div class="select">
             <select v-model="imageName.stream" id="isGts" name="isGts" class="question-select" @change="selectCuteDino">
               <option disabled selected :value="undefined">
