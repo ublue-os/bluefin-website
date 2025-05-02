@@ -50,7 +50,7 @@
     "Architecture": {
       "Question": "Which architecture will you install Bluefin on?",
       "x86": "x86_64 (Standard for most computers)",
-      "arm": "ARM64 (For Snapdragon hardware)"
+      "arm": "ARM64"
     },
     "Gpu": {
       "Question": "Who is the vendor of your primary GPU? ",
@@ -59,9 +59,9 @@
     "Stream": {
       "Question": "How aggressive do you like your updates? ",
       "DefaultSelection": "Select your update stream",
-      "Stable": "Bluefin Stable (for enthusiasts)",
-      "Gts": "Bluefin GTS (for regular people)",
-      "LTS": "Bluefin LTS (for the tired dad)"
+      "Stable": "Bluefin",
+      "Gts": "Bluefin GTS (Recommended)",
+      "LTS": "Bluefin LTS (Beta)"
     },
     "Download": {
       "Iso": "Download the ISO",
