@@ -35,12 +35,12 @@
   },
   "Video": {
     "Url": "https://www.youtube.com/embed/Nz-yyDwTfRM&autoplay=1",
-    "Title": "Bluefin Linux introduction",
+    "Title": "Bluefin Introduction",
     "AppendixText": "Project Bluefin is not a finished product, she is an ongoing passion project maintained by [cloud-native enthusiasts](https://github.com/ublue-os/bluefin/graphs/contributors) who seek a more reliable and maintainable Linux desktop experience. Check out the [open issues](https://github.com/ublue-os/bluefin/issues).\n\nShe represents the state of the art … a beautiful and unique creature. A perfect predator for a world that will inevitably face challenges. We must adapt. We can do it **together**."
   },
   "TryBluefin": {
     "Title": "Try Bluefin",
-    "Description": "Use the form below to get the correct ISO download link for your hardware and use case. The team recommends <a href='https://flathub.org/apps/org.fedoraproject.MediaWriter'>Fedora Media Writer</a> to create installation media:",
+    "Description": "Use the form below to get the correct ISO download link for your hardware and use case.\n\n<strong>NOTE:</strong> These ISOs are experimental, please <a href="https://github.com/ublue-os/titanoboa/issues">file issues</a> if you encounter a problem, thanks! \n\n The team recommends <a href='https://flathub.org/apps/org.fedoraproject.MediaWriter'>Fedora Media Writer</a> to create installation media, Ventoy is unsupported:",
     "Developer": {
       "Question": "Are you a developer?",
       "DefaultSelection": "Include developer tooling",
@@ -59,7 +59,7 @@
     "Stream": {
       "Question": "How aggressive do you like your updates? ",
       "DefaultSelection": "Select your update stream",
-      "Stable": "Bluefin",
+      "Stable": "Bluefin (For Enthusiasts)",
       "Gts": "Bluefin GTS (Recommended)",
       "LTS": "Bluefin LTS (Beta)"
     },
