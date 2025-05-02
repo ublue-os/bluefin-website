@@ -53,7 +53,7 @@
       "arm": "ARM64"
     },
     "Gpu": {
-      "Question": "Who is the vendor of your primary GPU? ",
+      "Question": "Who is the vendor of your primary graphics card (GPU)?",
       "DefaultSelection": "Select your primary GPU vendor"
     },
     "Stream": {
