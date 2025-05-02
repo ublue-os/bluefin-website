@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref, watch } from "vue"
+import { Ref, ref } from "vue"
 import { marked } from "marked"
 import {
   IconCheckCircle,
@@ -59,7 +59,7 @@ const getFormattedImageName = () => {
   switch (imageName.value.stream) {
     case "lts":
     case "gts":
-      final_name = getNewFormatting(final_name)
+      final_name = getNewFormatting(final_name!)
       break;
     default:
       if (imageName.value.gpu == "nvidia") {
@@ -162,7 +162,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="gpu question-container" v-if="imageName.arch != undefined">
           <label for="gpuVendor" class="question-title">{{
             t("TryBluefin.Gpu.Question")
-          }}</label>
+            }}</label>
           <div>
             <select v-model="imageName.gpu" id="gpuVendor" name="gpuVendor" class="question-select">
               <option :value="undefined" disabled selected>
@@ -179,7 +179,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="question-container" v-if="imageName.gpu != undefined">
           <label for="isGts" class="question-title">{{
             t("TryBluefin.Stream.Question")
-          }}</label>
+            }}</label>
           <div class="select">
             <select v-model="imageName.stream" id="isGts" name="isGts" class="question-select" @change="selectCuteDino">
               <option disabled selected :value="undefined">
@@ -235,7 +235,6 @@ const { t } = useI18n<MessageSchema>({
         </div>
 
         <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
-        <p v-if="imageName.developer" v-html="marked.parse(t('TryBluefin.Download.DeveloperNote'))" />
 
         <div class="container">
           <Transition name="slide-fade">
