@@ -48,7 +48,7 @@
       "No": "No"
     },
     "Architecture": {
-      "Question": "Which architecture will you install Bluefin on?",
+      "Question": "Which architecture will you install Bluefin on? Older BIOS-based systems are unsupported",
       "x86": "x86_64 (Standard for most computers)",
       "arm": "ARM64"
     },
