@@ -18,7 +18,7 @@ const imageName: Ref<{
   base: "bluefin",
   gpu: undefined,
   stream: "gts",
-  imagesrc: "./characters/dolly.webp"
+  imagesrc: "./characters/intrigued.png"
 })
 
 const getNewFormatting = (final_name: string): string => {
@@ -79,10 +79,10 @@ const selectCuteDino = () => {
       target_image = './characters/achillobator.webp';
       break;
     case 'gts':
-      target_image = './characters/dolly.webp';
+      target_image = './characters/intrigued.png';
       break;
     case 'stable':
-      target_image = './characters/angry.webp';
+      target_image = './characters/leaping.png';
       break;
     default:
   }
