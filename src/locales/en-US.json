@@ -59,8 +59,8 @@
     "Stream": {
       "Question": "How aggressive do you like your updates? ",
       "DefaultSelection": "Select your update stream",
-      "Stable": "Bluefin (For Enthusiasts)",
-      "Gts": "Bluefin GTS (Recommended)",
+      "Stable": "Bluefin (Recommended for Enthusiasts)",
+      "Gts": "Bluefin GTS (Recommended for Most People)",
       "LTS": "Bluefin LTS (Beta, Live only, uninstallable)"
     },
     "Download": {
