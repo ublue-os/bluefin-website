@@ -61,7 +61,7 @@
       "DefaultSelection": "Select your update stream",
       "Stable": "Bluefin (Recommended for Enthusiasts)",
       "Gts": "Bluefin GTS (Recommended for Most People)",
-      "LTS": "Bluefin LTS (Beta, Live only, uninstallable)"
+      "LTS": "Bluefin LTS (Beta)"
     },
     "Download": {
       "Iso": "Download the ISO",
