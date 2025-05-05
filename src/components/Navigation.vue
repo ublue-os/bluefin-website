@@ -25,7 +25,6 @@ const links: Record<string, Link> = {
   "#scene-developers": { name: "Navbar.ForDevs", icon: IconCodeBraces },
   // '#scene-gamers': { name: 'Gamers', icon: IconControllerClassic },
   "#scene-mission": { name: "Navbar.OurMission" },
-  "#scene-picker": { name: "Navbar.TryOut", icon: IconDownload },
   "#scene-faq": { name: "Navbar.FAQ" }
 }
 
