@@ -10,12 +10,6 @@ function scrollToUsers() {
   document.querySelector("#scene-users")?.scrollIntoView({ behavior: "smooth" })
 }
 
-function scrollToPicker() {
-  document
-    .querySelector("#scene-picker")
-    ?.scrollIntoView({ behavior: "smooth" })
-}
-
 const isLoaded = ref(false)
 
 onMounted(() => {
@@ -44,14 +38,8 @@ const { t } = useI18n<MessageSchema>({
     <div class="container moderate">
       <div class="title" :class="{ 'is-loaded': isLoaded }">
         <div class="text">
-          <img
-            style="width: 100%; height: auto"
-            width="105"
-            height="43"
-            src="/brands/bluefin.svg"
-            fetchpriority="high"
-            alt="Project Bluefin"
-          />
+          <img style="width: 100%; height: auto" width="105" height="43" src="/brands/bluefin.svg" fetchpriority="high"
+            alt="Project Bluefin" />
           <p>{{ t("Landing.Title") }}</p>
 
           <div class="btn-wrap">
@@ -59,21 +47,15 @@ const { t } = useI18n<MessageSchema>({
               {{ t("Landing.DiscoverButton") }}
             </button>
 
-            <select
-              class="btn black filled text-nowrap"
-              @change="redirectToLang(lang)"
-              v-model="lang"
-            >
-              <option
-                v-for="key in Object.keys(i18n.global.messages)"
-                :value="key"
-              >
+            <select class="btn black filled text-nowrap" @change="redirectToLang(lang)" v-model="lang">
+              <option v-for="key in Object.keys(i18n.global.messages)" :value="key">
                 {{ key }}
               </option>
             </select>
           </div>
         </div>
-        <img class="container sm:h-full sm:w-full object-contain my-3 w-1/2 h-1/2" :src="LangLandingBluefinImageURL" alt="Bluefin" />
+        <img class="container sm:h-full sm:w-full object-contain my-3 w-1/2 h-1/2" :src="LangLandingBluefinImageURL"
+          alt="Bluefin" />
       </div>
     </div>
     <SceneVisibilityChecker name="null" />
