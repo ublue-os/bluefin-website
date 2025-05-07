@@ -201,7 +201,7 @@ const { t } = useI18n<MessageSchema>({
 
         <div class="container">
           <Transition name="slide-fade">
-            <img class="dolly xl:absolute top-0 left-0 right-0 m-auto text-center" :key="imageName.stream"
+            <img class="dolly xl:absolute top-0 left-0 right-0 m-auto text-center w-3/4" :key="imageName.stream"
               :src="imageName.imagesrc" :title="t('TryBluefin.Download.DollyChill')" />
           </Transition>
         </div>
