@@ -59,6 +59,10 @@ const { t } = useI18n<MessageSchema>({
               {{ t("Landing.DiscoverButton") }}
             </button>
 
+            <a class="btn black filled text-nowrap" @click="scrollToPicker">
+              {{ t("Landing.TryOutButton") }}
+            </a>
+
             <select
               class="btn black filled text-nowrap"
               @change="redirectToLang(lang)"

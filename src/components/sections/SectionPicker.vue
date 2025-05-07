@@ -23,6 +23,13 @@ const { t } = useI18n<MessageSchema>({
 
 <template>
   <section id="scene-picker" class="section-wrap">
+    <div class="container">
+      <div>
+        <h2>{{ t("TryBluefin.Title") }}</h2>
+        <p v-html="marked.parse(t('TryBluefin.Description'))" />
+      </div>
+      <ImagePicker />
+    </div>
     <SceneVisibilityChecker name="#scene-picker" />
   </section>
 </template>
