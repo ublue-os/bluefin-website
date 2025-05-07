@@ -5,6 +5,7 @@ import {
   IconArrowUp,
   IconCodeBraces,
   IconFaceManShimmer,
+  IconDownload
 } from "@iconify-prerendered/vue-mdi"
 import { useEventListener } from "@vueuse/core"
 
@@ -77,27 +78,41 @@ const { t } = useI18n<MessageSchema>({
 <template>
   <header id="navigation" class="app-navigation" role="navigation">
     <nav aria-label="Navigation">
-      <ul :style="{
-        gridTemplateColumns: `repeat(${linksAmount},1fr)`
-      }">
+      <ul
+        :style="{
+          gridTemplateColumns: `repeat(${linksAmount},1fr)`
+        }"
+      >
         <li v-for="(link, key) in links" :key="key" :data-section="key">
-          <a :href="key" :class="{ active: key === visibleSection }" :aria-label="`Section ${link.name}`"
-            @click.prevent="scrollTo(key)">
+          <a
+            :href="key"
+            :class="{ active: key === visibleSection }"
+            :aria-label="`Section ${link.name}`"
+            @click.prevent="scrollTo(key)"
+          >
             <component :is="link.icon" v-if="link.icon" />
             {{ t(link.name) }}
           </a>
         </li>
 
-        <div class="bg" :style="{
-          left: `${Math.max(0, (offset - 1) * 20)}%`,
-          opacity: visibleSection === 'null' ? 0 : 1,
-          width: `${Math.round(100 / linksAmount)}%`
-        }" />
+        <div
+          class="bg"
+          :style="{
+            left: `${Math.max(0, (offset - 1) * 20)}%`,
+            opacity: visibleSection === 'null' ? 0 : 1,
+            width: `${Math.round(100 / linksAmount)}%`
+          }"
+        />
       </ul>
     </nav>
 
     <Transition name="fade">
-      <button v-if="showButtonUp" class="btn-up" aria-label="Scroll up button" @click="scrollUp">
+      <button
+        v-if="showButtonUp"
+        class="btn-up"
+        aria-label="Scroll up button"
+        @click="scrollUp"
+      >
         <IconArrowUp />
       </button>
     </Transition>
