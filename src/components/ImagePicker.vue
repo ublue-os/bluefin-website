@@ -21,38 +21,6 @@ const imageName: Ref<{
   imagesrc: "./characters/intrigued.png"
 })
 
-const getNewFormatting = (final_name: string): string => {
-  final_name += "-live"
-
-  if (imageName.value.gpu == "nvidia") {
-    if (imageName.value.stream == "lts") {
-      final_name += "-gdx"
-    } else {
-      final_name += "-nvidia-open"
-    }
-  }
-
-  switch (imageName.value.stream) {
-    case "latest":
-    case "lts":
-    case "gts":
-      final_name += "-" + imageName.value.stream
-      break;
-    default:
-      final_name += "-stable";
-  }
-
-  switch (imageName.value.arch) {
-    case "arm":
-      final_name += "-arm64"
-      break;
-    case "x86":
-      final_name += "-amd64"
-      break
-  }
-  return final_name
-}
-
 const getFormattedImageName = () => {
   let final_name = imageName.value.base
 
@@ -157,7 +125,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="gpu question-container" v-if="imageName.arch != undefined">
           <label for="gpuVendor" class="question-title">{{
             t("TryBluefin.Gpu.Question")
-          }}</label>
+            }}</label>
           <div>
             <select v-model="imageName.gpu" id="gpuVendor" name="gpuVendor" class="question-select">
               <option :value="undefined" disabled selected>
@@ -174,7 +142,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="question-container" v-if="imageName.gpu != undefined">
           <label for="isGts" class="question-title">{{
             t("TryBluefin.Stream.Question")
-          }}</label>
+            }}</label>
           <div class="select">
             <select v-model="imageName.stream" id="isGts" name="isGts" class="question-select" @change="selectCuteDino">
               <option disabled selected :value="undefined">
