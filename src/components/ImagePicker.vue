@@ -56,18 +56,13 @@ const getNewFormatting = (final_name: string): string => {
 const getFormattedImageName = () => {
   let final_name = imageName.value.base
 
-  switch (imageName.value.stream) {
-    case "lts":
-    case "gts":
-      final_name = getNewFormatting(final_name!)
-      break;
-    default:
-      if (imageName.value.gpu == "nvidia") {
-        final_name += "-nvidia-open"
-      }
-      final_name += "-stable";
-      break;
+  if (imageName.value.gpu == "nvidia") {
+    final_name += "-nvidia-open"
   }
+  final_name += "-" + imageName.value.stream;
+
+  // final_name = getNewFormatting(final_name!)
+  // break;
 
   return final_name
 }
@@ -152,7 +147,7 @@ const { t } = useI18n<MessageSchema>({
             <select @change="() => { fixupStreamHandling(); selectCuteDino(); }" v-model="imageName.arch"
               id="archVendor" name="archVendor" class="question-select">
               <option :value="'x86'" selected>{{ t("TryBluefin.Architecture.x86") }}</option>
-              <option :value="'arm'">{{ t("TryBluefin.Architecture.arm") }}</option>
+              <option :value="'arm'" disabled>{{ t("TryBluefin.Architecture.arm") }}</option>
             </select>
           </div>
         </div>
@@ -162,7 +157,7 @@ const { t } = useI18n<MessageSchema>({
         <div class="gpu question-container" v-if="imageName.arch != undefined">
           <label for="gpuVendor" class="question-title">{{
             t("TryBluefin.Gpu.Question")
-            }}</label>
+          }}</label>
           <div>
             <select v-model="imageName.gpu" id="gpuVendor" name="gpuVendor" class="question-select">
               <option :value="undefined" disabled selected>
@@ -179,13 +174,13 @@ const { t } = useI18n<MessageSchema>({
         <div class="question-container" v-if="imageName.gpu != undefined">
           <label for="isGts" class="question-title">{{
             t("TryBluefin.Stream.Question")
-            }}</label>
+          }}</label>
           <div class="select">
             <select v-model="imageName.stream" id="isGts" name="isGts" class="question-select" @change="selectCuteDino">
               <option disabled selected :value="undefined">
                 {{ t("TryBluefin.Stream.DefaultSelection") }}
               </option>
-              <option :value="'lts'">
+              <option :value="'lts'" disabled>
                 {{ t("TryBluefin.Stream.LTS", { version: "10" }) }}
               </option>
               <option :value="'gts'" :disabled="imageName.arch == 'arm'">
