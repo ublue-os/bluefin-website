@@ -29,8 +29,14 @@ const getFormattedImageName = () => {
   }
   final_name += "-" + imageName.value.stream;
 
-  // final_name = getNewFormatting(final_name!)
-  // break;
+  switch (imageName.value.arch) {
+    case "x86":
+      final_name += "-x86_64";
+      break;
+    case "arm":
+      final_name += "-aarch64";
+      break;
+  }
 
   return final_name
 }
