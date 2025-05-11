@@ -23,7 +23,7 @@
     "vue-i18n": "^11.0.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "5.2.3",
+    "@vitejs/plugin-vue": "5.2.4",
     "tailwindcss": "4.1.6",
     "typescript": "5.8.3",
     "vite": "6.3.4",
