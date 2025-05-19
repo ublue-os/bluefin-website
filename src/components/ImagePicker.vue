@@ -24,10 +24,6 @@ const imageName: Ref<{
 const getFormattedImageName = () => {
   let final_name = imageName.value.base
 
-  if (imageName.value.arch == "arm") {
-    final_name = `readymade-${final_name}`
-  }
-
   if (imageName.value.gpu == "nvidia") {
     if (imageName.value.stream == "lts" ) {
       final_name += "-gdx"
