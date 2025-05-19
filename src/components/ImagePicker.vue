@@ -24,9 +24,18 @@ const imageName: Ref<{
 const getFormattedImageName = () => {
   let final_name = imageName.value.base
 
-  if (imageName.value.gpu == "nvidia") {
-    final_name += "-nvidia-open"
+  if (imageName.value.arch == "arm") {
+    final_name = `readymade-${final_name}`
   }
+
+  if (imageName.value.gpu == "nvidia") {
+    if (imageName.value.stream == "lts" ) {
+      final_name += "-gdx"
+    } else {
+      final_name += "-nvidia-open"
+    }
+  }
+
   final_name += "-" + imageName.value.stream;
 
   switch (imageName.value.arch) {
@@ -121,7 +130,7 @@ const { t } = useI18n<MessageSchema>({
             <select @change="() => { fixupStreamHandling(); selectCuteDino(); }" v-model="imageName.arch"
               id="archVendor" name="archVendor" class="question-select">
               <option :value="'x86'" selected>{{ t("TryBluefin.Architecture.x86") }}</option>
-              <option :value="'arm'" disabled>{{ t("TryBluefin.Architecture.arm") }}</option>
+              <option :value="'arm'">{{ t("TryBluefin.Architecture.arm") }}</option>
             </select>
           </div>
         </div>
@@ -154,7 +163,7 @@ const { t } = useI18n<MessageSchema>({
               <option disabled selected :value="undefined">
                 {{ t("TryBluefin.Stream.DefaultSelection") }}
               </option>
-              <option :value="'lts'" disabled>
+              <option :value="'lts'">
                 {{ t("TryBluefin.Stream.LTS", { version: "10" }) }}
               </option>
               <option :value="'gts'" :disabled="imageName.arch == 'arm'">
