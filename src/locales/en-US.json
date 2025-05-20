@@ -80,7 +80,7 @@
     "QuestionsArray": {
       "0": {
         "question": "What is this exactly? Why did you make a Linux distribution?",
-        "answer": "Bluefin utilizes bootc's OCI container features to compose and build an OS image. This process is overseen by a well-structured community that is committed to automation and sustainability. The end result is akin to a configuration management tool like Ansible or Salt, but without the typical challenges associated with maintaining a custom distribution. We use the term \"custom image\" to describe this approach. It's like having someone install, configure, and maintain a polished setup for you. \n\n It's akin to your geeky friend helping you set up your computer, except we do it together as a community to help each other. \n\n[OSTree Native Containers](https://bootc-dev.github.io/bootc/)"
+        "answer": "Bluefin utilizes bootc's OCI container features to compose and build an OS image. This process is overseen by a well-structured community that is committed to automation and sustainability. The end result is crowd sourced best practices so users don't have to start from scratch to get going. We use the term \"custom image\" to describe this approach. It's like having someone install, configure, and maintain a polished setup for you. \n\n It's akin to your geeky friend helping you set up your computer, except we do it together as a community to help each other. \n\n[OSTree Native Containers](https://bootc-dev.github.io/bootc/)"
       },
       "1": {
         "question": "How does this differ from other desktops?",
