@@ -126,7 +126,7 @@ const { t } = useI18n<MessageSchema>({
             <select @change="() => { fixupStreamHandling(); selectCuteDino(); }" v-model="imageName.arch"
               id="archVendor" name="archVendor" class="question-select">
               <option :value="'x86'" selected>{{ t("TryBluefin.Architecture.x86") }}</option>
-              <option :value="'arm'">{{ t("TryBluefin.Architecture.arm") }}</option>
+              <option :value="'arm'" disabled>{{ t("TryBluefin.Architecture.arm") }}</option>
             </select>
           </div>
         </div>
@@ -159,7 +159,7 @@ const { t } = useI18n<MessageSchema>({
               <option disabled selected :value="undefined">
                 {{ t("TryBluefin.Stream.DefaultSelection") }}
               </option>
-              <option :value="'lts'">
+              <option :value="'lts' disable">
                 {{ t("TryBluefin.Stream.LTS", { version: "10" }) }}
               </option>
               <option :value="'gts'" :disabled="imageName.arch == 'arm'">
