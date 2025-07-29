@@ -102,7 +102,7 @@ export const LangFaqTag = 'Unsure?'
 export const LangFaqTitle = 'FAQ'
 export const LangFaqText = `
 If your questions remain unanswered, 
-you can find us [on our Discourse forum](https://universal-blue.discourse.group/c/bluefin/6) and check out [docs.projectbluefin.io](https://docs.projectbluefin.io).
+you can find us [on our Community forum](https://commmunity.projectbluefin.io) and check out [docs.projectbluefin.io](https://docs.projectbluefin.io).
 `
 export const LangFaqQuestions = [
   {
