@@ -184,11 +184,6 @@ export const LangPoweredBy: PoweredBy[] = [
     altText: 'Docker',
   },
   {
-    imageUrl: './brands/dontrememberthisbrand.svg',
-    projectUrl: 'https://distrobox.privatedns.org/',
-    altText: 'Distrobox',
-  },
-  {
     imageUrl: './brands/bootc.png',
     projectUrl: 'https://containers.github.io/bootc/',
     altText: 'bootc',
