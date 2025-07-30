@@ -188,4 +188,9 @@ export const LangPoweredBy: PoweredBy[] = [
     projectUrl: 'https://distrobox.privatedns.org/',
     altText: 'Distrobox',
   },
+  {
+    imageUrl: './brands/bootc.png',
+    projectUrl: 'https://containers.github.io/bootc/',
+    altText: 'bootc',
+  },
 ]
