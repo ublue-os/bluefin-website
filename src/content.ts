@@ -189,7 +189,7 @@ export const LangPoweredBy: PoweredBy[] = [
     altText: 'Distrobox',
   },
   {
-    imageUrl: 'https://raw.githubusercontent.com/containers/common/main/logos/bootc-logo-full-vert.png',
+    imageUrl: './brands/bootc.png',
     projectUrl: 'https://containers.github.io/bootc/',
     altText: 'bootc',
   },
