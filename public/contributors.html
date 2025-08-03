@@ -212,25 +212,11 @@
           return !ignoredContributors.includes(contributor.login);
         });
         
-        // Limit to 50 contributors: top 10 + 40 others
-        var displayContributors = [];
+        // Shuffle to create a mix instead of just showing top contributors
+        var shuffledContributors = shuffleArray(validContributors);
         
-        if (validContributors.length > 0) {
-          // Take top 10 contributors (they're already sorted by contribution count from GitHub API)
-          var topContributors = validContributors.slice(0, Math.min(10, validContributors.length));
-          displayContributors = displayContributors.concat(topContributors);
-          
-          // If we have more than 10 contributors, shuffle the remaining and take up to 40
-          if (validContributors.length > 10) {
-            var remainingContributors = validContributors.slice(10);
-            var shuffledRemaining = shuffleArray(remainingContributors);
-            var additionalContributors = shuffledRemaining.slice(0, Math.min(40, shuffledRemaining.length));
-            displayContributors = displayContributors.concat(additionalContributors);
-          }
-        }
-        
-        // Add contributors to the page (limited to 50 total)
-        displayContributors.forEach(function(contributor) {
+        // Add contributors to the page
+        shuffledContributors.forEach(function(contributor) {
           var contributorLogin = contributor['login'];
           document.getElementById('contributor-container').innerHTML += '<div class="github-profile-badge" data-user="' + contributorLogin + '"></div';
         });
