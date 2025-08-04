@@ -159,7 +159,7 @@ const { t } = useI18n<MessageSchema>({
               <option disabled selected :value="undefined">
                 {{ t("TryBluefin.Stream.DefaultSelection") }}
               </option>
-              <option :value="'lts'" >
+              <option :value="'lts' disabled" >
                 {{ t("TryBluefin.Stream.LTS", { version: "10" }) }}
               </option>
               <option :value="'gts'" :disabled="imageName.arch == 'arm'">
