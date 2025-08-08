@@ -76,7 +76,7 @@
   "Faq": {
     "Tag": "Unsure?",
     "Title": "FAQ",
-    "Text": "If your questions remain unanswered, \nyou can find us [on our Discourse forum](https://universal-blue.discourse.group/c/bluefin/6) and check out [docs.projectbluefin.io](https://docs.projectbluefin.io)",
+    "Text": "If your questions remain unanswered, \nyou can find us [in GitHub Discussions](https://community.projectbluefin.io) and check out [docs.projectbluefin.io](https://docs.projectbluefin.io)",
     "QuestionsArray": {
       "0": {
         "question": "What is this exactly? Why did you make a Linux distribution?",
