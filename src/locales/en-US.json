@@ -59,9 +59,9 @@
     "Stream": {
       "Question": "How aggressive do you like your updates? ",
       "DefaultSelection": "Select your update stream",
-      "Stable": "Bluefin (Recommended for Enthusiasts)",
-      "Gts": "Bluefin GTS (Recommended for Most People)",
-      "LTS": "Bluefin LTS (Beta)"
+      "Stable": "Bluefin (For Enthusiasts)",
+      "Gts": "Bluefin GTS (For Most People)",
+      "LTS": "Bluefin LTS (For Professional Needs)"
     },
     "Download": {
       "Iso": "Download the ISO",
