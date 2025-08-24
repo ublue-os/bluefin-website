@@ -19,6 +19,7 @@ interface BlogPost {
   description: string
   pubDate: string
   formattedDate: string
+  thumbnail?: string
 }
 
 const props = defineProps<{
@@ -29,6 +30,27 @@ const props = defineProps<{
 const posts = ref<BlogPost[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
+
+// Extract the first image URL from HTML content
+const extractThumbnail = (htmlContent: string): string | undefined => {
+  if (!htmlContent) return undefined
+  
+  // Create a temporary DOM element to parse HTML
+  const tempDiv = document.createElement('div')
+  tempDiv.innerHTML = htmlContent
+  
+  // Find the first img element
+  const firstImg = tempDiv.querySelector('img')
+  if (firstImg) {
+    const src = firstImg.getAttribute('src')
+    // Make sure we have a valid URL
+    if (src && (src.startsWith('http') || src.startsWith('//'))) {
+      return src
+    }
+  }
+  
+  return undefined
+}
 
 const parseAtomFeed = (xmlText: string): BlogPost[] => {
   const parser = new DOMParser()
@@ -51,6 +73,11 @@ const parseAtomFeed = (xmlText: string): BlogPost[] => {
     const published = entry.querySelector('published')?.textContent || 
                      entry.querySelector('updated')?.textContent || ''
     
+    // Extract thumbnail from content or summary
+    const content = entry.querySelector('content')?.innerHTML || 
+                   entry.querySelector('summary')?.innerHTML || ''
+    const thumbnail = extractThumbnail(content)
+    
     // Format the date
     let formattedDate = ''
     if (published) {
@@ -71,7 +98,8 @@ const parseAtomFeed = (xmlText: string): BlogPost[] => {
       link,
       description: summary,
       pubDate: published,
-      formattedDate
+      formattedDate,
+      thumbnail
     })
   })
   
@@ -85,21 +113,24 @@ const mockPosts: BlogPost[] = [
     link: "https://docs.projectbluefin.io/blog/introducing-project-bluefin",
     description: "Welcome to Project Bluefin, the next generation Linux workstation designed for reliability, performance, and sustainability.",
     pubDate: "2024-01-15T10:00:00Z",
-    formattedDate: "January 15, 2024"
+    formattedDate: "January 15, 2024",
+    thumbnail: "https://docs.projectbluefin.io/assets/images/bluefin-logo-4d88cc69e2b085b9dcc0c72bafdc24df.png"
   },
   {
     title: "Developer Mode: Cloud-Native Workflows",
     link: "https://docs.projectbluefin.io/blog/developer-mode",
     description: "Learn about Bluefin's developer mode and how it transforms your device into a powerful workstation with container-focused workflows.",
     pubDate: "2024-01-20T14:30:00Z",
-    formattedDate: "January 20, 2024"
+    formattedDate: "January 20, 2024",
+    thumbnail: "https://docs.projectbluefin.io/assets/images/containerfile-example-7c20da04f56b30b8c78d04a1b28e99e7.png"
   },
   {
     title: "Understanding Image-Based Updates",
     link: "https://docs.projectbluefin.io/blog/image-based-updates",
     description: "Discover how Bluefin's automatic image-based updates provide near-zero maintenance while ensuring system stability.",
     pubDate: "2024-01-25T09:15:00Z",
-    formattedDate: "January 25, 2024"
+    formattedDate: "January 25, 2024",
+    thumbnail: "https://docs.projectbluefin.io/assets/images/system-update-5a7ca45e75b1ac21f4b28c91c4885b21.png"
   }
 ]
 
@@ -180,18 +211,25 @@ onMounted(() => {
     
     <div v-else class="posts-list">
       <article v-for="post in posts" :key="post.link" class="blog-post">
-        <header class="post-header">
-          <h3 class="post-title">
-            <a :href="post.link" target="_blank" rel="noopener noreferrer">
-              {{ post.title }}
-            </a>
-          </h3>
-          <time v-if="post.formattedDate" class="post-date">
-            {{ post.formattedDate }}
-          </time>
-        </header>
-        <div v-if="post.description" class="post-description">
-          <p>{{ post.description }}</p>
+        <div class="post-content">
+          <div v-if="post.thumbnail" class="post-thumbnail">
+            <img :src="post.thumbnail" :alt="post.title" loading="lazy" />
+          </div>
+          <div class="post-text">
+            <header class="post-header">
+              <h3 class="post-title">
+                <a :href="post.link" target="_blank" rel="noopener noreferrer">
+                  {{ post.title }}
+                </a>
+              </h3>
+              <time v-if="post.formattedDate" class="post-date">
+                {{ post.formattedDate }}
+              </time>
+            </header>
+            <div v-if="post.description" class="post-description">
+              <p>{{ post.description }}</p>
+            </div>
+          </div>
         </div>
       </article>
       
@@ -237,6 +275,38 @@ onMounted(() => {
 
 .blog-post:hover {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.post-content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.post-thumbnail {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.blog-post:hover .post-thumbnail img {
+  opacity: 1;
+}
+
+.post-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .post-header {
@@ -311,6 +381,10 @@ onMounted(() => {
     border-color: #374151;
   }
   
+  .post-thumbnail {
+    background: #374151;
+  }
+  
   .post-title a {
     color: #f9fafb;
   }
@@ -333,6 +407,20 @@ onMounted(() => {
   
   .source-text a:hover {
     color: #93c5fd;
+  }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .post-content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .post-thumbnail {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 0.5rem;
   }
 }
 </style>
