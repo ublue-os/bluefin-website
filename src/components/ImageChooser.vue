@@ -298,38 +298,46 @@ const reset = () => {
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 3px solid transparent;
+  background: #1f2937;
 }
 
 .release-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .release-box.recommended {
   border-color: #4f9cf9;
+  box-shadow: 0 0 20px rgba(79, 156, 249, 0.3);
 }
 
 .release-image {
   width: 100%;
   height: 100%;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .release-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.7) 100%
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.8) 100%
   );
   display: flex;
   align-items: flex-end;
   padding: 1.5rem;
   color: white;
+  border-radius: 12px;
 }
 
 .release-content {
