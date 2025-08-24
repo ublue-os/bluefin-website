@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
 import SceneVisibilityChecker from "../common/SceneVisibilityChecker.vue"
-import { LangLandingBluefinImageURL } from "../../content"
+import { LangLandingBluefinImageURLs } from "../../content"
 import { i18n } from "../../locales/schema"
 import { useI18n } from "vue-i18n"
 import type { MessageSchema } from "../../locales/schema"
@@ -16,7 +16,12 @@ function scrollToPicker() {
     ?.scrollIntoView({ behavior: "smooth" })
 }
 
+function getRandomBluefinImage() {
+  return LangLandingBluefinImageURLs[Math.floor(Math.random() * LangLandingBluefinImageURLs.length)]
+}
+
 const isLoaded = ref(false)
+const LangLandingBluefinImageURL = getRandomBluefinImage()
 
 onMounted(() => {
   setTimeout(() => {
