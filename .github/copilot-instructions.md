@@ -349,6 +349,7 @@ npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 - 🌍 **Consider i18n impact** for all text changes (12 languages supported)
 - 📸 **Take screenshots** of UI changes for review
 - ⚠️ **Ignore warnings** - Sass @import and @types/marked deprecation warnings are expected
-- Always follow the conventional commits specification when sending pull requests: conventional-commits/conventionalcommits.org
-- Always include screenshots of both desktop and mobile in pull requests
-- Always use tailwind css and do not hardcode pixel sizes
+- **Always** follow the conventional commits specification when sending pull requests: conventional-commits/conventionalcommits.org
+- **Always** include screenshots of both desktop and mobile in pull requests, even in subsequent runs
+- **Always** use tailwind css and do not hardcode pixel sizes
+- **Always** ensure that every file passes lint at the end of the request 
