@@ -402,20 +402,20 @@ const reset = () => {
 }
 
 .release-title {
-  font-size: 1.5rem;
+  font-size: 2.0rem;
   font-weight: 700;
   margin: 0 0 0.25rem 0;
 }
 
 .release-subtitle {
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   opacity: 0.9;
   display: block;
   margin-bottom: 0.5rem;
 }
 
 .recommended-badge {
-  background: var(--accent-color);
+  background: #a710c9;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -427,7 +427,7 @@ const reset = () => {
 
 .beta-badge {
   display: inline-block;
-  background: #f59e0b;
+  background: #a710c9;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -438,7 +438,7 @@ const reset = () => {
 }
 
 .release-description {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   line-height: 1.4;
   opacity: 0.9;
   margin: 0;
@@ -460,7 +460,7 @@ const reset = () => {
   border: none;
   color: #4f9cf9;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 4px;
