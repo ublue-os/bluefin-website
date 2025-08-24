@@ -48,7 +48,7 @@ const releases = [
     title: 'Bluefin GTS',
     subtitle: 'For Most People',
     description: 'The default experience for users, following the previous stable release of Fedora',
-    image: './characters/intrigued.png',
+    image: './characters/intrigued.webp',
     supportedArch: ['x86'],
     recommended: true
   },
@@ -57,7 +57,7 @@ const releases = [
     title: 'Bluefin',
     subtitle: 'For Enthusiasts',
     description: 'The most current, based on the latest Fedora',
-    image: './characters/leaping.png',
+    image: './characters/leaping.webp',
     supportedArch: ['x86'],
     recommended: false
   }
