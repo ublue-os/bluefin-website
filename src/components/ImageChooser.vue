@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref, computed } from "vue"
+import { Ref, ref, computed, onMounted } from "vue"
 import { marked } from "marked"
 import {
   IconCheckCircle,
@@ -12,6 +12,24 @@ import type { MessageSchema } from "../locales/schema"
 const { t } = useI18n<MessageSchema>({
   useScope: "global"
 })
+
+// Version information interface
+interface VersionInfo {
+  base: string
+  gnome: string
+  kernel: string
+  mesa: string
+  nvidia: string
+}
+
+interface StreamVersions {
+  lts: VersionInfo
+  gts: VersionInfo
+  stable: VersionInfo
+}
+
+// State for version information
+const streamVersions = ref<StreamVersions | null>(null)
 
 const imageName: Ref<{
   arch: string | undefined
@@ -147,6 +165,42 @@ const reset = () => {
   showGpuStep.value = false
   showDownload.value = false
 }
+
+// Load version information from YAML file
+const loadVersions = async () => {
+  try {
+    const response = await fetch('/stream-versions.yml')
+    const yamlText = await response.text()
+    
+    // Simple YAML parser for our specific format
+    const parseYAML = (yaml: string): StreamVersions => {
+      const lines = yaml.split('\n').filter(line => line.trim() && !line.trim().startsWith('#'))
+      const result: any = {}
+      let currentStream = ''
+      
+      for (const line of lines) {
+        if (!line.startsWith(' ') && line.includes(':')) {
+          currentStream = line.split(':')[0].trim()
+          result[currentStream] = {}
+        } else if (line.startsWith('  ') && line.includes(':')) {
+          const [key, value] = line.trim().split(': ')
+          result[currentStream][key] = value.replace(/"/g, '')
+        }
+      }
+      
+      return result as StreamVersions
+    }
+    
+    streamVersions.value = parseYAML(yamlText)
+  } catch (error) {
+    console.warn('Failed to load stream versions:', error)
+  }
+}
+
+// Load versions on component mount
+onMounted(() => {
+  loadVersions()
+})
 </script>
 
 <template>
@@ -178,6 +232,30 @@ const reset = () => {
                   <span class="release-subtitle">{{ release.subtitle }}</span>
                 </div>
                 <p class="release-description">{{ release.description }}</p>
+                
+                <!-- Version Information -->
+                <div v-if="streamVersions && streamVersions[release.id as keyof StreamVersions]" class="version-info">
+                  <div class="version-item">
+                    <span class="version-label">Base:</span>
+                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].base }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">GNOME:</span>
+                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].gnome }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">Kernel:</span>
+                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].kernel }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">MESA:</span>
+                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].mesa }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">Nvidia:</span>
+                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].nvidia }}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -345,7 +423,7 @@ const reset = () => {
 
 .release-box {
   position: relative;
-  height: 300px;
+  height: 400px;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
@@ -450,7 +528,42 @@ const reset = () => {
   font-size: 1.5rem;
   line-height: 1.4;
   opacity: 0.9;
-  margin: 0;
+  margin: 0 0 1rem 0;
+}
+
+/* Version Information */
+.version-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.version-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.version-item:last-child {
+  margin-bottom: 0;
+}
+
+.version-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 60px;
+}
+
+.version-value {
+  font-family: 'Courier New', monospace;
+  color: #93c5fd;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
 }
 
 /* Step Selection */
@@ -665,7 +778,7 @@ const reset = () => {
   }
 
   .release-box {
-    height: 250px;
+    height: 350px;
   }
 
   .selected-release-info {
