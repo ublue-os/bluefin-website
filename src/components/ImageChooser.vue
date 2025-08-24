@@ -415,8 +415,7 @@ const reset = () => {
 }
 
 .recommended-badge {
-  display: inline-block;
-  background: #4f9cf9;
+  background: var(--accent-color);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
