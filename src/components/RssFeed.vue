@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue"
 
 /**
  * RSS/Atom Feed Parser Component
- * 
+ *
  * This component fetches and displays RSS/Atom feeds with graceful fallback.
  * It attempts direct fetch first, then uses a CORS proxy if needed.
  * Falls back to mock data if all network attempts fail.
- * 
- * Production Note: The target site (docs.projectbluefin.io) should ideally 
- * add CORS headers to allow direct access, or this component can use a 
+ *
+ * Production Note: The target site (docs.projectbluefin.io) should ideally
+ * add CORS headers to allow direct access, or this component can use a
  * simple CORS proxy service.
  */
 
@@ -34,65 +34,71 @@ const error = ref<string | null>(null)
 // Extract the first image URL from HTML content
 const extractThumbnail = (htmlContent: string): string | undefined => {
   if (!htmlContent) return undefined
-  
+
   // Create a temporary DOM element to parse HTML
-  const tempDiv = document.createElement('div')
+  const tempDiv = document.createElement("div")
   tempDiv.innerHTML = htmlContent
-  
+
   // Find the first img element
-  const firstImg = tempDiv.querySelector('img')
+  const firstImg = tempDiv.querySelector("img")
   if (firstImg) {
-    const src = firstImg.getAttribute('src')
+    const src = firstImg.getAttribute("src")
     // Make sure we have a valid URL
-    if (src && (src.startsWith('http') || src.startsWith('//'))) {
+    if (src && (src.startsWith("http") || src.startsWith("//"))) {
       return src
     }
   }
-  
+
   return undefined
 }
 
 const parseAtomFeed = (xmlText: string): BlogPost[] => {
   const parser = new DOMParser()
-  const xmlDoc = parser.parseFromString(xmlText, 'text/xml')
-  
+  const xmlDoc = parser.parseFromString(xmlText, "text/xml")
+
   // Check for parsing errors
-  const parserError = xmlDoc.querySelector('parsererror')
+  const parserError = xmlDoc.querySelector("parsererror")
   if (parserError) {
-    throw new Error('Failed to parse XML feed')
+    throw new Error("Failed to parse XML feed")
   }
-  
-  const entries = xmlDoc.querySelectorAll('entry')
+
+  const entries = xmlDoc.querySelectorAll("entry")
   const parsedPosts: BlogPost[] = []
-  
+
   entries.forEach((entry) => {
-    const title = entry.querySelector('title')?.textContent || 'Untitled'
-    const link = entry.querySelector('link')?.getAttribute('href') || '#'
-    const summary = entry.querySelector('summary')?.textContent || 
-                   entry.querySelector('content')?.textContent || ''
-    const published = entry.querySelector('published')?.textContent || 
-                     entry.querySelector('updated')?.textContent || ''
-    
+    const title = entry.querySelector("title")?.textContent || "Untitled"
+    const link = entry.querySelector("link")?.getAttribute("href") || "#"
+    const summary =
+      entry.querySelector("summary")?.textContent ||
+      entry.querySelector("content")?.textContent ||
+      ""
+    const published =
+      entry.querySelector("published")?.textContent ||
+      entry.querySelector("updated")?.textContent ||
+      ""
+
     // Extract thumbnail from content or summary
-    const content = entry.querySelector('content')?.innerHTML || 
-                   entry.querySelector('summary')?.innerHTML || ''
+    const content =
+      entry.querySelector("content")?.innerHTML ||
+      entry.querySelector("summary")?.innerHTML ||
+      ""
     const thumbnail = extractThumbnail(content)
-    
+
     // Format the date
-    let formattedDate = ''
+    let formattedDate = ""
     if (published) {
       try {
         const date = new Date(published)
-        formattedDate = date.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
+        formattedDate = date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
         })
       } catch (e) {
         formattedDate = published
       }
     }
-    
+
     parsedPosts.push({
       title,
       link,
@@ -102,7 +108,7 @@ const parseAtomFeed = (xmlText: string): BlogPost[] => {
       thumbnail
     })
   })
-  
+
   return parsedPosts
 }
 
@@ -111,26 +117,32 @@ const mockPosts: BlogPost[] = [
   {
     title: "Introducing Project Bluefin",
     link: "https://docs.projectbluefin.io/blog/introducing-project-bluefin",
-    description: "Welcome to Project Bluefin, the next generation Linux workstation designed for reliability, performance, and sustainability.",
+    description:
+      "Welcome to Project Bluefin, the next generation Linux workstation designed for reliability, performance, and sustainability.",
     pubDate: "2024-01-15T10:00:00Z",
     formattedDate: "January 15, 2024",
-    thumbnail: "https://docs.projectbluefin.io/assets/images/bluefin-logo-4d88cc69e2b085b9dcc0c72bafdc24df.png"
+    thumbnail:
+      "https://docs.projectbluefin.io/assets/images/bluefin-logo-4d88cc69e2b085b9dcc0c72bafdc24df.png"
   },
   {
     title: "Developer Mode: Cloud-Native Workflows",
     link: "https://docs.projectbluefin.io/blog/developer-mode",
-    description: "Learn about Bluefin's developer mode and how it transforms your device into a powerful workstation with container-focused workflows.",
+    description:
+      "Learn about Bluefin's developer mode and how it transforms your device into a powerful workstation with container-focused workflows.",
     pubDate: "2024-01-20T14:30:00Z",
     formattedDate: "January 20, 2024",
-    thumbnail: "https://docs.projectbluefin.io/assets/images/containerfile-example-7c20da04f56b30b8c78d04a1b28e99e7.png"
+    thumbnail:
+      "https://docs.projectbluefin.io/assets/images/containerfile-example-7c20da04f56b30b8c78d04a1b28e99e7.png"
   },
   {
     title: "Understanding Image-Based Updates",
     link: "https://docs.projectbluefin.io/blog/image-based-updates",
-    description: "Discover how Bluefin's automatic image-based updates provide near-zero maintenance while ensuring system stability.",
+    description:
+      "Discover how Bluefin's automatic image-based updates provide near-zero maintenance while ensuring system stability.",
     pubDate: "2024-01-25T09:15:00Z",
     formattedDate: "January 25, 2024",
-    thumbnail: "https://docs.projectbluefin.io/assets/images/system-update-5a7ca45e75b1ac21f4b28c91c4885b21.png"
+    thumbnail:
+      "https://docs.projectbluefin.io/assets/images/system-update-5a7ca45e75b1ac21f4b28c91c4885b21.png"
   }
 ]
 
@@ -138,24 +150,24 @@ const fetchFeed = async () => {
   try {
     loading.value = true
     error.value = null
-    
+
     // Try to fetch the real feed first
     try {
       // Try direct fetch first
       let response = await fetch(props.feedUrl, {
-        mode: 'cors',
+        mode: "cors",
         headers: {
-          'Accept': 'application/atom+xml, application/xml, text/xml'
+          Accept: "application/atom+xml, application/xml, text/xml"
         }
       })
-      
+
       // If direct fetch fails due to CORS, try with a simple proxy
       if (!response.ok && response.status !== 200) {
-        console.warn('Direct fetch failed, trying with CORS proxy...')
+        console.warn("Direct fetch failed, trying with CORS proxy...")
         // Use a simple CORS proxy for production if direct access fails
         const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(props.feedUrl)}`
         response = await fetch(proxyUrl)
-        
+
         if (response.ok) {
           const data = await response.json()
           const parsedPosts = parseAtomFeed(data.contents)
@@ -170,21 +182,19 @@ const fetchFeed = async () => {
         posts.value = parsedPosts.slice(0, limit)
         return
       }
-      
+
       throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-      
     } catch (fetchError) {
-      console.warn('Failed to fetch live feed, using fallback:', fetchError)
-      
+      console.warn("Failed to fetch live feed, using fallback:", fetchError)
+
       // If the feed is not accessible (CORS, network issues, etc.), use mock data
       // This ensures the UI still works during development and provides a fallback
       const limit = props.perPage || mockPosts.length
       posts.value = mockPosts.slice(0, limit)
     }
-    
   } catch (err) {
-    error.value = err instanceof Error ? err.message : 'Failed to load feed'
-    console.error('RSS Feed Error:', err)
+    error.value = err instanceof Error ? err.message : "Failed to load feed"
+    console.error("RSS Feed Error:", err)
   } finally {
     loading.value = false
   }
@@ -200,15 +210,15 @@ onMounted(() => {
     <div v-if="loading" class="loading">
       <p>Loading blog posts...</p>
     </div>
-    
+
     <div v-else-if="error" class="error">
       <p>{{ error }}</p>
     </div>
-    
+
     <div v-else-if="posts.length === 0" class="no-posts">
       <p>No blog posts found.</p>
     </div>
-    
+
     <div v-else class="posts-list">
       <article v-for="post in posts" :key="post.link" class="blog-post">
         <div class="post-content">
@@ -232,10 +242,14 @@ onMounted(() => {
           </div>
         </div>
       </article>
-      
+
       <div class="feed-source">
         <p class="source-text">
-          <a :href="feedUrl.replace('/atom.xml', '')" target="_blank" rel="noopener noreferrer">
+          <a
+            :href="feedUrl.replace('/atom.xml', '')"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View all posts on the official blog →
           </a>
         </p>
@@ -249,7 +263,9 @@ onMounted(() => {
   width: 100%;
 }
 
-.loading, .error, .no-posts {
+.loading,
+.error,
+.no-posts {
   text-align: center;
   padding: 2rem;
   color: #666;
@@ -380,31 +396,31 @@ onMounted(() => {
     background: #1f2937;
     border-color: #374151;
   }
-  
+
   .post-thumbnail {
     background: #374151;
   }
-  
+
   .post-title a {
     color: #f9fafb;
   }
-  
+
   .post-title a:hover {
     color: #60a5fa;
   }
-  
+
   .post-description {
     color: #d1d5db;
   }
-  
+
   .feed-source {
     border-color: #374151;
   }
-  
+
   .source-text a {
     color: #60a5fa;
   }
-  
+
   .source-text a:hover {
     color: #93c5fd;
   }
@@ -416,7 +432,7 @@ onMounted(() => {
     flex-direction: column;
     gap: 0.75rem;
   }
-  
+
   .post-thumbnail {
     width: 100%;
     height: 200px;

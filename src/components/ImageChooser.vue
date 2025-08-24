@@ -35,30 +35,31 @@ const showDownload = ref(false)
 // Release definitions with their characteristics
 const releases = [
   {
-    id: 'lts',
-    title: 'Bluefin LTS',
-    subtitle: 'Beta',
-    description: 'The long term support experience',
-    image: './characters/achillobator.webp',
-    supportedArch: ['x86', 'arm'],
+    id: "lts",
+    title: "Bluefin LTS",
+    subtitle: "Beta",
+    description: "The long term support experience",
+    image: "./characters/achillobator.webp",
+    supportedArch: ["x86", "arm"],
     recommended: false
   },
   {
-    id: 'gts',
-    title: 'Bluefin GTS',
-    subtitle: 'For Most People',
-    description: 'The default experience for users, following the previous stable release of Fedora',
-    image: './characters/intrigued.webp',
-    supportedArch: ['x86'],
+    id: "gts",
+    title: "Bluefin GTS",
+    subtitle: "For Most People",
+    description:
+      "The default experience for users, following the previous stable release of Fedora",
+    image: "./characters/intrigued.webp",
+    supportedArch: ["x86"],
     recommended: true
   },
   {
-    id: 'stable',
-    title: 'Bluefin',
-    subtitle: 'For Enthusiasts',
-    description: 'The most current, based on the latest Fedora',
-    image: './characters/leaping.webp',
-    supportedArch: ['x86'],
+    id: "stable",
+    title: "Bluefin",
+    subtitle: "For Enthusiasts",
+    description: "The most current, based on the latest Fedora",
+    image: "./characters/leaping.webp",
+    supportedArch: ["x86"],
     recommended: false
   }
 ]
@@ -67,22 +68,22 @@ const getFormattedImageName = () => {
   let final_name = imageName.value.base
 
   if (imageName.value.gpu == "nvidia") {
-    if (imageName.value.stream == "lts" ) {
+    if (imageName.value.stream == "lts") {
       final_name += "-gdx"
     } else {
       final_name += "-nvidia-open"
     }
   }
 
-  final_name += "-" + imageName.value.stream;
+  final_name += "-" + imageName.value.stream
 
   switch (imageName.value.arch) {
     case "x86":
-      final_name += "-x86_64";
-      break;
+      final_name += "-x86_64"
+      break
     case "arm":
-      final_name += "-aarch64";
-      break;
+      final_name += "-aarch64"
+      break
   }
 
   return final_name
@@ -91,7 +92,7 @@ const getFormattedImageName = () => {
 const selectRelease = (releaseId: string) => {
   selectedRelease.value = releaseId
   imageName.value.stream = releaseId
-  imageName.value.imagesrc = releases.find(r => r.id === releaseId)?.image
+  imageName.value.imagesrc = releases.find((r) => r.id === releaseId)?.image
   showArchitectureStep.value = true
   showGpuStep.value = false
   showDownload.value = false
@@ -99,14 +100,14 @@ const selectRelease = (releaseId: string) => {
 
 const selectArchitecture = (arch: string) => {
   imageName.value.arch = arch
-  
+
   // Apply ARM restrictions like in original component
   if (arch == "arm" && imageName.value.stream != "lts") {
-    imageName.value.stream = 'lts'
-    selectedRelease.value = 'lts'
-    imageName.value.imagesrc = './characters/achillobator.webp'
+    imageName.value.stream = "lts"
+    selectedRelease.value = "lts"
+    imageName.value.imagesrc = "./characters/achillobator.webp"
   }
-  
+
   showGpuStep.value = true
   showDownload.value = false
 }
@@ -117,16 +118,19 @@ const selectGpu = (gpu: string) => {
 }
 
 const getSelectedRelease = computed(() => {
-  return releases.find(r => r.id === selectedRelease.value)
+  return releases.find((r) => r.id === selectedRelease.value)
 })
 
 const getSupportedArchitectures = computed(() => {
   const release = getSelectedRelease.value
   if (!release) return []
-  
-  return release.supportedArch.map(arch => ({
+
+  return release.supportedArch.map((arch) => ({
     id: arch,
-    label: arch === 'x86' ? t("TryBluefin.Architecture.x86") : t("TryBluefin.Architecture.arm"),
+    label:
+      arch === "x86"
+        ? t("TryBluefin.Architecture.x86")
+        : t("TryBluefin.Architecture.arm"),
     available: true
   }))
 })
@@ -150,20 +154,25 @@ const reset = () => {
     <!-- Release Selection -->
     <div v-if="!selectedRelease" class="release-selection">
       <div class="release-grid">
-        <div 
-          v-for="release in releases" 
+        <div
+          v-for="release in releases"
           :key="release.id"
           class="release-box"
-          :class="{ 'recommended': release.recommended }"
+          :class="{ recommended: release.recommended }"
           @click="selectRelease(release.id)"
         >
-          <div class="release-image" :style="{ backgroundImage: `url(${release.image})` }">
+          <div
+            class="release-image"
+            :style="{ backgroundImage: `url(${release.image})` }"
+          >
             <div class="release-overlay">
               <div class="release-content">
                 <div class="release-header">
                   <h3 class="release-title">{{ release.title }}</h3>
                   <span class="release-subtitle">{{ release.subtitle }}</span>
-                  <span v-if="release.recommended" class="recommended-badge">Recommended</span>
+                  <span v-if="release.recommended" class="recommended-badge"
+                    >Recommended</span
+                  >
                 </div>
                 <p class="release-description">{{ release.description }}</p>
               </div>
@@ -174,14 +183,17 @@ const reset = () => {
     </div>
 
     <!-- Architecture Selection -->
-    <div v-else-if="showArchitectureStep && !imageName.arch" class="step-selection">
+    <div
+      v-else-if="showArchitectureStep && !imageName.arch"
+      class="step-selection"
+    >
       <div class="step-header">
         <button class="back-button" @click="reset">← Back to releases</button>
         <h3>{{ t("TryBluefin.Architecture.Question") }}</h3>
       </div>
       <div class="options-grid">
-        <button 
-          v-for="arch in getSupportedArchitectures" 
+        <button
+          v-for="arch in getSupportedArchitectures"
           :key="arch.id"
           class="option-button"
           :disabled="!arch.available"
@@ -195,7 +207,12 @@ const reset = () => {
     <!-- GPU Selection -->
     <div v-else-if="showGpuStep && !imageName.gpu" class="step-selection">
       <div class="step-header">
-        <button class="back-button" @click="showArchitectureStep = true; imageName.arch = undefined; showGpuStep = false">← Back</button>
+        <button
+          class="back-button"
+          @click="showArchitectureStep = true; imageName.arch = undefined; showGpuStep = false"
+        >
+          ← Back
+        </button>
         <h3>{{ t("TryBluefin.Gpu.Question") }}</h3>
       </div>
       <div class="options-grid">
@@ -211,46 +228,70 @@ const reset = () => {
     <!-- Download Section -->
     <div v-else-if="showDownload" class="download-section">
       <div class="step-header">
-        <button class="back-button" @click="showGpuStep = true; imageName.gpu = undefined; showDownload = false">← Back</button>
+        <button
+          class="back-button"
+          @click="showGpuStep = true; imageName.gpu = undefined; showDownload = false"
+        >
+          ← Back
+        </button>
         <h3>Ready to download!</h3>
       </div>
-      
+
       <div class="download-summary">
         <div class="selected-release-info">
-          <div class="release-preview" :style="{ backgroundImage: `url(${imageName.imagesrc})` }">
+          <div
+            class="release-preview"
+            :style="{ backgroundImage: `url(${imageName.imagesrc})` }"
+          >
             <div class="release-overlay-small">
               <h4>{{ getSelectedRelease?.title }}</h4>
               <p>{{ getSelectedRelease?.subtitle }}</p>
             </div>
           </div>
           <div class="selection-details">
-            <p><strong>Architecture:</strong> {{ imageName.arch === 'x86' ? 'x86_64' : 'ARM64' }}</p>
-            <p><strong>GPU:</strong> {{ imageName.gpu === 'amd' ? 'AMD/Intel' : 'Nvidia' }}</p>
+            <p>
+              <strong>Architecture:</strong>
+              {{ imageName.arch === "x86" ? "x86_64" : "ARM64" }}
+            </p>
+            <p>
+              <strong>GPU:</strong>
+              {{ imageName.gpu === "amd" ? "AMD/Intel" : "Nvidia" }}
+            </p>
           </div>
         </div>
 
         <div class="download-actions">
-          <a 
+          <a
             class="download-button primary"
-            :href="BLUEFIN_DOWNLOAD_URL.replace('%TEMPLATE%', (getFormattedImageName() ?? '') + '.iso')"
+            :href="
+              BLUEFIN_DOWNLOAD_URL.replace(
+                '%TEMPLATE%',
+                (getFormattedImageName() ?? '') + '.iso'
+              )
+            "
           >
             {{ t("TryBluefin.Download.Iso") }}
             <IconDownload class="download-icon" />
           </a>
-          
+
           <div class="secondary-actions">
-            <a 
-              class="action-link" 
-              :title="t('TryBluefin.Download.Checksum')" 
-              :href="BLUEFIN_DOWNLOAD_URL.replace('%TEMPLATE%', (getFormattedImageName() ?? '') + '.iso-CHECKSUM')"
+            <a
+              class="action-link"
+              :title="t('TryBluefin.Download.Checksum')"
+              :href="
+                BLUEFIN_DOWNLOAD_URL.replace(
+                  '%TEMPLATE%',
+                  (getFormattedImageName() ?? '') + '.iso-CHECKSUM'
+                )
+              "
             >
               <IconCheckCircle class="action-icon" />
               Verify (SHA256)
             </a>
-            <a 
+            <a
               class="action-link"
               :title="t('TryBluefin.Download.Registry')"
-              href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin" 
+              href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin"
               target="_blank"
             >
               <IconGithubCircle class="action-icon" />
@@ -296,7 +337,9 @@ const reset = () => {
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: 3px solid transparent;
   background: #1f2937;
 }
@@ -589,16 +632,16 @@ const reset = () => {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .release-box {
     height: 250px;
   }
-  
+
   .selected-release-info {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .secondary-actions {
     flex-direction: column;
     gap: 0.75rem;

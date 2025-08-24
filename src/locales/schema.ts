@@ -1,6 +1,6 @@
-import { createI18n } from 'vue-i18n'
+import { createI18n } from "vue-i18n"
 
-const modules = import.meta.glob('./*.json', { eager: true })
+const modules = import.meta.glob("./*.json", { eager: true })
 
 const messages = Object.fromEntries(
   Object.entries(modules).map(([key, value]) => {
@@ -11,14 +11,14 @@ const messages = Object.fromEntries(
 
 export type NumberSchema = {
   currency: {
-    style: 'currency'
-    currencyDisplay: 'symbol'
+    style: "currency"
+    currencyDisplay: "symbol"
     currency: string
   }
 }
-export type MessageSchema = typeof messages['en-US']
+export type MessageSchema = (typeof messages)["en-US"]
 
 export const i18n = createI18n<[MessageSchema], string>({
-  locale: 'en-US',
-  messages,
+  locale: "en-US",
+  messages
 })

@@ -17,7 +17,11 @@ const { t } = useI18n<MessageSchema>({
       <Transition name="fade">
         <div>
           <div class="img-wrap">
-            <img class="container" :src="LangDevsTowerImageURL" :alt="t('ArtworkDescription')" />
+            <img
+              class="container"
+              :src="LangDevsTowerImageURL"
+              :alt="t('ArtworkDescription')"
+            />
           </div>
           <div class="scene-arrow">
             <img src="/icons/arrow.svg" alt="" />
