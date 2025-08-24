@@ -1,0 +1,211 @@
+name: Update Stream Versions
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: write
+
+jobs:
+  update-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Checkout bluefin-docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: ublue-os/bluefin-docs
+          path: bluefin-docs
+
+      - name: Extract version information and update stream-versions.yml
+        run: |
+          # Create the update script
+          cat > update_versions.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+
+          // Function to find the latest changelog for a specific stream
+          function findLatestChangelog(changelogsDir, stream) {
+            const files = fs.readdirSync(changelogsDir);
+            const streamFiles = files.filter(file => {
+              const parts = file.split('-');
+              return parts.length >= 4 && parts[3].includes(stream) && file.endsWith('.md');
+            });
+            
+            // Sort by date (assuming YYYY-MM-DD format)
+            streamFiles.sort((a, b) => {
+              const dateA = a.substring(0, 10); // Extract YYYY-MM-DD
+              const dateB = b.substring(0, 10);
+              return dateB.localeCompare(dateA); // Newest first
+            });
+            
+            return streamFiles.length > 0 ? streamFiles[0] : null;
+          }
+
+          // Function to extract version information from changelog content
+          function extractVersionInfo(content, stream) {
+            const lines = content.split('\n');
+            let inMajorPackages = false;
+            const versions = {};
+            
+            for (let i = 0; i < lines.length; i++) {
+              const line = lines[i].trim();
+              
+              if (line.includes('### Major packages')) {
+                inMajorPackages = true;
+                continue;
+              }
+              
+              if (inMajorPackages && line.startsWith('###')) {
+                break; // Exit major packages section
+              }
+              
+              if (inMajorPackages && line.includes('|') && line.includes('**')) {
+                // Parse table rows like: | **Kernel** | 6.14.11-200 |
+                const match = line.match(/\|\s*\*\*(.*?)\*\*\s*\|\s*(.*?)\s*\|/);
+                if (match) {
+                  const component = match[1].toLowerCase();
+                  let version = match[2].trim();
+                  
+                  // Handle version arrows (e.g., "version1 ➡️ version2")
+                  if (version.includes('➡️')) {
+                    version = version.split('➡️')[1].trim();
+                  }
+                  
+                  // Map component names to our schema
+                  if (component === 'kernel') {
+                    versions.kernel = version;
+                  } else if (component === 'gnome' || component === 'gnome') {
+                    versions.gnome = version;
+                  } else if (component === 'mesa') {
+                    versions.mesa = version;
+                  } else if (component === 'nvidia') {
+                    versions.nvidia = version;
+                  }
+                }
+              }
+            }
+            
+            // Determine base OS based on stream and kernel version
+            if (stream === 'lts') {
+              versions.base = 'CentOS Stream 10';
+            } else if (stream === 'gts') {
+              versions.base = 'Fedora 41';
+            } else if (stream === 'stable') {
+              versions.base = 'Fedora 42';
+            }
+            
+            return versions;
+          }
+
+          // Main execution
+          try {
+            const changelogsDir = 'bluefin-docs/changelogs';
+            const streamsToUpdate = ['lts', 'gts', 'stable'];
+            const streamVersions = {};
+            
+            for (const stream of streamsToUpdate) {
+              console.log(`Processing ${stream} stream...`);
+              
+              const latestChangelog = findLatestChangelog(changelogsDir, stream);
+              if (!latestChangelog) {
+                console.log(`No changelog found for ${stream} stream`);
+                continue;
+              }
+              
+              console.log(`Found latest changelog for ${stream}: ${latestChangelog}`);
+              
+              const changelogPath = path.join(changelogsDir, latestChangelog);
+              const content = fs.readFileSync(changelogPath, 'utf8');
+              
+              const versionInfo = extractVersionInfo(content, stream);
+              
+              if (Object.keys(versionInfo).length > 0) {
+                streamVersions[stream] = versionInfo;
+                console.log(`Extracted versions for ${stream}:`, versionInfo);
+              } else {
+                console.log(`No version information found for ${stream}`);
+              }
+            }
+            
+            if (Object.keys(streamVersions).length > 0) {
+              // Generate YAML content
+              const timestamp = new Date().toISOString().split('T')[0];
+              let yamlContent = `# Stream version information for Bluefin releases
+# This file contains the latest version information for each stream
+# Data is sourced from the most recent changelogs in ublue-os/bluefin-docs
+# Last updated: ${timestamp}
+
+`;
+              
+              for (const [stream, versions] of Object.entries(streamVersions)) {
+                yamlContent += `${stream}:
+  base: "${versions.base || ''}"
+  gnome: "${versions.gnome || ''}"
+  kernel: "${versions.kernel || ''}"
+  mesa: "${versions.mesa || ''}"
+  nvidia: "${versions.nvidia || ''}"
+
+`;
+              }
+              
+              // Write the updated YAML file
+              fs.writeFileSync('public/stream-versions.yml', yamlContent.trim() + '\n');
+              console.log('Updated public/stream-versions.yml');
+              
+              // Output for GitHub Actions
+              console.log('::set-output name=updated::true');
+            } else {
+              console.log('No updates found');
+              console.log('::set-output name=updated::false');
+            }
+            
+          } catch (error) {
+            console.error('Error:', error);
+            process.exit(1);
+          }
+          EOF
+
+          # Run the update script
+          node update_versions.js
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet public/stream-versions.yml; then
+            echo "No changes detected"
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected in public/stream-versions.yml"
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Display changes
+        if: steps.check-changes.outputs.has-changes == 'true'
+        run: |
+          echo "Changes to be committed:"
+          git diff public/stream-versions.yml
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.has-changes == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          git add public/stream-versions.yml
+          git commit -m "chore: update stream versions from latest changelogs
+
+          - Automatically updated from ublue-os/bluefin-docs changelogs
+          - Updated at $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          
+          git push

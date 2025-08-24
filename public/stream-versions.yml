@@ -4,17 +4,17 @@
 # Last updated: 2025-08-24
 
 lts:
-  base: "CentOS 10"
+  base: "CentOS Stream 10"
   gnome: "48.4-1"
   kernel: "6.12.0-116"
-  mesa: "25.0.7-1" 
-  nvidia: "575.64.05-1"
+  mesa: "25.0.7-1"
+  nvidia: ""
 
 gts:
   base: "Fedora 41"
   gnome: "47.7-1"
   kernel: "6.14.11-200"
-  mesa: "25.0.7-1"
+  mesa: ""
   nvidia: "580.76.05-2"
 
 stable:
