@@ -350,3 +350,4 @@ npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 - 📸 **Take screenshots** of UI changes for review
 - ⚠️ **Ignore warnings** - Sass @import and @types/marked deprecation warnings are expected
 - Always follow the conventional commits specification when sending pull requests: conventional-commits/conventionalcommits.org
+- Always include screenshots of both desktop and mobile in pull requests
