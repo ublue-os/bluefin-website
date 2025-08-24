@@ -18,7 +18,7 @@ const imageName: Ref<{
   base: "bluefin",
   gpu: undefined,
   stream: "gts",
-  imagesrc: "./characters/intrigued.png"
+  imagesrc: "./characters/intrigued.webp"
 })
 
 const getFormattedImageName = () => {
@@ -53,10 +53,10 @@ const selectCuteDino = () => {
       target_image = './characters/achillobator.webp';
       break;
     case 'gts':
-      target_image = './characters/intrigued.png';
+      target_image = './characters/intrigued.webp';
       break;
     case 'stable':
-      target_image = './characters/leaping.png';
+      target_image = './characters/leaping.webp';
       break;
     default:
   }
