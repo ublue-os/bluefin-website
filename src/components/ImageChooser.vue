@@ -165,13 +165,15 @@ const reset = () => {
             class="release-image"
             :style="{ backgroundImage: `url(${release.image})` }"
           >
+            <!-- Badges positioned in top right corner -->
+            <span v-if="release.recommended" class="recommended-badge"
+              >Recommended</span
+            >
+            <span v-if="release.beta" class="beta-badge">Beta</span>
+
             <div class="release-overlay">
               <div class="release-content">
                 <div class="release-header">
-                  <span v-if="release.recommended" class="recommended-badge"
-                    >Recommended</span
-                  >
-                  <span v-if="release.beta" class="beta-badge">Beta</span>
                   <h3 class="release-title">{{ release.title }}</h3>
                   <span class="release-subtitle">{{ release.subtitle }}</span>
                 </div>
@@ -402,7 +404,7 @@ const reset = () => {
 }
 
 .release-title {
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0 0 0.25rem 0;
 }
@@ -415,26 +417,33 @@ const reset = () => {
 }
 
 .recommended-badge {
-  background: #a710c9;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(var(--color-blue-rgb), 0.9);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .beta-badge {
-  display: inline-block;
-  background: #a710c9;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(var(--color-blue-rgb), 0.9);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .release-description {
