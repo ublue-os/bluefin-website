@@ -408,13 +408,14 @@ onMounted(() => {
         </div>
       </div>
 
-      <div class="documentation-note">
-        <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
-      </div>
-
       <button class="start-over-button" @click="reset">
         Choose a different release
       </button>
+    </div>
+
+    <!-- Documentation Note - Always Visible -->
+    <div class="documentation-note">
+      <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
     </div>
   </div>
 </template>
@@ -711,25 +712,30 @@ onMounted(() => {
 .download-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2.5rem;
-  background: #3b82f6;
-  color: white;
+  gap: 0.9rem; /* 20% increase from 0.75rem */
+  height: 43.2px; /* 20% increase from 36px */
+  line-height: 43.2px;
+  border: 2px solid var(--color-blue);
+  background-color: var(--color-blue);
+  color: var(--color-text-light);
+  border-radius: 21.6px; /* 20% increase from 18px */
+  padding: 0 24px; /* 20% increase from 20px */
+  font-size: 1.68rem; /* 20% increase from 1.4rem */
+  font-weight: 700;
   text-decoration: none;
-  border-radius: 8px;
-  font-size: 1.3rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .download-button:hover {
-  background: #2563eb;
+  background-color: var(--color-blue);
+  color: var(--color-text-light);
 }
 
 .download-icon {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.44rem; /* 20% increase from 1.2rem */
+  height: 1.44rem;
 }
 
 .secondary-actions {
