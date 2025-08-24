@@ -208,74 +208,70 @@ onMounted(() => {
 <template>
   <div class="image-chooser">
     <!-- Release Selection -->
-    <Transition name="fade">
-      <div v-if="!selectedRelease" class="release-selection">
-        <div class="release-grid">
+    <div v-if="!selectedRelease" class="release-selection">
+      <div class="release-grid">
+        <div
+          v-for="release in releases"
+          :key="release.id"
+          class="release-box"
+          :class="{ recommended: release.recommended }"
+          @click="selectRelease(release.id)"
+        >
           <div
-            v-for="release in releases"
-            :key="release.id"
-            class="release-box"
-            :class="{ recommended: release.recommended }"
-            @click="selectRelease(release.id)"
+            class="release-image"
+            :style="{ backgroundImage: `url(${release.image})` }"
           >
-            <div
-              class="release-image"
-              :style="{ backgroundImage: `url(${release.image})` }"
+            <!-- Badges positioned in top right corner -->
+            <span v-if="release.recommended" class="recommended-badge"
+              >Recommended</span
             >
-              <!-- Badges positioned in top right corner -->
-              <span v-if="release.recommended" class="recommended-badge"
-                >Recommended</span
-              >
-              <span v-if="release.beta" class="beta-badge">Beta</span>
+            <span v-if="release.beta" class="beta-badge">Beta</span>
 
-              <div class="release-overlay">
-                <div class="release-content">
-                  <div class="release-header">
-                    <h3 class="release-title">{{ release.title }}</h3>
-                    <span class="release-subtitle">{{ release.subtitle }}</span>
+            <div class="release-overlay">
+              <div class="release-content">
+                <div class="release-header">
+                  <h3 class="release-title">{{ release.title }}</h3>
+                  <span class="release-subtitle">{{ release.subtitle }}</span>
+                </div>
+                <p class="release-description">{{ release.description }}</p>
+
+                <!-- Version Information -->
+                <div
+                  v-if="
+                    streamVersions &&
+                    streamVersions[release.id as keyof StreamVersions]
+                  "
+                  class="version-info"
+                >
+                  <div class="version-item">
+                    <span class="version-label">Base:</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].base
+                    }}</span>
                   </div>
-                  <p class="release-description">{{ release.description }}</p>
-
-                  <!-- Version Information -->
-                  <div
-                    v-if="
-                      streamVersions &&
-                      streamVersions[release.id as keyof StreamVersions]
-                    "
-                    class="version-info"
-                  >
-                    <div class="version-item">
-                      <span class="version-label">Base:</span>
-                      <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions].base
-                      }}</span>
-                    </div>
-                    <div class="version-item">
-                      <span class="version-label">GNOME:</span>
-                      <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions].gnome
-                      }}</span>
-                    </div>
-                    <div class="version-item">
-                      <span class="version-label">Kernel:</span>
-                      <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions]
-                          .kernel
-                      }}</span>
-                    </div>
-                    <div class="version-item">
-                      <span class="version-label">MESA:</span>
-                      <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions].mesa
-                      }}</span>
-                    </div>
-                    <div class="version-item">
-                      <span class="version-label">Nvidia:</span>
-                      <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions]
-                          .nvidia
-                      }}</span>
-                    </div>
+                  <div class="version-item">
+                    <span class="version-label">GNOME:</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].gnome
+                    }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">Kernel:</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].kernel
+                    }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">MESA:</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].mesa
+                    }}</span>
+                  </div>
+                  <div class="version-item">
+                    <span class="version-label">Nvidia:</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].nvidia
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -283,153 +279,145 @@ onMounted(() => {
           </div>
         </div>
       </div>
-    </Transition>
+    </div>
 
     <!-- Architecture Selection -->
-    <Transition name="fade">
-      <div
-        v-if="showArchitectureStep && !imageName.arch"
-        class="step-selection"
-      >
-        <div class="step-header">
-          <button class="back-button" @click="reset">← Back to releases</button>
-          <h3>{{ t("TryBluefin.Architecture.Question") }}</h3>
-        </div>
-        <div class="options-grid">
-          <button
-            v-for="arch in getSupportedArchitectures"
-            :key="arch.id"
-            class="option-button"
-            :disabled="!arch.available"
-            @click="selectArchitecture(arch.id)"
-          >
-            {{ arch.label }}
-          </button>
-        </div>
+    <div
+      v-else-if="showArchitectureStep && !imageName.arch"
+      class="step-selection"
+    >
+      <div class="step-header">
+        <button class="back-button" @click="reset">← Back to releases</button>
+        <h3>{{ t("TryBluefin.Architecture.Question") }}</h3>
       </div>
-    </Transition>
+      <div class="options-grid">
+        <button
+          v-for="arch in getSupportedArchitectures"
+          :key="arch.id"
+          class="option-button"
+          :disabled="!arch.available"
+          @click="selectArchitecture(arch.id)"
+        >
+          {{ arch.label }}
+        </button>
+      </div>
+    </div>
 
     <!-- GPU Selection -->
-    <Transition name="fade">
-      <div v-if="showGpuStep && !imageName.gpu" class="step-selection">
-        <div class="step-header">
-          <button
-            class="back-button"
-            @click="
-              () => {
-                showArchitectureStep = true
-                imageName.arch = undefined
-                showGpuStep = false
-              }
-            "
-          >
-            ← Back
-          </button>
-          <h3>{{ t("TryBluefin.Gpu.Question") }}</h3>
-        </div>
-        <div class="options-grid">
-          <button class="option-button" @click="selectGpu('amd')">
-            AMD | Intel
-          </button>
-          <button class="option-button" @click="selectGpu('nvidia')">
-            Nvidia (RTX Series | GTX 16xx+ Series)
-          </button>
-        </div>
+    <div v-else-if="showGpuStep && !imageName.gpu" class="step-selection">
+      <div class="step-header">
+        <button
+          class="back-button"
+          @click="
+            showArchitectureStep = true;
+            imageName.arch = undefined;
+            showGpuStep = false;
+          "
+        >
+          ← Back
+        </button>
+        <h3>{{ t("TryBluefin.Gpu.Question") }}</h3>
       </div>
-    </Transition>
+      <div class="options-grid">
+        <button class="option-button" @click="selectGpu('amd')">
+          AMD | Intel
+        </button>
+        <button class="option-button" @click="selectGpu('nvidia')">
+          Nvidia (RTX Series | GTX 16xx+ Series)
+        </button>
+      </div>
+    </div>
 
     <!-- Download Section -->
-    <Transition name="fade">
-      <div v-if="showDownload" class="download-section">
-        <div class="step-header">
-          <button
-            class="back-button"
-            @click="
-              () => {
-                showGpuStep = true
-                imageName.gpu = undefined
-                showDownload = false
-              }
-            "
-          >
-            ← Back
-          </button>
-          <h3>Ready to download!</h3>
-        </div>
+    <div v-else-if="showDownload" class="download-section">
+      <div class="step-header">
+        <button
+          class="back-button"
+          @click="
+            showGpuStep = true;
+            imageName.gpu = undefined;
+            showDownload = false;
+          "
+        >
+          ← Back
+        </button>
+        <h3>Ready to download!</h3>
+      </div>
 
-        <div class="download-summary">
-          <div class="selected-release-info">
-            <div
-              class="release-preview"
-              :style="{ backgroundImage: `url(${imageName.imagesrc})` }"
-            >
-              <div class="release-overlay-small">
-                <h4>{{ getSelectedRelease?.title }}</h4>
-                <p>{{ getSelectedRelease?.subtitle }}</p>
-              </div>
-            </div>
-            <div class="selection-details">
-              <p>
-                <strong>Architecture:</strong>
-                {{ imageName.arch === "x86" ? "x86_64" : "ARM64" }}
-              </p>
-              <p>
-                <strong>GPU:</strong>
-                {{ imageName.gpu === "amd" ? "AMD/Intel" : "Nvidia" }}
-              </p>
+      <div class="download-summary">
+        <div class="selected-release-info">
+          <div
+            class="release-preview"
+            :style="{ backgroundImage: `url(${imageName.imagesrc})` }"
+          >
+            <div class="release-overlay-small">
+              <h4>{{ getSelectedRelease?.title }}</h4>
+              <p>{{ getSelectedRelease?.subtitle }}</p>
             </div>
           </div>
+          <div class="selection-details">
+            <p>
+              <strong>Architecture:</strong>
+              {{ imageName.arch === "x86" ? "x86_64" : "ARM64" }}
+            </p>
+            <p>
+              <strong>GPU:</strong>
+              {{ imageName.gpu === "amd" ? "AMD/Intel" : "Nvidia" }}
+            </p>
+          </div>
+        </div>
 
-          <div class="download-actions">
+        <div class="download-actions">
+          <a
+            class="download-button primary"
+            :href="
+              BLUEFIN_DOWNLOAD_URL.replace(
+                '%TEMPLATE%',
+                (getFormattedImageName() ?? '') + '.iso'
+              )
+            "
+          >
+            {{ t("TryBluefin.Download.Iso") }}
+            <IconDownload class="download-icon" />
+          </a>
+
+          <div class="secondary-actions">
             <a
-              class="download-button primary"
+              class="action-link"
+              :title="t('TryBluefin.Download.Checksum')"
               :href="
                 BLUEFIN_DOWNLOAD_URL.replace(
                   '%TEMPLATE%',
-                  (getFormattedImageName() ?? '') + '.iso'
+                  (getFormattedImageName() ?? '') + '.iso-CHECKSUM'
                 )
               "
             >
-              {{ t("TryBluefin.Download.Iso") }}
-              <IconDownload class="download-icon" />
+              <IconCheckCircle class="action-icon" />
+              Verify (SHA256)
             </a>
-
-            <div class="secondary-actions">
-              <a
-                class="action-link"
-                :title="t('TryBluefin.Download.Checksum')"
-                :href="
-                  BLUEFIN_DOWNLOAD_URL.replace(
-                    '%TEMPLATE%',
-                    (getFormattedImageName() ?? '') + '.iso-CHECKSUM'
-                  )
-                "
-              >
-                <IconCheckCircle class="action-icon" />
-                Verify (SHA256)
-              </a>
-              <a
-                class="action-link"
-                :title="t('TryBluefin.Download.Registry')"
-                href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin"
-                target="_blank"
-              >
-                <IconGithubCircle class="action-icon" />
-                View Registry
-              </a>
-            </div>
+            <a
+              class="action-link"
+              :title="t('TryBluefin.Download.Registry')"
+              href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin"
+              target="_blank"
+            >
+              <IconGithubCircle class="action-icon" />
+              View Registry
+            </a>
           </div>
         </div>
-
-        <div class="documentation-note">
-          <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
-        </div>
-
-        <button class="start-over-button" @click="reset">
-          Choose a different release
-        </button>
       </div>
-    </Transition>
+
+    <div class="documentation-note">
+      <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
+    </div>
+      
+      <button class="start-over-button" @click="reset">
+        Choose a different release
+      </button>
+    </div>
+
+
   </div>
 </template>
 
@@ -438,8 +426,6 @@ onMounted(() => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  /* Ensure consistent height across all steps to prevent FAQ section from jumping */
-  min-height: 500px;
 }
 
 /* Release Selection */
@@ -597,7 +583,7 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.3);
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 1.0rem;
 }
 
 /* Step Selection */
@@ -779,7 +765,7 @@ onMounted(() => {
   gap: 0.5rem;
   color: #93c5fd;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.0rem;
   transition: color 0.3s ease;
 }
 
