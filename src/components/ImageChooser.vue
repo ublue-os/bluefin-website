@@ -426,6 +426,8 @@ onMounted(() => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+   /* Ensure consistent height across all steps to prevent FAQ section from jumping */
+  min-height: 500px;
 }
 
 /* Release Selection */
