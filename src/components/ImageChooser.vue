@@ -598,25 +598,35 @@ onMounted(() => {
 }
 
 .back-button {
-  background: none;
-  border: none;
-  color: #4f9cf9;
-  cursor: pointer;
-  font-size: 1.5rem;
+  /* Style like "Discover" button (btn filled) */
+  font-weight: 700;
+  height: 36px;
+  line-height: 36px;
+  border: 2px solid var(--color-blue);
+  background-color: var(--color-blue);
+  color: var(--color-text-light);
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  font-size: 1.4rem;
+  text-decoration: none;
   margin-bottom: 1rem;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: rgba(79, 156, 249, 0.1);
+  background-color: var(--color-blue);
+  color: var(--color-text-light);
 }
 
 .step-header h3 {
   font-size: 1.5rem;
   margin: 0;
-  color: white;
+  color: white; /* Download the ISO text should be white - keeping this white */
 }
 
 .options-grid {
@@ -630,7 +640,8 @@ onMounted(() => {
   border-radius: 8px;
   background: #1f2937;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.6rem; /* Increased from 1.1rem to be larger than average text */
+  font-weight: 700; /* Made bold as requested */
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -649,6 +660,8 @@ onMounted(() => {
 .download-section {
   max-width: 800px;
   margin: 0 auto;
+  /* Center the "Choose a different release" button */
+  text-align: center;
 }
 
 .download-summary {
@@ -656,6 +669,7 @@ onMounted(() => {
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
+  text-align: left; /* Override center alignment for content */
 }
 
 .selected-release-info {
@@ -769,8 +783,12 @@ onMounted(() => {
   border: 1px solid rgba(79, 156, 249, 0.2);
   border-radius: 8px;
   padding: 1.5rem;
-  margin-bottom: 2rem;
+  /* Increased spacing below documentation note (contains "ventoy is unsupported" text) 
+     to provide better visual separation from the "Choose different release" button below.
+     Adjust this value to modify spacing between documentation and button. */
+  margin-bottom: 3rem; /* Increased from 2rem to 3rem */
   color: white;
+  text-align: left; /* Override center alignment for content */
 }
 
 .documentation-note :deep(a) {
@@ -778,21 +796,29 @@ onMounted(() => {
 }
 
 .start-over-button {
-  background: none;
-  border: 1px solid #374151;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1.0rem;
-  transition: all 0.3s ease;
-  display: block;
+  /* Style like "Discover" button (btn filled) */
+  font-weight: 700;
+  height: 36px;
+  line-height: 36px;
+  border: 2px solid var(--color-blue);
+  background-color: var(--color-blue);
+  color: var(--color-text-light);
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  font-size: 1.4rem;
+  text-decoration: none;
   margin: 0 auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .start-over-button:hover {
-  border-color: #4f9cf9;
-  background: rgba(79, 156, 249, 0.1);
+  background-color: var(--color-blue);
+  color: var(--color-text-light);
 }
 
 /* Mobile responsiveness */
