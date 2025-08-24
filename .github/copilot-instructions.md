@@ -234,6 +234,8 @@ export const LangSectionTitle = 'Default English Text'
 </template>
 ```
 
+**Available languages:** de-DE, en-US, eo, fr-FR, ja-JP, nl-NL, pt-BR, ru-RU, sk-SK, vi-VN, zh-HK, zh-TW
+
 ### Content Guidelines
 - Use markdown support where available (rendered with `marked.parse()`)
 - Support HTML in content when necessary
@@ -264,131 +266,69 @@ Common mixins available for use:
 - Ocean/aquatic color palette reflecting the Bluefin theme
 - Ensure the font sizes match and are consistent across components
 
-## Component Development Patterns
+## Development Workflows
 
-### Scene Components
-Large page sections that typically include:
-- Parallax effects and animations
-- Character artwork integration
-- Structured content with tags, titles, and descriptions
-- Visibility tracking for navigation
+### Making Changes
+1. **Start development server:** `npm run dev`
+2. **Make your changes** to Vue components, TypeScript, or SCSS files
+3. **Test functionality manually** in browser (http://localhost:5173/)
+4. **Format code:** `npx prettier --write src/`
+5. **Build to verify:** `npm run build`
+6. **Test production build:** `npm run preview`
 
-### Responsive Design
-- Mobile-first approach
-- Use `IS_TABLET` composable for conditional logic
-- Progressive image loading for performance
-- Adaptive content based on screen size
+### Adding New Components
+1. **Create component** in appropriate directory (`scenes/`, `sections/`, or `common/`)
+2. **Follow naming convention** (PascalCase, descriptive names)
+3. **Use `<script setup>` syntax** with TypeScript
+4. **Import and register** in parent components
+5. **Test responsive behavior** on mobile/tablet/desktop
 
-### Performance Considerations
-- Lazy loading for images: `loading="lazy"`
-- WebP format for images where possible
-- Conditional asset loading based on device capabilities
-- Preload critical assets in `App.vue`
+### Adding New Languages
+1. **Create `{locale}.json`** in `src/locales/` following `en-US.json` schema
+2. **Ensure all keys match** the English version exactly
+3. **Update imports** in `src/locales/schema.ts`
+4. **Test language switching** via header dropdown
 
-## Image and Asset Management
+### Troubleshooting
+- **Build failures:** Check TypeScript errors in terminal output
+- **Missing images:** Verify paths relative to `public/` directory
+- **Translation issues:** Ensure locale keys exist in all language files
+- **Styling problems:** Check for SCSS syntax errors or missing Tailwind classes
 
-### Image Conventions
-- Character artwork: `./characters/{name}.webp`
-- Brand logos: `/brands/{name}.svg`
-- Scene backgrounds: `./evening/{name}-min.webp`
-- Use descriptive alt text for accessibility
+## CI/CD Pipeline
 
-### Asset Preloading
-Critical images are preloaded in `App.vue` with conditional loading for mobile devices.
+**GitHub Actions workflows:**
+- **deploy.yml:** Builds and deploys to GitHub Pages on push to main
+- **pagespeed.yml:** Monitors site performance daily
 
-## Development Best Practices
+**Deployment process:**
+1. Code pushed to main branch
+2. GitHub Actions runs `npm install` and `npm run build`
+3. Built files from `./dist/` deployed to GitHub Pages
+4. Live site updates at https://projectbluefin.io/
 
-### TypeScript
-- Use strict mode and maintain type safety
-- Define proper interfaces for complex data structures
-- Prefer type inference where possible
+## Quick Reference
 
-### Vue 3 Composition API
-- Use `<script setup>` syntax for all new components
-- Prefer `ref()` and `reactive()` for state management
-- Use `computed()` for derived state
-- Leverage `@vueuse` utilities for common patterns
+### Common File Locations
+- **Components:** `src/components/{scenes,sections,common}/`
+- **Styles:** `src/style/`
+- **Translations:** `src/locales/`
+- **Content:** `src/content.ts`
+- **Assets:** `public/{characters,brands,evening}/`
+- **Config:** `vite.config.ts`, `tailwind.config.js`, `tsconfig.json`
 
-### Code Style
-- Follow Prettier configuration (2 spaces, no semicolons, double quotes)
-- Use ESLint with @antfu configuration
-- Maintain consistent naming conventions
-
-## Adding New Languages
-
-To add a new language:
-1. Create `{locale}.json` in `src/locales/` following the `en-US.json` schema
-2. Ensure all keys match the English version
-3. Update locale imports in `src/locales/schema.ts`
-4. The language will be automatically available via Navigator.language detection
-
-## Common Patterns and Conventions
-
-### Loading States
-Use the `PageLoading` component for initial page load states. Components often use local loading states:
-```vue
-<script setup lang="ts">
-const isLoaded = ref(false)
-onMounted(() => {
-  setTimeout(() => {
-    isLoaded.value = true
-  }, 150)
-})
-</script>
+### Essential Commands
+```bash
+npm install           # Install dependencies (~10s)
+npm run dev          # Start dev server (~1s)
+npm run build        # Build for production (~10s)
+npm run preview      # Preview production build
+npx prettier --write src/  # Format code (~5s)
 ```
 
-### Navigation Integration
-Components can integrate with the navigation system using the `visibleSection` provide/inject pattern via `SceneVisibilityChecker`.
-
-### Smooth Scrolling
-Use smooth scrolling for navigation between sections:
-```typescript
-function scrollToSection() {
-  document.querySelector("#section-id")?.scrollIntoView({ behavior: "smooth" })
-}
-```
-
-### Language Switching
-Language switching uses URL parameters:
-```typescript
-const redirectToLang = (lang: string) => {
-  const urlParams = new URLSearchParams(window.location.search)
-  urlParams.set("lang", lang)
-  window.location.search = urlParams
-}
-```
-
-### Responsive Helpers
-Use the `IS_TABLET` composable for responsive logic:
-```typescript
-import { IS_TABLET } from "../composables"
-// IS_TABLET.value returns true for screens <= 956px
-```
-
-### Markdown Content
-Use `marked.parse(t('key'))` for content that supports markdown formatting.
-
-### External Links
-Always use `target="_blank"` for external links and include proper `rel` attributes for security.
-
-## Project-Specific Context
-
-### Bluefin Character and Voice
-- Bluefin is referred to as "she" and characterized as a predatory, adaptive creature
-- Content should reflect themes of evolution, adaptation, and survival
-- Technical content should emphasize cloud-native patterns and reliability
-- Community-focused messaging highlighting collaboration and sustainability
-
-### Target Audience
-- **Primary**: Developers and Linux operators seeking reliable desktop experience
-- **Secondary**: General users wanting Chromebook-like simplicity with Linux power
-- Content should balance technical depth with accessibility
-
-### Key Features to Highlight
-- Container-focused development workflows
-- Image-based updates for stability
-- Developer mode transformation
-- GNOME desktop with cloud-native patterns
-- Community-driven development approach
-
-Remember: When suggesting code changes, prioritize maintainability, performance, and consistency with existing patterns. Always consider the international audience and ensure proper i18n integration for any text content.
+**CRITICAL REMINDERS:**
+- ⏱️ **NEVER CANCEL builds** - Always set 60+ second timeouts
+- 🧪 **ALWAYS test manually** after making changes
+- 📱 **Test responsive design** on different screen sizes
+- 🌍 **Consider i18n impact** for all text changes
+- 📸 **Take screenshots** of UI changes for review

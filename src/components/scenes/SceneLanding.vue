@@ -77,7 +77,11 @@ const { t } = useI18n<MessageSchema>({
             </select>
           </div>
         </div>
-        <img class="sm:h-full sm:w-full object-contain my-3 w-1/2 h-1/2" :src="LangLandingBluefinImageURL" alt="Bluefin" />
+        <img
+          class="sm:h-full sm:w-full object-contain my-3 w-1/2 h-1/2"
+          :src="LangLandingBluefinImageURL"
+          alt="Bluefin"
+        />
       </div>
     </div>
     <SceneVisibilityChecker name="null" />

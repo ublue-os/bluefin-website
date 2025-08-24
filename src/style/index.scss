@@ -3,7 +3,6 @@
 @use "setup";
 @import "tailwindcss";
 
-
 html {
   @include fonts.font(400);
   font-size: 63.5%;
