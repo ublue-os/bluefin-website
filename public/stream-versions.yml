@@ -1,6 +1,6 @@
 # Stream version information for Bluefin releases
 # This file contains the latest version information for each stream
-# Data is sourced from the most recent changelogs in ublue-os/bluefin-docs
+# Data is sourced from the most recent changelogs in ublue-os/bluefin and ublue-os/bluefin-lts repositories
 # Last updated: 2025-08-24
 
 lts:
