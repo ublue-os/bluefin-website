@@ -41,14 +41,14 @@ const releases = [
     description: "The long term support experience, for the risk averse",
     image: "./characters/achillobator.webp",
     supportedArch: ["x86", "arm"],
-    recommended: false
+    recommended: false,
+    beta: true
   },
   {
     id: "gts",
     title: "Bluefin GTS",
     subtitle: "For Most People",
-    description:
-      "The default experience, pick this if you\'re not sure",
+    description: "The default experience, pick this if you\'re not sure",
     image: "./characters/intrigued.webp",
     supportedArch: ["x86"],
     recommended: true
@@ -168,11 +168,12 @@ const reset = () => {
             <div class="release-overlay">
               <div class="release-content">
                 <div class="release-header">
-                  <h3 class="release-title">{{ release.title }}</h3>
-                  <span class="release-subtitle">{{ release.subtitle }}</span>
                   <span v-if="release.recommended" class="recommended-badge"
                     >Recommended</span
                   >
+                  <span v-if="release.beta" class="beta-badge">Beta</span>
+                  <h3 class="release-title">{{ release.title }}</h3>
+                  <span class="release-subtitle">{{ release.subtitle }}</span>
                 </div>
                 <p class="release-description">{{ release.description }}</p>
               </div>
@@ -209,7 +210,11 @@ const reset = () => {
       <div class="step-header">
         <button
           class="back-button"
-          @click="showArchitectureStep = true; imageName.arch = undefined; showGpuStep = false"
+          @click="
+            showArchitectureStep = true;
+            imageName.arch = undefined;
+            showGpuStep = false;
+          "
         >
           ← Back
         </button>
@@ -230,7 +235,11 @@ const reset = () => {
       <div class="step-header">
         <button
           class="back-button"
-          @click="showGpuStep = true; imageName.gpu = undefined; showDownload = false"
+          @click="
+            showGpuStep = true;
+            imageName.gpu = undefined;
+            showDownload = false;
+          "
         >
           ← Back
         </button>
@@ -322,6 +331,7 @@ const reset = () => {
 /* Release Selection */
 .release-selection {
   margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .release-grid {
@@ -408,15 +418,28 @@ const reset = () => {
   display: inline-block;
   background: #4f9cf9;
   color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
   text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.beta-badge {
+  display: inline-block;
+  background: #f59e0b;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
 }
 
 .release-description {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1.4;
   opacity: 0.9;
   margin: 0;
@@ -438,7 +461,7 @@ const reset = () => {
   border: none;
   color: #4f9cf9;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 4px;
@@ -549,20 +572,20 @@ const reset = () => {
 .download-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: #4f9cf9;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background: #3b82f6;
   color: white;
   text-decoration: none;
   border-radius: 8px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
   transition: background-color 0.3s ease;
   margin-bottom: 1rem;
 }
 
 .download-button:hover {
-  background: #3b82f6;
+  background: #2563eb;
 }
 
 .download-icon {
