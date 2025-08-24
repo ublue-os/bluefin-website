@@ -140,6 +140,7 @@ Common mixins available for use:
 - Uses CSS custom properties for theming
 - Dark/light theme support through CSS variables
 - Ocean/aquatic color palette reflecting the Bluefin theme
+- Ensure the font sizes match and are consistent across components
 
 ## Component Development Patterns
 
