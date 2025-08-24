@@ -28,6 +28,7 @@ jobs:
           path: bluefin-docs
 
       - name: Extract version information and update stream-versions.yml
+        id: update-versions
         run: |
           # Create the update script
           cat > update_versions.js << 'EOF'
@@ -85,7 +86,7 @@ jobs:
                   // Map component names to our schema
                   if (component === 'kernel') {
                     versions.kernel = version;
-                  } else if (component === 'gnome' || component === 'gnome') {
+                  } else if (component === 'gnome') {
                     versions.gnome = version;
                   } else if (component === 'mesa') {
                     versions.mesa = version;
@@ -141,33 +142,30 @@ jobs:
             if (Object.keys(streamVersions).length > 0) {
               // Generate YAML content
               const timestamp = new Date().toISOString().split('T')[0];
-              let yamlContent = `# Stream version information for Bluefin releases
-# This file contains the latest version information for each stream
-# Data is sourced from the most recent changelogs in ublue-os/bluefin-docs
-# Last updated: ${timestamp}
-
-`;
+              let yamlContent = '# Stream version information for Bluefin releases\n';
+              yamlContent += '# This file contains the latest version information for each stream\n';
+              yamlContent += '# Data is sourced from the most recent changelogs in ublue-os/bluefin-docs\n';
+              yamlContent += '# Last updated: ' + timestamp + '\n\n';
               
               for (const [stream, versions] of Object.entries(streamVersions)) {
-                yamlContent += `${stream}:
-  base: "${versions.base || ''}"
-  gnome: "${versions.gnome || ''}"
-  kernel: "${versions.kernel || ''}"
-  mesa: "${versions.mesa || ''}"
-  nvidia: "${versions.nvidia || ''}"
-
-`;
+                yamlContent += stream + ':\n';
+                yamlContent += '  base: "' + (versions.base || '') + '"\n';
+                yamlContent += '  gnome: "' + (versions.gnome || '') + '"\n';
+                yamlContent += '  kernel: "' + (versions.kernel || '') + '"\n';
+                yamlContent += '  mesa: "' + (versions.mesa || '') + '"\n';
+                yamlContent += '  nvidia: "' + (versions.nvidia || '') + '"\n\n';
               }
               
               // Write the updated YAML file
               fs.writeFileSync('public/stream-versions.yml', yamlContent.trim() + '\n');
               console.log('Updated public/stream-versions.yml');
               
-              // Output for GitHub Actions
-              console.log('::set-output name=updated::true');
+              // Signal success
+              process.exit(0);
             } else {
               console.log('No updates found');
-              console.log('::set-output name=updated::false');
+              // Signal no updates
+              process.exit(2);
             }
             
           } catch (error) {
@@ -177,7 +175,17 @@ jobs:
           EOF
 
           # Run the update script
-          node update_versions.js
+          if node update_versions.js; then
+            echo "updated=true" >> $GITHUB_OUTPUT
+          else
+            exit_code=$?
+            if [ $exit_code -eq 2 ]; then
+              echo "updated=false" >> $GITHUB_OUTPUT
+            else
+              echo "Script failed with exit code $exit_code"
+              exit $exit_code
+            fi
+          fi
 
       - name: Check for changes
         id: check-changes
