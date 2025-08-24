@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SceneVisibilityChecker from "../common/SceneVisibilityChecker.vue"
-import ImagePicker from "../ImagePicker.vue"
+import ImageChooser from "../ImageChooser.vue"
 import { marked } from "marked"
 
 import { useI18n } from "vue-i18n"
@@ -28,7 +28,7 @@ const { t } = useI18n<MessageSchema>({
         <h2>{{ t("TryBluefin.Title") }}</h2>
         <p v-html="marked.parse(t('TryBluefin.Description'))" />
       </div>
-      <ImagePicker />
+      <ImageChooser />
     </div>
     <SceneVisibilityChecker name="#scene-picker" />
   </section>
