@@ -408,15 +408,16 @@ onMounted(() => {
         </div>
       </div>
 
+    <div class="documentation-note">
+      <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
+    </div>
+      
       <button class="start-over-button" @click="reset">
         Choose a different release
       </button>
     </div>
 
-    <!-- Documentation Note - Always Visible -->
-    <div class="documentation-note">
-      <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
-    </div>
+
   </div>
 </template>
 
