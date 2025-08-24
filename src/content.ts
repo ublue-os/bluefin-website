@@ -1,7 +1,7 @@
 import { IconGithubCircle } from "@iconify-prerendered/vue-mdi"
 
 const characterImages = Object.keys(
-  import.meta.glob("/public/characters/header/*.webp")
+  import.meta.glob("/public/characters/header/angry.webp")
 ).map((v) => v.replace("/public", "."))
 
 //
