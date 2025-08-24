@@ -169,31 +169,33 @@ const reset = () => {
 // Load version information from YAML file
 const loadVersions = async () => {
   try {
-    const response = await fetch('/stream-versions.yml')
+    const response = await fetch("/stream-versions.yml")
     const yamlText = await response.text()
-    
+
     // Simple YAML parser for our specific format
     const parseYAML = (yaml: string): StreamVersions => {
-      const lines = yaml.split('\n').filter(line => line.trim() && !line.trim().startsWith('#'))
+      const lines = yaml
+        .split("\n")
+        .filter((line) => line.trim() && !line.trim().startsWith("#"))
       const result: any = {}
-      let currentStream = ''
-      
+      let currentStream = ""
+
       for (const line of lines) {
-        if (!line.startsWith(' ') && line.includes(':')) {
-          currentStream = line.split(':')[0].trim()
+        if (!line.startsWith(" ") && line.includes(":")) {
+          currentStream = line.split(":")[0].trim()
           result[currentStream] = {}
-        } else if (line.startsWith('  ') && line.includes(':')) {
-          const [key, value] = line.trim().split(': ')
-          result[currentStream][key] = value.replace(/"/g, '')
+        } else if (line.startsWith("  ") && line.includes(":")) {
+          const [key, value] = line.trim().split(": ")
+          result[currentStream][key] = value.replace(/"/g, "")
         }
       }
-      
+
       return result as StreamVersions
     }
-    
+
     streamVersions.value = parseYAML(yamlText)
   } catch (error) {
-    console.warn('Failed to load stream versions:', error)
+    console.warn("Failed to load stream versions:", error)
   }
 }
 
@@ -232,28 +234,44 @@ onMounted(() => {
                   <span class="release-subtitle">{{ release.subtitle }}</span>
                 </div>
                 <p class="release-description">{{ release.description }}</p>
-                
+
                 <!-- Version Information -->
-                <div v-if="streamVersions && streamVersions[release.id as keyof StreamVersions]" class="version-info">
+                <div
+                  v-if="
+                    streamVersions &&
+                    streamVersions[release.id as keyof StreamVersions]
+                  "
+                  class="version-info"
+                >
                   <div class="version-item">
                     <span class="version-label">Base:</span>
-                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].base }}</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].base
+                    }}</span>
                   </div>
                   <div class="version-item">
                     <span class="version-label">GNOME:</span>
-                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].gnome }}</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].gnome
+                    }}</span>
                   </div>
                   <div class="version-item">
                     <span class="version-label">Kernel:</span>
-                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].kernel }}</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].kernel
+                    }}</span>
                   </div>
                   <div class="version-item">
                     <span class="version-label">MESA:</span>
-                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].mesa }}</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].mesa
+                    }}</span>
                   </div>
                   <div class="version-item">
                     <span class="version-label">Nvidia:</span>
-                    <span class="version-value">{{ streamVersions[release.id as keyof StreamVersions].nvidia }}</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].nvidia
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -557,7 +575,7 @@ onMounted(() => {
 }
 
 .version-value {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   color: #93c5fd;
   font-weight: 500;
   background: rgba(0, 0, 0, 0.3);
