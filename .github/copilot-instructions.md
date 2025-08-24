@@ -15,20 +15,29 @@ This is the official website for **Project Bluefin**, a next-generation Linux wo
 
 ## Working Effectively
 
+**Package Management:**
+- **Primary:** npm (used in CI/CD and recommended for development)
+- **Secondary:** Bun (bun.lockb present but not required)
+- **Always use npm commands** for consistency with GitHub Actions deployment
+- Both package-lock.json and bun.lockb are maintained in the repository
+
 **Bootstrap, build, and test the repository:**
 
-1. **Install dependencies** (takes ~10 seconds):
+1. **Install dependencies** (takes ~6 seconds):
    ```bash
    npm install
    ```
+   - Uses npm as primary package manager (Bun lockfile also present but npm preferred)
+   - May show deprecation warning for @types/marked (safe to ignore)
 
-2. **Build the project** (takes ~10 seconds):
+2. **Build the project** (takes ~3 seconds):
    ```bash
    npm run build
    ```
    - **NEVER CANCEL**: Set timeout to 60+ seconds minimum
    - Outputs to `./dist/` directory
    - TypeScript compilation with vue-tsc followed by Vite build
+   - May show Sass @import deprecation warning (safe to ignore, still works)
 
 3. **Development server** (starts in ~1 second):
    ```bash
@@ -64,7 +73,7 @@ This is the official website for **Project Bluefin**, a next-generation Linux wo
 
 ## Linting and Code Quality
 
-**Code formatting** (takes ~5 seconds):
+**Code formatting** (takes ~3-5 seconds):
 ```bash
 # Check formatting issues
 npx prettier --check src/ --config .prettierrc
@@ -72,24 +81,26 @@ npx prettier --check src/ --config .prettierrc
 # Fix formatting issues  
 npx prettier --write src/ --config .prettierrc
 ```
-- **Note**: Current .prettierrc has "quote-props" warning but still works
+- **Note**: Prettier will show "quote-props" warning (suggest "quoteProps") but still works correctly
 - Always run formatting before committing changes
+- First run may install prettier@3.6.2 automatically
 
-**ESLint** - Uses @antfu configuration but requires manual setup:
-- The project uses legacy .eslintrc format
-- Run formatting checks instead of ESLint for now
-- DO NOT run automated ESLint migration during normal development
+**ESLint** - Configured but dependencies not installed:
+- .eslintrc extends @antfu but @antfu packages not in package.json
+- ESLint setup appears incomplete
+- Use Prettier for code formatting instead
+- DO NOT attempt to fix ESLint setup during normal development tasks
 
 ## Common Commands and Timing
 
-- `npm install`: ~10 seconds
-- `npm run build`: ~10 seconds (**NEVER CANCEL**, timeout: 60+ seconds)
+- `npm install`: ~6 seconds (may show @types/marked deprecation warning)
+- `npm run build`: ~3 seconds (**NEVER CANCEL**, timeout: 60+ seconds, may show Sass deprecation warning)
 - `npm run dev`: ~1 second to start
 - `npm run preview`: Instant start
-- `npx prettier --check src/`: ~5 seconds
-- `npx prettier --write src/`: ~5 seconds
+- `npx prettier --check src/`: ~3-5 seconds (may install prettier first run)
+- `npx prettier --write src/`: ~3-5 seconds
 
-**CRITICAL**: All build commands complete quickly (~10 seconds), but ALWAYS set 60+ second timeouts to account for slower systems.
+**CRITICAL**: All build commands complete quickly (~3-6 seconds), but ALWAYS set 60+ second timeouts to account for slower systems or first-run installations.
 
 ## Technology Stack
 
@@ -97,19 +108,20 @@ npx prettier --write src/ --config .prettierrc
 - **Vue 3** with Composition API (`<script setup>` syntax preferred)
 - **TypeScript** for type safety
 - **Vite** for build tooling and development server
-- **Vue i18n** for internationalization (13+ languages supported)
+- **Vue i18n** for internationalization (12 languages supported: de-DE, en-US, eo, fr-FR, ja-JP, nl-NL, pt-BR, ru-RU, sk-SK, vi-VN, zh-HK, zh-TW)
 
 ### Styling
-- **TailwindCSS 4.x** for utility-first CSS framework
+- **TailwindCSS 4.1.12** for utility-first CSS framework with new Vite plugin integration
 - **SCSS** for custom styling with mixins and helpers
 - **Custom SCSS mixins** located in `src/style/setup/_mixins.scss`
 - **Responsive design** patterns for mobile, tablet, and desktop
 
 ### Additional Libraries
-- **@iconify-prerendered/vue-mdi** for icons
+- **@iconify-prerendered/vue-mdi** for Material Design icons
 - **marked** for markdown parsing
-- **@vueuse/core** and **@vueuse/components** for Vue utilities
-- **@iframe-resizer** for embedded content
+- **@vueuse/core** and **@vueuse/components** for Vue utilities and composables
+- **@iframe-resizer** packages for responsive iframe embedding
+- **sass** for SCSS compilation
 
 ## Repository Structure
 
@@ -234,7 +246,7 @@ export const LangSectionTitle = 'Default English Text'
 </template>
 ```
 
-**Available languages:** de-DE, en-US, eo, fr-FR, ja-JP, nl-NL, pt-BR, ru-RU, sk-SK, vi-VN, zh-HK, zh-TW
+**Available languages:** de-DE, en-US, eo, fr-FR, ja-JP, nl-NL, pt-BR, ru-RU, sk-SK, vi-VN, zh-HK, zh-TW (12 total)
 
 ### Content Guidelines
 - Use markdown support where available (rendered with `marked.parse()`)
@@ -291,9 +303,13 @@ Common mixins available for use:
 
 ### Troubleshooting
 - **Build failures:** Check TypeScript errors in terminal output
+- **Sass deprecation warnings:** Expected and safe to ignore (@import rules deprecated)
+- **@types/marked deprecation:** Expected and safe to ignore (marked provides own types)
+- **Prettier quote-props warning:** Expected and safe to ignore (suggests "quoteProps" but "quote-props" works)
 - **Missing images:** Verify paths relative to `public/` directory
-- **Translation issues:** Ensure locale keys exist in all language files
+- **Translation issues:** Ensure locale keys exist in all 12 language files
 - **Styling problems:** Check for SCSS syntax errors or missing Tailwind classes
+- **ESLint errors:** Use Prettier instead (ESLint setup incomplete)
 
 ## CI/CD Pipeline
 
@@ -319,16 +335,17 @@ Common mixins available for use:
 
 ### Essential Commands
 ```bash
-npm install           # Install dependencies (~10s)
+npm install           # Install dependencies (~6s, may show deprecation warning)
 npm run dev          # Start dev server (~1s)
-npm run build        # Build for production (~10s)
+npm run build        # Build for production (~3s, may show Sass warning)
 npm run preview      # Preview production build
-npx prettier --write src/  # Format code (~5s)
+npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 ```
 
 **CRITICAL REMINDERS:**
 - ⏱️ **NEVER CANCEL builds** - Always set 60+ second timeouts
 - 🧪 **ALWAYS test manually** after making changes
 - 📱 **Test responsive design** on different screen sizes
-- 🌍 **Consider i18n impact** for all text changes
+- 🌍 **Consider i18n impact** for all text changes (12 languages supported)
 - 📸 **Take screenshots** of UI changes for review
+- ⚠️ **Ignore warnings** - Sass @import and @types/marked deprecation warnings are expected
