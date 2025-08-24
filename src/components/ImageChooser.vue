@@ -259,7 +259,8 @@ onMounted(() => {
                     <div class="version-item">
                       <span class="version-label">Kernel:</span>
                       <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions].kernel
+                        streamVersions[release.id as keyof StreamVersions]
+                          .kernel
                       }}</span>
                     </div>
                     <div class="version-item">
@@ -271,7 +272,8 @@ onMounted(() => {
                     <div class="version-item">
                       <span class="version-label">Nvidia:</span>
                       <span class="version-value">{{
-                        streamVersions[release.id as keyof StreamVersions].nvidia
+                        streamVersions[release.id as keyof StreamVersions]
+                          .nvidia
                       }}</span>
                     </div>
                   </div>
@@ -314,9 +316,9 @@ onMounted(() => {
           <button
             class="back-button"
             @click="
-              showArchitectureStep = true;
-              imageName.arch = undefined;
-              showGpuStep = false;
+              showArchitectureStep = true
+              imageName.arch = undefined
+              showGpuStep = false
             "
           >
             ← Back
@@ -341,9 +343,9 @@ onMounted(() => {
           <button
             class="back-button"
             @click="
-              showGpuStep = true;
-              imageName.gpu = undefined;
-              showDownload = false;
+              showGpuStep = true
+              imageName.gpu = undefined
+              showDownload = false
             "
           >
             ← Back
@@ -418,13 +420,12 @@ onMounted(() => {
         <div class="documentation-note">
           <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
         </div>
-        
+
         <button class="start-over-button" @click="reset">
           Choose a different release
         </button>
       </div>
     </Transition>
-
   </div>
 </template>
 
@@ -433,6 +434,8 @@ onMounted(() => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  /* Ensure consistent height across all steps to prevent FAQ section from jumping */
+  min-height: 500px;
 }
 
 /* Release Selection */
@@ -590,7 +593,7 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.3);
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
 /* Step Selection */
@@ -772,7 +775,7 @@ onMounted(() => {
   gap: 0.5rem;
   color: #93c5fd;
   text-decoration: none;
-  font-size: 1.0rem;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
