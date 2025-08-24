@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Bluefin LTS Releases</title>
+  <subtitle>Release updates for Bluefin LTS stream</subtitle>
+  <link href="https://projectbluefin.io/feeds/lts.xml" rel="self" />
+  <link href="https://projectbluefin.io" />
+  <id>https://projectbluefin.io/feeds/lts.xml</id>
+  <updated>2025-08-24T17:26:48.667Z</updated>
+  <author>
+    <name>Bluefin Project</name>
+    <uri>https://projectbluefin.io</uri>
+  </author>
+  <generator uri="https://github.com/ublue-os/bluefin-website" version="1.0">Bluefin Feed Generator</generator>
+  
+</feed>

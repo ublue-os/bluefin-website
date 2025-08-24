@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build": "npm run generate-feeds && vue-tsc && vite build",
+    "preview": "vite preview",
+    "generate-feeds": "node scripts/generate-feeds.js"
   },
   "dependencies": {
     "@iconify-prerendered/vue-mdi": "^0.28.1737398331",

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Bluefin GTS Releases</title>
+  <subtitle>Release updates for Bluefin GTS stream</subtitle>
+  <link href="https://projectbluefin.io/feeds/gts.xml" rel="self" />
+  <link href="https://projectbluefin.io" />
+  <id>https://projectbluefin.io/feeds/gts.xml</id>
+  <updated>2025-08-24T17:26:48.665Z</updated>
+  <author>
+    <name>Bluefin Project</name>
+    <uri>https://projectbluefin.io</uri>
+  </author>
+  <generator uri="https://github.com/ublue-os/bluefin-website" version="1.0">Bluefin Feed Generator</generator>
+  
+    <entry>
+      <title>gts-20250824: Gts (F41.20250824, #c4c3c57)</title>
+      <link href="https://github.com/ublue-os/bluefin/releases/tag/gts-20250824" />
+      <id>https://projectbluefin.io/releases/gts-20250824</id>
+      <updated>2025-08-24T06:54:31.000Z</updated>
+      <published>2025-08-24T06:54:31.000Z</published>
+      <summary type="text">This is an automatically generated changelog for release `gts-20250824`.
+
+From previous `gts` version `gts-20250819` there have been the following changes. **One package per new version shown.**...</summary>
+      <content type="html"><![CDATA[This is an automatically generated changelog for release `gts-20250824`.
+
+From previous `gts` version `gts-20250819` there have been the following changes. **One package per new version shown.**
+
+### Major packages
+| Name | Version |
+| --- | --- |
+| **Kernel** | 6.14.11-200 |
+| **Gnome** | 47.7-1 |
+| **Podman** | 5.5.2-1 |
+| **Nvidia** | 580.76.05-1 ➡️ 580.76.05-2 |
+
+### How to rebase
+For current users, type the following to rebase to this version:
+```bash
+# Get Image Name
+IMAGE_NAME=$(jq -r '.["image-name"]' < /usr/share/ublue-os/image-info.json)
+
+# For this Stream
+sudo bootc switch --enforce-container-sigpolicy ghcr.io/ublue-os/$IMAGE_NAME:gts
+```]]></content>
+      <author>
+        <name>Bluefin Team</name>
+        <uri>https://projectbluefin.io</uri>
+      </author>
+    </entry>
+</feed>
