@@ -583,7 +583,7 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.3);
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 1.0rem;
 }
 
 /* Step Selection */
@@ -714,14 +714,14 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.9rem; /* 20% increase from 0.75rem */
-  height: 43.2px; /* 20% increase from 36px */
-  line-height: 43.2px;
+  height: 44px; /* 20% increase from 36px */
+  line-height: 44px;
   border: 2px solid var(--color-blue);
   background-color: var(--color-blue);
   color: var(--color-text-light);
-  border-radius: 21.6px; /* 20% increase from 18px */
-  padding: 0 24px; /* 20% increase from 20px */
-  font-size: 1.68rem; /* 20% increase from 1.4rem */
+  border-radius: 22px; /* 20% increase from 18px */
+  padding: 0 25px; /* 20% increase from 20px */
+  font-size: 1.75rem; /* 20% increase from 1.4rem */
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -735,8 +735,8 @@ onMounted(() => {
 }
 
 .download-icon {
-  width: 1.44rem; /* 20% increase from 1.2rem */
-  height: 1.44rem;
+  width: 1.5rem; /* 20% increase from 1.2rem */
+  height: 1.5em;
 }
 
 .secondary-actions {
@@ -751,7 +751,7 @@ onMounted(() => {
   gap: 0.5rem;
   color: #93c5fd;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   transition: color 0.3s ease;
 }
 
@@ -784,7 +784,7 @@ onMounted(() => {
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   transition: all 0.3s ease;
   display: block;
   margin: 0 auto;
