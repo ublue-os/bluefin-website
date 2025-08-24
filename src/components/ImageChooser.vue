@@ -660,6 +660,8 @@ onMounted(() => {
 .download-section {
   max-width: 800px;
   margin: 0 auto;
+  /* Center the "Choose a different release" button */
+  text-align: center;
 }
 
 .download-summary {
@@ -667,6 +669,7 @@ onMounted(() => {
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
+  text-align: left; /* Override center alignment for content */
 }
 
 .selected-release-info {
@@ -780,8 +783,12 @@ onMounted(() => {
   border: 1px solid rgba(79, 156, 249, 0.2);
   border-radius: 8px;
   padding: 1.5rem;
-  margin-bottom: 2rem;
+  /* Increased spacing below documentation note (contains "ventoy is unsupported" text) 
+     to provide better visual separation from the "Choose different release" button below.
+     Adjust this value to modify spacing between documentation and button. */
+  margin-bottom: 3rem; /* Increased from 2rem to 3rem */
   color: white;
+  text-align: left; /* Override center alignment for content */
 }
 
 .documentation-note :deep(a) {
