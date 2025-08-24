@@ -245,7 +245,7 @@ onMounted(() => {
 
 .post-title {
   margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.4;
 }
@@ -262,13 +262,14 @@ onMounted(() => {
 
 .post-date {
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .post-description {
   color: #4b5563;
   line-height: 1.6;
+  font-size: 1.6rem;
 }
 
 .post-description p {
