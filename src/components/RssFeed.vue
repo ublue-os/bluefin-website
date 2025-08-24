@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
+/**
+ * RSS/Atom Feed Parser Component
+ * 
+ * This component fetches and displays RSS/Atom feeds with graceful fallback.
+ * It attempts direct fetch first, then uses a CORS proxy if needed.
+ * Falls back to mock data if all network attempts fail.
+ * 
+ * Production Note: The target site (docs.projectbluefin.io) should ideally 
+ * add CORS headers to allow direct access, or this component can use a 
+ * simple CORS proxy service.
+ */
+
 interface BlogPost {
   title: string
   link: string
@@ -98,24 +110,37 @@ const fetchFeed = async () => {
     
     // Try to fetch the real feed first
     try {
-      const response = await fetch(props.feedUrl, {
+      // Try direct fetch first
+      let response = await fetch(props.feedUrl, {
         mode: 'cors',
         headers: {
           'Accept': 'application/atom+xml, application/xml, text/xml'
         }
       })
       
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      // If direct fetch fails due to CORS, try with a simple proxy
+      if (!response.ok && response.status !== 200) {
+        console.warn('Direct fetch failed, trying with CORS proxy...')
+        // Use a simple CORS proxy for production if direct access fails
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(props.feedUrl)}`
+        response = await fetch(proxyUrl)
+        
+        if (response.ok) {
+          const data = await response.json()
+          const parsedPosts = parseAtomFeed(data.contents)
+          const limit = props.perPage || parsedPosts.length
+          posts.value = parsedPosts.slice(0, limit)
+          return
+        }
+      } else if (response.ok) {
+        const xmlText = await response.text()
+        const parsedPosts = parseAtomFeed(xmlText)
+        const limit = props.perPage || parsedPosts.length
+        posts.value = parsedPosts.slice(0, limit)
+        return
       }
       
-      const xmlText = await response.text()
-      const parsedPosts = parseAtomFeed(xmlText)
-      
-      // Limit the number of posts if perPage is specified
-      const limit = props.perPage || parsedPosts.length
-      posts.value = parsedPosts.slice(0, limit)
-      return
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       
     } catch (fetchError) {
       console.warn('Failed to fetch live feed, using fallback:', fetchError)
