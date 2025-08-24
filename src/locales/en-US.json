@@ -40,7 +40,7 @@
   },
   "TryBluefin": {
     "Title": "Try Bluefin",
-    "Description": "Choose your raptor for your hardware and use case.\n\nPlease [file issues](https://github.com/ublue-os/titanoboa/issues) if you encounter a problem, thanks!\n\nThe team recommends [Fedora Media Writer](https://flathub.org/apps/org.fedoraproject.MediaWriter) to create installation media, Ventoy is unsupported:\n\n\n",
+    "Description": "Choose your raptor for your hardware and use case.\n\nPlease [file issues](https://github.com/ublue-os/titanoboa/issues) if you encounter a problem. The team recommends [Fedora Media Writer](https://flathub.org/apps/org.fedoraproject.MediaWriter) to create installation media, Ventoy is unsupported:\n\n\n",
     "Developer": {
       "Question": "Are you a developer?",
       "DefaultSelection": "Include developer tooling",
