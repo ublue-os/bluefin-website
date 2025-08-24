@@ -55,8 +55,8 @@ const releases = [
   {
     id: "lts",
     title: "Bluefin LTS",
-    subtitle: "Beta - for testers only",
-    description: "The long term support experience, for the risk averse",
+    subtitle: "Beta",
+    description: "The long term support experience, for the risk averse. Coming late September 2025.",
     image: "./characters/achillobator.webp",
     supportedArch: ["x86", "arm"],
     recommended: false,
@@ -66,7 +66,7 @@ const releases = [
     id: "gts",
     title: "Bluefin GTS",
     subtitle: "For Most People",
-    description: "The default experience, pick this if you\'re not sure",
+    description: "The default experience, a modern desktop with a relaxed update cadence. Pick this if you\'re not sure",
     image: "./characters/intrigued.webp",
     supportedArch: ["x86"],
     recommended: true
@@ -75,7 +75,7 @@ const releases = [
     id: "stable",
     title: "Bluefin",
     subtitle: "For Enthusiasts",
-    description: "Faster updates, the leading edge",
+    description: "Faster updates, the leading edge.",
     image: "./characters/leaping.webp",
     supportedArch: ["x86"],
     recommended: false
