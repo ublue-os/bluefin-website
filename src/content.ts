@@ -12,7 +12,7 @@ export const LangLandingTag = "Project"
 export const LangLandingTitle = "Bluefin"
 export const LangLandingText =
   "The next generation Linux workstation, designed for reliability, performance, and sustainability."
-export const LangLandingBluefinImageURLs = './characters/header/angry.webp'
+export const LangLandingBluefinImageURLs = characterImages
 
 //
 //
