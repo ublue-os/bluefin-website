@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { MessageSchema } from "../../locales/schema"
 import { useI18n } from "vue-i18n"
+import RssFeed from "../RssFeed.vue"
+
 const { t } = useI18n<MessageSchema>({
   useScope: "global"
 })
@@ -12,12 +14,10 @@ const { t } = useI18n<MessageSchema>({
       <div>
         <h2>{{ t("NewsTitle") }}</h2>
       </div>
-      <d-topics-list
-        discourse-url="https://universal-blue.discourse.group"
-        per-page="5"
-        tags="bluefin-news"
-        template="complete"
-      ></d-topics-list>
+      <RssFeed
+        feed-url="https://docs.projectbluefin.io/blog/atom.xml"
+        :per-page="5"
+      />
     </div>
   </section>
 </template>
