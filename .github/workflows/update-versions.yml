@@ -37,76 +37,119 @@ jobs:
 
           // Function to find the latest changelog for a specific stream
           function findLatestChangelog(changelogsDir, stream) {
-            const files = fs.readdirSync(changelogsDir);
-            const streamFiles = files.filter(file => {
-              const parts = file.split('-');
-              return parts.length >= 4 && parts[3].includes(stream) && file.endsWith('.md');
-            });
-            
-            // Sort by date (assuming YYYY-MM-DD format)
-            streamFiles.sort((a, b) => {
-              const dateA = a.substring(0, 10); // Extract YYYY-MM-DD
-              const dateB = b.substring(0, 10);
-              return dateB.localeCompare(dateA); // Newest first
-            });
-            
-            return streamFiles.length > 0 ? streamFiles[0] : null;
+            try {
+              const files = fs.readdirSync(changelogsDir);
+              console.log(`Found ${files.length} total files in changelogs directory`);
+              
+              const streamFiles = files.filter(file => {
+                if (!file.endsWith('.md')) return false;
+                
+                // Handle different filename patterns:
+                // YYYY-MM-DD-stream-YYYYMMDD.md or YYYY-MM-DD-stream.YYYYMMDD.md
+                const streamPattern = new RegExp(`-${stream}[-.]`, 'i');
+                const datePattern = /^\d{4}-\d{2}-\d{2}-/;
+                
+                return datePattern.test(file) && streamPattern.test(file);
+              });
+              
+              console.log(`Found ${streamFiles.length} ${stream} changelog files:`, streamFiles);
+              
+              // Sort by date (assuming YYYY-MM-DD format at start)
+              streamFiles.sort((a, b) => {
+                const dateA = a.substring(0, 10); // Extract YYYY-MM-DD
+                const dateB = b.substring(0, 10);
+                return dateB.localeCompare(dateA); // Newest first
+              });
+              
+              return streamFiles.length > 0 ? streamFiles[0] : null;
+            } catch (error) {
+              console.error(`Error reading changelogs directory: ${error.message}`);
+              throw error;
+            }
           }
 
           // Function to extract version information from changelog content
           function extractVersionInfo(content, stream) {
-            const lines = content.split('\n');
-            let inMajorPackages = false;
-            const versions = {};
-            
-            for (let i = 0; i < lines.length; i++) {
-              const line = lines[i].trim();
+            try {
+              const lines = content.split('\n');
+              let inMajorPackages = false;
+              const versions = {};
               
-              if (line.includes('### Major packages')) {
-                inMajorPackages = true;
-                continue;
-              }
+              console.log(`Parsing changelog for ${stream} stream...`);
               
-              if (inMajorPackages && line.startsWith('###')) {
-                break; // Exit major packages section
-              }
-              
-              if (inMajorPackages && line.includes('|') && line.includes('**')) {
-                // Parse table rows like: | **Kernel** | 6.14.11-200 |
-                const match = line.match(/\|\s*\*\*(.*?)\*\*\s*\|\s*(.*?)\s*\|/);
-                if (match) {
-                  const component = match[1].toLowerCase();
-                  let version = match[2].trim();
-                  
-                  // Handle version arrows (e.g., "version1 ➡️ version2")
-                  if (version.includes('➡️')) {
-                    version = version.split('➡️')[1].trim();
-                  }
-                  
-                  // Map component names to our schema
-                  if (component === 'kernel') {
-                    versions.kernel = version;
-                  } else if (component === 'gnome') {
-                    versions.gnome = version;
-                  } else if (component === 'mesa') {
-                    versions.mesa = version;
-                  } else if (component === 'nvidia') {
-                    versions.nvidia = version;
+              for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                
+                // Look for Major packages section
+                if (line.includes('### Major packages')) {
+                  inMajorPackages = true;
+                  console.log('Found Major packages section');
+                  continue;
+                }
+                
+                // Exit when we reach another section
+                if (inMajorPackages && line.startsWith('###') && !line.includes('Major packages')) {
+                  console.log(`Exiting Major packages section at: ${line}`);
+                  break;
+                }
+                
+                // Parse version information from table rows
+                if (inMajorPackages && line.includes('|') && line.includes('**')) {
+                  // Parse table rows like: | **Kernel** | 6.14.11-200 | or | **Kernel** | 6.14.11-200 ➡️ 6.14.11-300 |
+                  const match = line.match(/\|\s*\*\*(.*?)\*\*\s*\|\s*(.*?)\s*\|/);
+                  if (match) {
+                    const component = match[1].toLowerCase().trim();
+                    let version = match[2].trim();
+                    
+                    // Handle version arrows (e.g., "version1 ➡️ version2") - take the newer version
+                    if (version.includes('➡️')) {
+                      version = version.split('➡️')[1].trim();
+                    }
+                    
+                    // Skip empty versions
+                    if (!version || version === '') {
+                      continue;
+                    }
+                    
+                    // Map component names to our schema
+                    const componentMapping = {
+                      'kernel': 'kernel',
+                      'gnome': 'gnome',
+                      'mesa': 'mesa',
+                      'nvidia': 'nvidia'
+                    };
+                    
+                    if (componentMapping[component]) {
+                      versions[componentMapping[component]] = version;
+                      console.log(`Found ${component}: ${version}`);
+                    }
                   }
                 }
               }
+              
+              // Determine base OS based on stream
+              const baseMapping = {
+                'lts': 'CentOS Stream 10',
+                'gts': 'Fedora 41',
+                'stable': 'Fedora 42'
+              };
+              
+              versions.base = baseMapping[stream] || 'Unknown';
+              
+              // Ensure all required fields are present, set empty string for missing ones
+              const requiredFields = ['base', 'gnome', 'kernel', 'mesa', 'nvidia'];
+              for (const field of requiredFields) {
+                if (!versions[field]) {
+                  versions[field] = '';
+                }
+              }
+              
+              console.log(`Extracted versions for ${stream}:`, versions);
+              return versions;
+            } catch (error) {
+              console.error(`Error extracting version info for ${stream}: ${error.message}`);
+              throw error;
             }
-            
-            // Determine base OS based on stream and kernel version
-            if (stream === 'lts') {
-              versions.base = 'CentOS Stream 10';
-            } else if (stream === 'gts') {
-              versions.base = 'Fedora 41';
-            } else if (stream === 'stable') {
-              versions.base = 'Fedora 42';
-            }
-            
-            return versions;
           }
 
           // Main execution
@@ -114,62 +157,105 @@ jobs:
             const changelogsDir = 'bluefin-docs/changelogs';
             const streamsToUpdate = ['lts', 'gts', 'stable'];
             const streamVersions = {};
+            let hasValidUpdates = false;
+            
+            // Verify changelogs directory exists
+            if (!fs.existsSync(changelogsDir)) {
+              throw new Error(`Changelogs directory not found: ${changelogsDir}`);
+            }
+            
+            console.log(`Processing changelogs from: ${changelogsDir}`);
             
             for (const stream of streamsToUpdate) {
-              console.log(`Processing ${stream} stream...`);
+              console.log(`\\n=== Processing ${stream} stream ===`);
               
-              const latestChangelog = findLatestChangelog(changelogsDir, stream);
-              if (!latestChangelog) {
-                console.log(`No changelog found for ${stream} stream`);
+              try {
+                const latestChangelog = findLatestChangelog(changelogsDir, stream);
+                if (!latestChangelog) {
+                  console.log(`No changelog found for ${stream} stream`);
+                  continue;
+                }
+                
+                console.log(`Found latest changelog for ${stream}: ${latestChangelog}`);
+                
+                const changelogPath = path.join(changelogsDir, latestChangelog);
+                if (!fs.existsSync(changelogPath)) {
+                  console.error(`Changelog file does not exist: ${changelogPath}`);
+                  continue;
+                }
+                
+                const content = fs.readFileSync(changelogPath, 'utf8');
+                if (!content || content.trim().length === 0) {
+                  console.error(`Empty changelog file: ${changelogPath}`);
+                  continue;
+                }
+                
+                const versionInfo = extractVersionInfo(content, stream);
+                
+                // Validate that we have meaningful version information
+                const hasValidVersions = versionInfo.base && 
+                  (versionInfo.gnome || versionInfo.kernel);
+                
+                if (hasValidVersions) {
+                  streamVersions[stream] = versionInfo;
+                  hasValidUpdates = true;
+                  console.log(`Successfully extracted versions for ${stream}`);
+                } else {
+                  console.error(`No meaningful version information found for ${stream}`);
+                  console.error('Extracted data:', versionInfo);
+                }
+              } catch (streamError) {
+                console.error(`Error processing ${stream} stream: ${streamError.message}`);
+                // Continue with other streams even if one fails
                 continue;
-              }
-              
-              console.log(`Found latest changelog for ${stream}: ${latestChangelog}`);
-              
-              const changelogPath = path.join(changelogsDir, latestChangelog);
-              const content = fs.readFileSync(changelogPath, 'utf8');
-              
-              const versionInfo = extractVersionInfo(content, stream);
-              
-              if (Object.keys(versionInfo).length > 0) {
-                streamVersions[stream] = versionInfo;
-                console.log(`Extracted versions for ${stream}:`, versionInfo);
-              } else {
-                console.log(`No version information found for ${stream}`);
               }
             }
             
-            if (Object.keys(streamVersions).length > 0) {
-              // Generate YAML content
-              const timestamp = new Date().toISOString().split('T')[0];
-              let yamlContent = '# Stream version information for Bluefin releases\n';
-              yamlContent += '# This file contains the latest version information for each stream\n';
-              yamlContent += '# Data is sourced from the most recent changelogs in ublue-os/bluefin-docs\n';
-              yamlContent += '# Last updated: ' + timestamp + '\n\n';
-              
-              for (const [stream, versions] of Object.entries(streamVersions)) {
-                yamlContent += stream + ':\n';
-                yamlContent += '  base: "' + (versions.base || '') + '"\n';
-                yamlContent += '  gnome: "' + (versions.gnome || '') + '"\n';
-                yamlContent += '  kernel: "' + (versions.kernel || '') + '"\n';
-                yamlContent += '  mesa: "' + (versions.mesa || '') + '"\n';
-                yamlContent += '  nvidia: "' + (versions.nvidia || '') + '"\n\n';
+            
+            // Read existing YAML to compare
+            let existingContent = '';
+            const yamlFile = 'public/stream-versions.yml';
+            if (fs.existsSync(yamlFile)) {
+              existingContent = fs.readFileSync(yamlFile, 'utf8');
+            }
+            
+            // Generate new YAML content
+            const timestamp = new Date().toISOString().split('T')[0];
+            let yamlContent = '# Stream version information for Bluefin releases\\n';
+            yamlContent += '# This file contains the latest version information for each stream\\n';
+            yamlContent += '# Data is sourced from the most recent changelogs in ublue-os/bluefin-docs\\n';
+            yamlContent += '# Last updated: ' + timestamp + '\\n\\n';
+            
+            // Ensure consistent ordering of streams
+            const orderedStreams = ['lts', 'gts', 'stable'];
+            for (const stream of orderedStreams) {
+              if (streamVersions[stream]) {
+                const versions = streamVersions[stream];
+                yamlContent += stream + ':\\n';
+                yamlContent += '  base: "' + (versions.base || '') + '"\\n';
+                yamlContent += '  gnome: "' + (versions.gnome || '') + '"\\n';
+                yamlContent += '  kernel: "' + (versions.kernel || '') + '"\\n';
+                yamlContent += '  mesa: "' + (versions.mesa || '') + '"\\n';
+                yamlContent += '  nvidia: "' + (versions.nvidia || '') + '"\\n\\n';
               }
-              
-              // Write the updated YAML file
-              fs.writeFileSync('public/stream-versions.yml', yamlContent.trim() + '\n');
-              console.log('Updated public/stream-versions.yml');
-              
-              // Signal success
-              process.exit(0);
+            }
+            
+            const finalContent = yamlContent.trim() + '\\n';
+            
+            // Only write if content has actually changed
+            if (finalContent !== existingContent) {
+              fs.writeFileSync(yamlFile, finalContent);
+              console.log('\\n=== Updated public/stream-versions.yml ===');
+              console.log(finalContent);
+              process.exit(0); // Signal success
             } else {
-              console.log('No updates found');
-              // Signal no updates
-              process.exit(2);
+              console.log('No changes detected in version information');
+              process.exit(2); // Signal no updates
             }
             
           } catch (error) {
-            console.error('Error:', error);
+            console.error('Fatal error:', error);
+            console.error('Stack trace:', error.stack);
             process.exit(1);
           }
           EOF
