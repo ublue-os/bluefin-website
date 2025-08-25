@@ -323,10 +323,10 @@ onMounted(() => {
       </div>
       <div class="options-grid">
         <button class="option-button" @click="selectGpu('amd')">
-          AMD | Intel
+          AMD or Intel
         </button>
         <button class="option-button" @click="selectGpu('nvidia')">
-          Nvidia (RTX Series | GTX 16xx+ Series)
+          Nvidia RTX or GTX 16xx+ Series
         </button>
       </div>
     </div>
@@ -378,13 +378,13 @@ onMounted(() => {
               }}</span>
               <span class="decision-subtitle">{{
                 imageName.gpu === "amd"
-                  ? "Integrated and AMD graphics"
+                  ? "Integrated AMD graphics"
                   : "RTX/GTX 16xx+ series"
               }}</span>
             </div>
           </div>
           <div class="generated-filename">
-            <span class="filename-label">Generated filename:</span>
+            <span class="filename-label">Installation ISO:</span>
             <span class="filename-value"
               >{{ getFormattedImageName() }}.iso</span
             >
