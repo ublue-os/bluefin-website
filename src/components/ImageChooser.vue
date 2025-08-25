@@ -312,9 +312,9 @@ onMounted(() => {
         <button
           class="back-button"
           @click="
-            showArchitectureStep = true;
-            imageName.arch = undefined;
-            showGpuStep = false;
+            showArchitectureStep = true
+            imageName.arch = undefined
+            showGpuStep = false
           "
         >
           ← Back
@@ -337,9 +337,9 @@ onMounted(() => {
         <button
           class="back-button"
           @click="
-            showGpuStep = true;
-            imageName.gpu = undefined;
-            showDownload = false;
+            showGpuStep = true
+            imageName.gpu = undefined
+            showDownload = false
           "
         >
           ← Back
@@ -390,7 +390,9 @@ onMounted(() => {
             >
           </div>
         </div>
- <br/> <br/> <br/>
+        <br />
+        <br />
+        <br />
         <div class="download-actions">
           <a
             class="download-button primary"
@@ -407,7 +409,7 @@ onMounted(() => {
 
           <div class="secondary-actions">
             <a
-              class="action-link"
+              class="btn"
               :title="t('TryBluefin.Download.Checksum')"
               :href="
                 BLUEFIN_DOWNLOAD_URL.replace(
@@ -416,16 +418,16 @@ onMounted(() => {
                 )
               "
             >
-              <IconCheckCircle class="action-icon" />
+              <IconCheckCircle />
               Verify (SHA256)
             </a>
             <a
-              class="action-link"
+              class="btn"
               :title="t('TryBluefin.Download.Registry')"
               href="https://github.com/orgs/ublue-os/packages?repo_name=bluefin"
               target="_blank"
             >
-              <IconGithubCircle class="action-icon" />
+              <IconGithubCircle />
               View Registry
             </a>
           </div>
@@ -807,25 +809,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-}
-
-.action-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #93c5fd;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.action-link:hover {
-  color: #4f9cf9;
-}
-
-.action-icon {
-  width: 1rem;
-  height: 1rem;
+  flex-wrap: wrap;
 }
 
 .documentation-note {
