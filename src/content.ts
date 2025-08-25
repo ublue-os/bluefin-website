@@ -192,7 +192,7 @@ export const LangPoweredBy: PoweredBy[] = [
     altText: "Docker"
   },
   {
-    imageUrl: "./brands/bootc.png",
+    imageUrl: "./brands/bootc.svg",
     projectUrl: "https://containers.github.io/bootc/",
     altText: "bootc"
   }
