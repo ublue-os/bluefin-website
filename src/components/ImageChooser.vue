@@ -56,7 +56,8 @@ const releases = [
     id: "lts",
     title: "Bluefin LTS",
     subtitle: "For professionals and AI/ML engineers",
-    description: "The long term support experience. Coming late September 2025.",
+    description:
+      "The long term support experience. Coming late September 2025.",
     image: "./characters/achillobator.webp",
     supportedArch: ["x86", "arm"],
     recommended: false,
@@ -66,7 +67,8 @@ const releases = [
     id: "gts",
     title: "Bluefin GTS",
     subtitle: "For Everyone",
-    description: "A modern desktop with a relaxed update cadence. Pick this if you\'re not sure.",
+    description:
+      "A modern desktop with a relaxed update cadence. Pick this if you\'re not sure.",
     image: "./characters/intrigued.webp",
     supportedArch: ["x86"],
     recommended: true
@@ -75,7 +77,8 @@ const releases = [
     id: "stable",
     title: "Bluefin",
     subtitle: "For Enthusiasts",
-    description: "Faster updates, the leading edge. You know what you\'re looking for.",
+    description:
+      "Faster updates, the leading edge. You know what you\'re looking for.",
     image: "./characters/leaping.webp",
     supportedArch: ["x86"],
     recommended: false
@@ -345,25 +348,46 @@ onMounted(() => {
       </div>
 
       <div class="download-summary">
-        <div class="selected-release-info">
-          <div
-            class="release-preview"
-            :style="{ backgroundImage: `url(${imageName.imagesrc})` }"
-          >
-            <div class="release-overlay-small">
-              <h4>{{ getSelectedRelease?.title }}</h4>
-              <p>{{ getSelectedRelease?.subtitle }}</p>
+        <div class="decision-summary">
+          <h4>Your Selection Summary</h4>
+          <div class="decision-items">
+            <div class="decision-item">
+              <span class="decision-label">Release:</span>
+              <span class="decision-value">{{
+                getSelectedRelease?.title
+              }}</span>
+              <span class="decision-subtitle">{{
+                getSelectedRelease?.subtitle
+              }}</span>
+            </div>
+            <div class="decision-item">
+              <span class="decision-label">Architecture:</span>
+              <span class="decision-value">{{
+                imageName.arch === "x86" ? "x86_64" : "ARM64"
+              }}</span>
+              <span class="decision-subtitle">{{
+                imageName.arch === "x86"
+                  ? "Standard for most computers"
+                  : "ARM-based systems"
+              }}</span>
+            </div>
+            <div class="decision-item">
+              <span class="decision-label">GPU:</span>
+              <span class="decision-value">{{
+                imageName.gpu === "amd" ? "AMD/Intel" : "Nvidia"
+              }}</span>
+              <span class="decision-subtitle">{{
+                imageName.gpu === "amd"
+                  ? "Integrated and AMD graphics"
+                  : "RTX/GTX 16xx+ series"
+              }}</span>
             </div>
           </div>
-          <div class="selection-details">
-            <p>
-              <strong>Architecture:</strong>
-              {{ imageName.arch === "x86" ? "x86_64" : "ARM64" }}
-            </p>
-            <p>
-              <strong>GPU:</strong>
-              {{ imageName.gpu === "amd" ? "AMD/Intel" : "Nvidia" }}
-            </p>
+          <div class="generated-filename">
+            <span class="filename-label">Generated filename:</span>
+            <span class="filename-value"
+              >{{ getFormattedImageName() }}.iso</span
+            >
           </div>
         </div>
 
@@ -408,16 +432,14 @@ onMounted(() => {
         </div>
       </div>
 
-    <div class="documentation-note">
-      <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
-    </div>
-      
+      <div class="documentation-note">
+        <p v-html="marked.parse(t('TryBluefin.Download.DocumentationURL'))" />
+      </div>
+
       <button class="start-over-button" @click="reset">
         Choose a different release
       </button>
     </div>
-
-
   </div>
 </template>
 
@@ -426,7 +448,7 @@ onMounted(() => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-   /* Ensure consistent height across all steps to prevent FAQ section from jumping */
+  /* Ensure consistent height across all steps to prevent FAQ section from jumping */
   min-height: 500px;
 }
 
@@ -585,7 +607,7 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.3);
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
 
 /* Step Selection */
@@ -667,59 +689,85 @@ onMounted(() => {
 }
 
 .download-summary {
-  background: #1f2937;
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
   text-align: left; /* Override center alignment for content */
 }
 
-.selected-release-info {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  align-items: center;
+.decision-summary h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
-.release-preview {
-  width: 120px;
-  height: 80px;
-  border-radius: 8px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.release-overlay-small {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 8px;
+.decision-items {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-  padding: 0.5rem;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.release-overlay-small h4 {
-  font-size: 0.8rem;
-  margin: 0;
+.decision-item {
+  padding: 1rem;
+  border: 2px solid #374151;
+  border-radius: 8px;
+  background: #1f2937;
+}
+
+.decision-label {
+  display: block;
+  font-size: 0.9rem;
   font-weight: 600;
+  color: #93c5fd;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
 }
 
-.release-overlay-small p {
-  font-size: 0.7rem;
-  margin: 0;
-  opacity: 0.9;
-}
-
-.selection-details p {
-  margin: 0.25rem 0;
+.decision-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: white;
+  margin-bottom: 0.25rem;
+}
+
+.decision-subtitle {
+  display: block;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.generated-filename {
+  padding: 1rem;
+  background: rgba(79, 156, 249, 0.1);
+  border: 1px solid rgba(79, 156, 249, 0.2);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.filename-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #93c5fd;
+  margin-bottom: 0.5rem;
+}
+
+.filename-value {
+  display: block;
+  font-family: "Courier New", monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  word-break: break-all;
 }
 
 .download-actions {
@@ -767,7 +815,7 @@ onMounted(() => {
   gap: 0.5rem;
   color: #93c5fd;
   text-decoration: none;
-  font-size: 1.0rem;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
@@ -834,9 +882,29 @@ onMounted(() => {
     height: 350px;
   }
 
-  .selected-release-info {
-    flex-direction: column;
-    text-align: center;
+  .decision-summary h4 {
+    font-size: 1.25rem;
+  }
+
+  .decision-items {
+    gap: 1rem;
+  }
+
+  .decision-item {
+    padding: 0.75rem;
+  }
+
+  .decision-value {
+    font-size: 1.1rem;
+  }
+
+  .generated-filename {
+    padding: 0.75rem;
+  }
+
+  .filename-value {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
   }
 
   .secondary-actions {
