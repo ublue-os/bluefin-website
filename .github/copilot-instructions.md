@@ -352,4 +352,4 @@ npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 - **Always** follow the conventional commits specification when sending pull requests: conventional-commits/conventionalcommits.org
 - **Always** include screenshots of both desktop and mobile in pull requests, even in subsequent runs
 - **Always** use tailwind css and do not hardcode pixel sizes
-- **Always** ensure that every file passes lint at the end of the request 
+- **Always** ensure that every file passes lint at the end of the request, be especially strict with vue syntax
