@@ -312,9 +312,11 @@ onMounted(() => {
         <button
           class="back-button"
           @click="
-            showArchitectureStep = true
-            imageName.arch = undefined
-            showGpuStep = false
+            () => {
+              showArchitectureStep = true
+              imageName.arch = undefined
+              showGpuStep = false
+            }
           "
         >
           ← Back
@@ -337,9 +339,11 @@ onMounted(() => {
         <button
           class="back-button"
           @click="
-            showGpuStep = true
-            imageName.gpu = undefined
-            showDownload = false
+            () => {
+              showGpuStep = true
+              imageName.gpu = undefined
+              showDownload = false
+            }
           "
         >
           ← Back
