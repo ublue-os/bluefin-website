@@ -74,8 +74,8 @@ const releases = [
   {
     id: "stable",
     title: "Bluefin",
-    subtitle: "For Enthusiasts, you know what you want",
-    description: "Faster updates, the leading edge.",
+    subtitle: "For Enthusiasts",
+    description: "Faster updates, the leading edge. You know what you\'re looking for.",
     image: "./characters/leaping.webp",
     supportedArch: ["x86"],
     recommended: false
