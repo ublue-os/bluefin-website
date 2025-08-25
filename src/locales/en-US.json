@@ -67,7 +67,7 @@
       "Iso": "Download the ISO",
       "Registry": "View details on the GitHub Container Registry",
       "Checksum": "Verify (SHA256)",
-      "DocumentationURL": "Check out the [Bluefin Documentation](https://docs.projectbluefin.io/), it takes about 15 minutes and includes an installation runbook - set yourself up for success, you are headed into a new world. <br/><br/>",
+      "DocumentationURL": "Check out the [Bluefin Documentation](https://docs.projectbluefin.io/), it takes about 15 minutes and includes an installation runbook - set yourself up for success, you are headed into a new world.<br/><br/>If you choose secure boot during installation, the password is `universalblue`.",
       "DeveloperNote": "Check out [Introduction to Bluefin DX](https://docs.projectbluefin.io/bluefin-dx).",
       "DollyChill": "Dolly chilling near your ISO link"
     }
