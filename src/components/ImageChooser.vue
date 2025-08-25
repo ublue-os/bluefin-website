@@ -20,6 +20,7 @@ interface VersionInfo {
   kernel: string
   mesa: string
   nvidia: string
+  releaseDate: string
 }
 
 interface StreamVersions {
@@ -156,6 +157,20 @@ const getSupportedArchitectures = computed(() => {
   }))
 })
 
+// Format release date for human readability
+const formatReleaseDate = (dateString: string): string => {
+  try {
+    const date = new Date(dateString)
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    })
+  } catch (error) {
+    return dateString // fallback to original string if parsing fails
+  }
+}
+
 const BLUEFIN_DOWNLOAD_URL = "https://download.projectbluefin.io/%TEMPLATE%"
 
 const reset = () => {
@@ -275,6 +290,18 @@ onMounted(() => {
                     <span class="version-value">{{
                       streamVersions[release.id as keyof StreamVersions].nvidia
                     }}</span>
+                  </div>
+                  <!-- Release Date Display -->
+                  <div class="release-date-item">
+                    <span class="release-date-text"
+                      >Release Date:
+                      {{
+                        formatReleaseDate(
+                          streamVersions[release.id as keyof StreamVersions]
+                            .releaseDate
+                        )
+                      }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -614,6 +641,20 @@ onMounted(() => {
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
   font-size: 1rem;
+}
+
+/* Release Date Styling */
+.release-date-item {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.release-date-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
 }
 
 /* Step Selection */
