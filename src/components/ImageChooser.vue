@@ -390,7 +390,9 @@ onMounted(() => {
             >
           </div>
         </div>
- <br/> <br/> <br/>
+        <br />
+        <br />
+        <br />
         <div class="download-actions">
           <a
             class="download-button primary"
@@ -813,14 +815,14 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #93c5fd;
+  color: var(--color-text-light);
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .action-link:hover {
-  color: #4f9cf9;
+  color: var(--color-text-light);
 }
 
 .action-icon {
