@@ -41,27 +41,57 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit and push changes
+      - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add public/stream-versions.yml
-          git commit -m "chore: update stream versions from latest releases
+        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            chore: update stream versions from latest releases
 
-          - Updated from latest ublue-os/bluefin and ublue-os/bluefin-lts releases
-          - Automated update via GitHub Actions"
-          git push
+            - Updated from latest ublue-os/bluefin and ublue-os/bluefin-lts
+              releases
+            - Automated update via GitHub Actions
+          title: "chore: update stream versions from latest releases"
+          body: |
+            ## 🤖 Automated Stream Versions Update
+
+            This PR updates the stream version information with the latest
+            package versions from:
+            - `ublue-os/bluefin` (for GTS and Stable streams)
+            - `ublue-os/bluefin-lts` (for LTS stream)
+
+            ### Changes
+            - Updated `public/stream-versions.yml` with latest version
+              information
+            - Data sourced from the most recent release changelogs
+
+            ### Review Notes
+            - This is an automated update triggered by the daily workflow
+            - Please verify the version numbers look correct before merging
+            - The updated file is used by the website to display current
+              stream information
+
+            ---
+            *This PR was automatically created by the `update-stream-versions`
+            workflow.*
+          branch: automated/update-stream-versions
+          delete-branch: true
+          add-paths: |
+            public/stream-versions.yml
 
       - name: Create issue on failure
         if: failure()
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           script: |
+            const runUrl = `${context.payload.repository.html_url}/actions/runs/` +
+                           `${context.runId}`;
             github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: 'Failed to update stream versions',
-              body: `The automated stream versions update failed. Please check the [workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId}) for details.`,
+              body: `The automated stream versions update failed. ` +
+                    `Please check the [workflow run](${runUrl}) for details.`,
               labels: ['bug', 'automation']
             })
