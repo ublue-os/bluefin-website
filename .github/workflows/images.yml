@@ -10,6 +10,7 @@ on:
       - '**/*.gif'
       - '**/*.webp'
       - '**/*.avif'
+  workflow_dispatch:
 
 jobs:
   build:
