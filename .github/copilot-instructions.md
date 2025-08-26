@@ -353,3 +353,4 @@ npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 - **Always** include screenshots of both desktop and mobile in pull requests, even in subsequent runs
 - **Always** use tailwind css and do not hardcode pixel sizes
 - **Always** ensure that every file passes lint at the end of the request, be especially strict with vue syntax
+- **Always** ensure images are compressed appropriately, the website must be mobile friendly
