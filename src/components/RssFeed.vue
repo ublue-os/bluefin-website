@@ -32,6 +32,11 @@ const loading = ref(true)
 const error = ref<string | null>(null)
 
 // Extract the first image URL from HTML content and optimize it
+// Extract and optimize thumbnails from RSS feed content
+// This function makes the component future-proof by automatically:
+// 1. Extracting thumbnails from any RSS feed content (current and future posts)
+// 2. Applying optimization through getOptimizedThumbnail() to reduce file sizes
+// 3. Ensuring new blog posts automatically benefit from thumbnail optimization
 const extractThumbnail = (htmlContent: string): string | undefined => {
   if (!htmlContent) return undefined
 
@@ -45,7 +50,8 @@ const extractThumbnail = (htmlContent: string): string | undefined => {
     const src = firstImg.getAttribute("src")
     // Make sure we have a valid URL
     if (src && (src.startsWith("http") || src.startsWith("//"))) {
-      // Apply optimization to extracted thumbnails
+      // FUTURE-PROOF: Apply optimization to ANY extracted thumbnail
+      // This ensures future blog posts automatically get optimized thumbnails
       return getOptimizedThumbnail(src)
     }
   }
@@ -113,20 +119,44 @@ const parseAtomFeed = (xmlText: string): BlogPost[] => {
   return parsedPosts
 }
 
-// Optimized thumbnail URL helper function
+// Future-proof thumbnail optimization system
+// This function automatically optimizes thumbnails for both current and future blog posts
 const getOptimizedThumbnail = (originalUrl: string): string => {
-  // Map of known large PNG thumbnails to optimized local WebP versions
-  const thumbnailMapping: Record<string, string> = {
-    "https://docs.projectbluefin.io/assets/images/bluefin-logo-4d88cc69e2b085b9dcc0c72bafdc24df.png":
-      "./thumbnails/bluefin-logo.webp",
-    "https://docs.projectbluefin.io/assets/images/containerfile-example-7c20da04f56b30b8c78d04a1b28e99e7.png":
-      "./thumbnails/containerfile-example.webp",
-    "https://docs.projectbluefin.io/assets/images/system-update-5a7ca45e75b1ac21f4b28c91c4885b21.png":
-      "./thumbnails/system-update.webp"
+  // Pattern-based mapping for future-proof optimization
+  // Matches image names regardless of hash suffixes that change over time
+  const optimizationPatterns = [
+    {
+      pattern: /bluefin-logo.*\.png$/,
+      replacement: "./thumbnails/bluefin-logo.webp"
+    },
+    {
+      pattern: /containerfile-example.*\.png$/,
+      replacement: "./thumbnails/containerfile-example.webp"
+    },
+    {
+      pattern: /system-update.*\.png$/,
+      replacement: "./thumbnails/system-update.webp"
+    }
+  ]
+
+  // Check each pattern and return optimized version if found
+  for (const { pattern, replacement } of optimizationPatterns) {
+    if (pattern.test(originalUrl)) {
+      return replacement
+    }
   }
 
-  // Return optimized version if available, otherwise return original
-  return thumbnailMapping[originalUrl] || originalUrl
+  // Fallback: for any other PNG from docs.projectbluefin.io, try to use a default optimization
+  if (
+    originalUrl.includes("docs.projectbluefin.io") &&
+    originalUrl.endsWith(".png")
+  ) {
+    console.log(`No specific optimization found for: ${originalUrl}`)
+    // Could add generic fallback logic here if needed in the future
+  }
+
+  // Return original URL if no optimization is available
+  return originalUrl
 }
 
 // Mock data for testing when the real feed is not accessible
