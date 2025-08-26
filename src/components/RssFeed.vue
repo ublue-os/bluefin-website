@@ -114,8 +114,7 @@ const parseAtomFeed = (xmlText: string): BlogPost[] => {
   return parsedPosts
 }
 
-// Future-proof thumbnail optimization system
-// This function automatically optimizes thumbnails for both current and future blog posts
+// Maps known thumbnail URLs to optimized WebP versions
 const getOptimizedThumbnail = (originalUrl: string): string => {
   // Pattern-based mapping for future-proof optimization
   // Matches image names regardless of hash suffixes that change over time
