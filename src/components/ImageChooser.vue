@@ -505,6 +505,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  filter: brightness(0.7) contrast(1.1);
 }
 
 .release-overlay {
