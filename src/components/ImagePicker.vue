@@ -114,10 +114,6 @@ const { t } = useI18n<MessageSchema>({
 #downloadtexts a {
   color: #ffffff !important;
 }
-
-.dolly {
-  filter: brightness(0.7) contrast(1.1);
-}
 </style>
 
 <template>
