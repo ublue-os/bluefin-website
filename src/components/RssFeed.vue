@@ -31,7 +31,7 @@ const posts = ref<BlogPost[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-// Extract the first image URL from HTML content
+// Extract the first image URL from HTML content and optimize it
 const extractThumbnail = (htmlContent: string): string | undefined => {
   if (!htmlContent) return undefined
 
@@ -45,7 +45,8 @@ const extractThumbnail = (htmlContent: string): string | undefined => {
     const src = firstImg.getAttribute("src")
     // Make sure we have a valid URL
     if (src && (src.startsWith("http") || src.startsWith("//"))) {
-      return src
+      // Apply optimization to extracted thumbnails
+      return getOptimizedThumbnail(src)
     }
   }
 
@@ -112,6 +113,22 @@ const parseAtomFeed = (xmlText: string): BlogPost[] => {
   return parsedPosts
 }
 
+// Optimized thumbnail URL helper function
+const getOptimizedThumbnail = (originalUrl: string): string => {
+  // Map of known large PNG thumbnails to optimized local WebP versions
+  const thumbnailMapping: Record<string, string> = {
+    "https://docs.projectbluefin.io/assets/images/bluefin-logo-4d88cc69e2b085b9dcc0c72bafdc24df.png":
+      "./thumbnails/bluefin-logo.webp",
+    "https://docs.projectbluefin.io/assets/images/containerfile-example-7c20da04f56b30b8c78d04a1b28e99e7.png":
+      "./thumbnails/containerfile-example.webp",
+    "https://docs.projectbluefin.io/assets/images/system-update-5a7ca45e75b1ac21f4b28c91c4885b21.png":
+      "./thumbnails/system-update.webp"
+  }
+
+  // Return optimized version if available, otherwise return original
+  return thumbnailMapping[originalUrl] || originalUrl
+}
+
 // Mock data for testing when the real feed is not accessible
 const mockPosts: BlogPost[] = [
   {
@@ -121,8 +138,9 @@ const mockPosts: BlogPost[] = [
       "Welcome to Project Bluefin, the next generation Linux workstation designed for reliability, performance, and sustainability.",
     pubDate: "2024-01-15T10:00:00Z",
     formattedDate: "January 15, 2024",
-    thumbnail:
+    thumbnail: getOptimizedThumbnail(
       "https://docs.projectbluefin.io/assets/images/bluefin-logo-4d88cc69e2b085b9dcc0c72bafdc24df.png"
+    )
   },
   {
     title: "Developer Mode: Cloud-Native Workflows",
@@ -131,8 +149,9 @@ const mockPosts: BlogPost[] = [
       "Learn about Bluefin's developer mode and how it transforms your device into a powerful workstation with container-focused workflows.",
     pubDate: "2024-01-20T14:30:00Z",
     formattedDate: "January 20, 2024",
-    thumbnail:
+    thumbnail: getOptimizedThumbnail(
       "https://docs.projectbluefin.io/assets/images/containerfile-example-7c20da04f56b30b8c78d04a1b28e99e7.png"
+    )
   },
   {
     title: "Understanding Image-Based Updates",
@@ -141,8 +160,9 @@ const mockPosts: BlogPost[] = [
       "Discover how Bluefin's automatic image-based updates provide near-zero maintenance while ensuring system stability.",
     pubDate: "2024-01-25T09:15:00Z",
     formattedDate: "January 25, 2024",
-    thumbnail:
+    thumbnail: getOptimizedThumbnail(
       "https://docs.projectbluefin.io/assets/images/system-update-5a7ca45e75b1ac21f4b28c91c4885b21.png"
+    )
   }
 ]
 
@@ -223,7 +243,14 @@ onMounted(() => {
       <article v-for="post in posts" :key="post.link" class="blog-post">
         <div class="post-content">
           <div v-if="post.thumbnail" class="post-thumbnail">
-            <img :src="post.thumbnail" :alt="post.title" loading="lazy" />
+            <img
+              :src="post.thumbnail"
+              :alt="post.title"
+              loading="lazy"
+              width="80"
+              height="80"
+              decoding="async"
+            />
           </div>
           <div class="post-text">
             <header class="post-header">
