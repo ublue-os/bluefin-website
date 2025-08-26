@@ -31,12 +31,7 @@ const posts = ref<BlogPost[]>([])
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-// Extract the first image URL from HTML content and optimize it
-// Extract and optimize thumbnails from RSS feed content
-// This function makes the component future-proof by automatically:
-// 1. Extracting thumbnails from any RSS feed content (current and future posts)
-// 2. Applying optimization through getOptimizedThumbnail() to reduce file sizes
-// 3. Ensuring new blog posts automatically benefit from thumbnail optimization
+// Extracts and optimizes the first thumbnail image from RSS feed content, ensuring future posts benefit automatically.
 const extractThumbnail = (htmlContent: string): string | undefined => {
   if (!htmlContent) return undefined
 
