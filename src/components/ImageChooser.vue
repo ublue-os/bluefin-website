@@ -641,11 +641,12 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   padding: 0 20px;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   text-decoration: none;
   margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin: 24px;
 }
 
 .back-button:hover {
@@ -654,7 +655,7 @@ onMounted(() => {
 }
 
 .step-header h3 {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin: 0;
   color: white; /* Download the ISO text should be white - keeping this white */
 }
