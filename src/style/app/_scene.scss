@@ -77,7 +77,7 @@
 
     a {
       @include fonts.font(700);
-      color: var(--color-blue-light) !important;
+      color: var(--color-text-light) !important;
 
       &:hover {
         text-decoration: none;
