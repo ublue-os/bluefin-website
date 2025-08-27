@@ -1,7 +1,7 @@
 @use "sass:meta";
 @use "setup/fonts";
 @use "setup";
-@import "tailwindcss";
+@use "tailwindcss";
 
 html {
   @include fonts.font(400);
