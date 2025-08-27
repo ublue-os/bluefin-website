@@ -312,7 +312,7 @@ onMounted(() => {
 
 .source-text {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 1.7rem;
 }
 
 .source-text a {
