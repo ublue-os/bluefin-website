@@ -177,7 +177,7 @@ export const LangPoweredBy: PoweredBy[] = [
     altText: "Devpod"
   },
   {
-    imageUrl: "./brands/chainguard.webp",
+    imageUrl: "./brands/chainguard.svg",
     projectUrl: "https://www.chainguard.dev/",
     altText: "Chainguard"
   },
