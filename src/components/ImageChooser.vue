@@ -726,25 +726,25 @@ onMounted(() => {
 
 .decision-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1.7rem;
   font-weight: 600;
   color: #93c5fd;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
 }
 
 .decision-value {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: white;
-  margin-bottom: 0.25rem;
+  margin-bottom: 1.0rem;
 }
 
 .decision-subtitle {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1.6rem;
   color: #9ca3af;
   font-style: italic;
 }
