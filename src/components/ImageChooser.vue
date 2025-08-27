@@ -758,7 +758,7 @@ onMounted(() => {
 
 .filename-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1.75rem;
   font-weight: 600;
   color: #93c5fd;
   margin-bottom: 0.5rem;
@@ -767,7 +767,7 @@ onMounted(() => {
 .filename-value {
   display: block;
   font-family: "Courier New", monospace;
-  font-size: 1.1rem;
+  font-size: 1.65rem;
   font-weight: 600;
   color: white;
   background: rgba(0, 0, 0, 0.3);
