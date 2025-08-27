@@ -655,7 +655,8 @@ onMounted(() => {
 }
 
 .step-header h3 {
-  font-size: 1.7rem;
+  font-size: 2.3rem;
+  font-weight: bold;
   margin: 0;
   color: white; /* Download the ISO text should be white - keeping this white */
 }
