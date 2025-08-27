@@ -593,7 +593,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1.55rem;
 }
 
 .version-item:last-child {
@@ -613,7 +613,7 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.3);
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 1.55rem;
 }
 
 /* Step Selection */
