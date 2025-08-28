@@ -552,7 +552,7 @@ onMounted(() => {
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   font-weight: 700;
   text-transform: uppercase;
   z-index: 10;
@@ -849,7 +849,7 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   padding: 0 20px;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   text-decoration: none;
   margin: 0 auto;
   cursor: pointer;
