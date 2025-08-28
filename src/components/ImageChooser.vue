@@ -552,7 +552,7 @@ onMounted(() => {
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   font-weight: 700;
   text-transform: uppercase;
   z-index: 10;
