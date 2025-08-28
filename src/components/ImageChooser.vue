@@ -849,7 +849,7 @@ onMounted(() => {
   justify-content: center;
   gap: 10px;
   padding: 0 20px;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   text-decoration: none;
   margin: 0 auto;
   cursor: pointer;
