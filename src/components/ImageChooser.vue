@@ -512,9 +512,9 @@ onMounted(() => {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.3) 40%,
-    rgba(0, 0, 0, 0.8) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.9) 100%
   );
   display: flex;
   align-items: flex-end;
@@ -535,6 +535,7 @@ onMounted(() => {
   font-size: 2rem;
   font-weight: 700;
   margin: 0 0 0.25rem 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .release-subtitle {
@@ -542,6 +543,7 @@ onMounted(() => {
   opacity: 0.9;
   display: block;
   margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .recommended-badge {
@@ -579,6 +581,7 @@ onMounted(() => {
   line-height: 1.4;
   opacity: 0.9;
   margin: 0 0 1rem 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 /* Version Information */
@@ -604,6 +607,7 @@ onMounted(() => {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.8);
   min-width: 60px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .version-value {
