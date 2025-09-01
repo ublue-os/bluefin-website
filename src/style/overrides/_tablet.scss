@@ -145,6 +145,23 @@
     }
   }
 
+  @media only screen and (max-width: 640px) {
+    .btn-wrap {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      font-size: 1.3rem;
+      padding: 0 16px;
+      justify-content: center;
+    }
+  }
+
   #scene-users {
     .container {
       display: block;
