@@ -155,10 +155,31 @@
     .btn {
       width: 100%;
       max-width: 280px;
+      display: flex;
       text-align: center;
       font-size: 1.3rem;
       padding: 0 16px;
       justify-content: center;
+      box-sizing: border-box;
+
+      &[type="select"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: none;
+        cursor: pointer;
+      }
+    }
+
+    select.btn {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: none;
+      cursor: pointer;
+      text-align: center;
+      text-align-last: center;
+      -webkit-text-align-last: center;
     }
   }
 
