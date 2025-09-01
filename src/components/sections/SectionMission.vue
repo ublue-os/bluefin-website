@@ -15,7 +15,7 @@ const { t } = useI18n<MessageSchema>({
 
 <template>
   <section id="scene-mission" class="section-wrap">
-    <img src="/layer-transition.png" class="layer-transition" alt="" />
+    <img src="/layer-transition.webp" class="layer-transition" alt="" />
 
     <div class="container">
       <SceneContent
