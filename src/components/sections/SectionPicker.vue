@@ -10,10 +10,10 @@ const { t } = useI18n<MessageSchema>({
 })
 </script>
 
-<style>
-#scene-picker a {
+<style scoped>
+p :deep(a) {
   @include font(700);
-  color: var(--color-text-light);
+  color: var(--color-blue-light);
 
   &:hover {
     text-decoration: none;
