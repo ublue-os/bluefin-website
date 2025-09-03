@@ -193,7 +193,7 @@ export const LangPoweredBy: PoweredBy[] = [
   },
   {
     imageUrl: "./brands/bootc.svg",
-    projectUrl: "https://containers.github.io/bootc/",
+    projectUrl: "https://bootc-dev.github.io/",
     altText: "bootc"
   }
 ]
