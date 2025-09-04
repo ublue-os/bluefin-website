@@ -82,7 +82,7 @@ jobs:
 
       - name: Create issue on failure
         if: failure()
-        uses: actions/github-script@20fe497b3fe0c7be8aae5c9df711ac716dc9c425
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
         with:
           script: |
             const runUrl = `${context.payload.repository.html_url}/actions/runs/` +
