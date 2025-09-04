@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, provide, ref } from "vue"
 import Navigation from "./components/Navigation.vue"
-import DocusaurusHeader from "./components/DocusaurusHeader.vue"
 import PageLoading from "./components/PageLoading.vue"
 import ParallaxWrapper from "./components/sections/ParallaxWrapper.vue"
 import SectionMission from "./components/sections/SectionMission.vue"
@@ -89,14 +88,14 @@ const { t } = useI18n<MessageSchema>({
 </script>
 
 <template>
-  <DocusaurusHeader :isOpaque="isOpaque" />
   <Transition name="fade">
-    <main style="margin-top: 60px;">
+    <main>
       <PageLoading v-if="isLoading" />
       <div v-show="!isLoading">
         <ParallaxWrapper>
           <SceneLanding />
           <SceneUsers />
+
           <div class="scene-quote">
             <blockquote>
               <p>
@@ -109,6 +108,7 @@ const { t } = useI18n<MessageSchema>({
               </p>
             </blockquote>
           </div>
+
           <SceneDevelopers />
         </ParallaxWrapper>
         <SectionMission />
@@ -122,15 +122,3 @@ const { t } = useI18n<MessageSchema>({
     </main>
   </Transition>
 </template>
-// Header opacity logic
-import { onMounted, onUnmounted } from "vue"
-const isOpaque = ref(true)
-function handleScroll() {
-  isOpaque.value = window.scrollY < 10
-}
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll)
-})
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll)
-})
