@@ -12,14 +12,14 @@ lts:
 
 gts:
   base: "Fedora 41"
-  gnome: "47.5-2.switcheroo"
+  gnome: "47.5-2"
   kernel: "6.15.9-101"
   mesa: "25.0.7-1"
   nvidia: "580.82.07-2"
 
 stable:
   base: "Fedora 42"
-  gnome: "48.4-1.switcheroo"
+  gnome: "48.4-1"
   kernel: "6.15.9-201"
   mesa: "25.1.7-1"
   nvidia: "580.82.07-2"
