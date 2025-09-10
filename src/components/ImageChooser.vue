@@ -143,11 +143,10 @@ const selectArchitecture = (arch: string) => {
     imageName.value.imagesrc = "./characters/achillobator.webp"
   }
 
-  // For LTS stream, go to GPU step first (kernel comes last)
-  // For other streams, set default kernel and go to GPU step
+  // Show kernel step only for LTS stream, otherwise go to GPU step
   if (imageName.value.stream == "lts") {
-    showKernelStep.value = false
-    showGpuStep.value = true
+    showKernelStep.value = true
+    showGpuStep.value = false
   } else {
     imageName.value.kernel = "regular" // Default for non-LTS
     showKernelStep.value = false
@@ -164,24 +163,7 @@ const selectKernel = (kernel: string) => {
 
 const selectGpu = (gpu: string) => {
   imageName.value.gpu = gpu
-  
-  // For LTS stream with Nvidia: skip kernel question, go directly to download
-  // For LTS stream with AMD/Intel: show kernel question
-  // For non-LTS streams: go directly to download (kernel already set)
-  if (imageName.value.stream == "lts") {
-    if (gpu === "nvidia") {
-      // Nvidia in LTS = GDX, use regular kernel (no HWE for GDX)
-      imageName.value.kernel = "regular"
-      showDownload.value = true
-    } else {
-      // AMD/Intel in LTS = show kernel question (regular vs HWE)
-      showKernelStep.value = true
-      showDownload.value = false
-    }
-  } else {
-    // Non-LTS streams go directly to download
-    showDownload.value = true
-  }
+  showDownload.value = true
 }
 
 const getSelectedRelease = computed(() => {
@@ -361,8 +343,8 @@ onMounted(() => {
           class="back-button"
           @click="
             () => {
-              showGpuStep = true
-              imageName.gpu = undefined
+              showArchitectureStep = true
+              imageName.arch = undefined
               showKernelStep = false
             }
           "
@@ -388,9 +370,15 @@ onMounted(() => {
           class="back-button"
           @click="
             () => {
-              showArchitectureStep = true
-              imageName.arch = undefined
-              showGpuStep = false
+              if (imageName.stream === 'lts') {
+                showKernelStep = true
+                imageName.kernel = undefined
+                showGpuStep = false
+              } else {
+                showArchitectureStep = true
+                imageName.arch = undefined
+                showGpuStep = false
+              }
             }
           "
         >
@@ -415,22 +403,9 @@ onMounted(() => {
           class="back-button"
           @click="
             () => {
-              // For LTS with nvidia: go back to GPU step (kernel was skipped)
-              // For LTS with AMD/Intel: go back to kernel step  
-              // For non-LTS: go back to GPU step
-              if (imageName.stream === 'lts' && imageName.gpu === 'nvidia') {
-                showGpuStep = true
-                imageName.gpu = undefined
-                showDownload = false
-              } else if (imageName.stream === 'lts') {
-                showKernelStep = true
-                imageName.kernel = undefined
-                showDownload = false
-              } else {
-                showGpuStep = true
-                imageName.gpu = undefined
-                showDownload = false
-              }
+              showGpuStep = true
+              imageName.gpu = undefined
+              showDownload = false
             }
           "
         >
