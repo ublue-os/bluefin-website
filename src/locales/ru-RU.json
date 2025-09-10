@@ -63,11 +63,6 @@
       "DocumentationURL": "Также смотрите [Документацию Bluefin](https://docs.projectbluefin.io/), это займёт около 15 минут и содержит в себе пособие по установке - настройте себя на успех, вы направляетесь в новый мир. <br/><br/><span style='font-weight: 900'>Ищете Bluefin GTS?</span> GTS образы в данный момент недоступны но вернутся весной 2025 года.",
       "DeveloperNote": "Смотрите [Введение в Bluefin DX](https://docs.projectbluefin.io/bluefin-dx).",
       "DollyChill": "Dolly раслабляется возле ссылки на образ"
-    },
-    "Kernel": {
-      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
-      "Regular": "Bluefin LTS - For stable kernel updates",
-      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "Новости",

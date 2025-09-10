@@ -70,11 +70,6 @@
       "DocumentationURL": "參閱 [Bluefin 文檔](https://docs.projectbluefin.io/)，包含安裝運行簿，15分鐘內為自己成功做好準備，踏進新世界。<br/><br/>",
       "DeveloperNote": "參閱[Bluefin DX 簡介](https://docs.projectbluefin.io/bluefin-dx)。",
       "DollyChill": "Dolly chilling near your ISO link"
-    },
-    "Kernel": {
-      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
-      "Regular": "Bluefin LTS - For stable kernel updates",
-      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "最新消息",
