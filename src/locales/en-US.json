@@ -51,9 +51,9 @@
       "DefaultSelection": "Select your primary GPU vendor"
     },
     "Kernel": {
-      "Question": "How aggressive do you want kernel updates? This setting can be toggled after installation:",
-      "Regular": "Stable kernel updates, best for stability",
-      "HWE": "Regularly updated kernels, best for newer devices like Framework Computers"
+      "Question": "What is your priority? This choice balances system stability with support for the newest hardware. You can change this later:",
+      "Regular": "LTS Linux kernel: The most reliable option, perfect for most computers.",
+      "HWE": "Latest Linux kernel: Best for brand-new devices and getting the newest features."
     },
     "Download": {
       "Iso": "Download the ISO",
