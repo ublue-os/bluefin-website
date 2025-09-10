@@ -57,16 +57,9 @@
       "DefaultSelection": "Select your primary GPU vendor"
     },
     "Kernel": {
-      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Question": "How aggressive do you want kernel updates? Newer devices may require newer kernels",
       "Regular": "Bluefin LTS - For stable kernel updates",
-      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
-    },
-    "Stream": {
-      "Question": "How aggressive do you like your updates? ",
-      "DefaultSelection": "Select your update stream",
-      "Stable": "Bluefin (For Enthusiasts)",
-      "Gts": "Bluefin GTS (For Most People)",
-      "LTS": "Bluefin LTS (Beta)"
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework Computer"
     },
     "Download": {
       "Iso": "Download the ISO",
