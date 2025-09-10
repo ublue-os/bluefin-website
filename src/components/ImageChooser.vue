@@ -58,7 +58,7 @@ const releases = [
   {
     id: "lts",
     title: "Bluefin LTS",
-    subtitle: "For professionals and AI/ML engineers, includes NVIDIA CUDA",
+    subtitle: "For professionals and AI/ML engineers",
     description:
       "The long term support experience. Coming late September 2025.",
     image: "./characters/achillobator.webp",
