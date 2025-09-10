@@ -102,7 +102,12 @@ const getFormattedImageName = () => {
   final_name += "-" + imageName.value.stream
 
   // Add HWE suffix for LTS streams with hardware enablement
-  if (imageName.value.stream == "lts" && imageName.value.kernel == "hwe") {
+  // Skip HWE for GDX (LTS + Nvidia) as bluefin-gdx-lts-hwe-x86_64.iso does not exist
+  if (
+    imageName.value.stream == "lts" &&
+    imageName.value.kernel == "hwe" &&
+    imageName.value.gpu != "nvidia"
+  ) {
     final_name += "-hwe"
   }
 
@@ -332,10 +337,7 @@ onMounted(() => {
     </div>
 
     <!-- Kernel Selection (only for LTS) -->
-    <div
-      v-else-if="showKernelStep && !imageName.kernel"
-      class="step-selection"
-    >
+    <div v-else-if="showKernelStep && !imageName.kernel" class="step-selection">
       <div class="step-header">
         <button
           class="back-button"
@@ -419,7 +421,9 @@ onMounted(() => {
             <div class="decision-item">
               <span class="decision-label">Release:</span>
               <span class="decision-value">{{
-                getSelectedRelease?.title
+                imageName.gpu === "nvidia" && imageName.stream === "lts"
+                  ? "Bluefin GDX"
+                  : getSelectedRelease?.title
               }}</span>
               <span class="decision-subtitle">{{
                 getSelectedRelease?.subtitle
@@ -439,7 +443,9 @@ onMounted(() => {
             <div v-if="imageName.stream === 'lts'" class="decision-item">
               <span class="decision-label">Kernel:</span>
               <span class="decision-value">{{
-                imageName.kernel === "hwe" ? "Hardware Enablement (HWE)" : "Regular LTS"
+                imageName.kernel === "hwe"
+                  ? "Hardware Enablement (HWE)"
+                  : "Regular LTS"
               }}</span>
               <span class="decision-subtitle">{{
                 imageName.kernel === "hwe"
@@ -816,7 +822,7 @@ onMounted(() => {
   font-size: 1.6rem;
   font-weight: 700;
   color: white;
-  margin-bottom: 1.0rem;
+  margin-bottom: 1rem;
 }
 
 .decision-subtitle {
