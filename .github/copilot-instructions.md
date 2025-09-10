@@ -354,3 +354,7 @@ npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 - **Always** use tailwind css and do not hardcode pixel sizes
 - **Always** ensure that every file passes lint at the end of the request, be especially strict with vue syntax
 - **Always** ensure images are compressed appropriately, the website must be mobile friendly
+- **Always** do surgical improvements, especially when creating something from scratch, keep it simple so others can expand on it in the future. Focus on clean, readable code.
+- **Always** match conventions that exist, like font sizes, match the visual style and identity of the existing website
+
+
