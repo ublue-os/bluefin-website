@@ -41,12 +41,6 @@
   "TryBluefin": {
     "Title": "Try Bluefin",
     "Description": "Choose your raptor for your hardware and use case. The team recommends [Fedora Media Writer](https://flathub.org/apps/org.fedoraproject.MediaWriter) to create installation media, Ventoy is unsupported. Check [the documentation](https://docs.projectbluefin.io) for more information.\n\n\nBluefin receives timely security updates and is available in three different streams that reflect how aggressively it receives feature updates:\n\n",
-    "Developer": {
-      "Question": "Are you a developer?",
-      "DefaultSelection": "Include developer tooling",
-      "Yes": "Yes",
-      "No": "No"
-    },
     "Architecture": {
       "Question": "Which architecture will you install Bluefin on? Older BIOS-based systems are unsupported",
       "x86": "x86_64 (Standard for most computers)",
