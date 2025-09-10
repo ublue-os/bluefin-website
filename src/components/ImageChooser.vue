@@ -58,7 +58,7 @@ const releases = [
   {
     id: "lts",
     title: "Bluefin LTS",
-    subtitle: "For professionals and AI/ML engineers",
+    subtitle: "For professionals and AI/ML engineers, includes NVIDIA CUDA",
     description:
       "The long term support experience. Coming late September 2025.",
     image: "./characters/achillobator.webp",
@@ -416,7 +416,7 @@ onMounted(() => {
 
       <div class="download-summary">
         <div class="decision-summary">
-          <h4>Your Selection Summary</h4>
+          <h4>Your Selection ...</h4>
           <div class="decision-items">
             <div class="decision-item">
               <span class="decision-label">Release:</span>
@@ -436,7 +436,7 @@ onMounted(() => {
               }}</span>
               <span class="decision-subtitle">{{
                 imageName.arch === "x86"
-                  ? "Standard for most computers"
+                  ? "Standard for most computers (AMD and Intel)"
                   : "ARM-based systems"
               }}</span>
             </div>
@@ -449,8 +449,8 @@ onMounted(() => {
               }}</span>
               <span class="decision-subtitle">{{
                 imageName.kernel === "hwe"
-                  ? "Updated kernels for better hardware support"
-                  : "Stable kernel updates"
+                  ? "Regularly updated kernels for better hardware support"
+                  : "Stable kernel updates, locked to 6.12.0 with backports"
               }}</span>
             </div>
             <div class="decision-item">
@@ -460,8 +460,8 @@ onMounted(() => {
               }}</span>
               <span class="decision-subtitle">{{
                 imageName.gpu === "amd"
-                  ? "Integrated AMD graphics"
-                  : "RTX/GTX 16xx+ series"
+                  ? "Integrated AMD or Intel graphics"
+                  : "Nvidia RTX/GTX 16xx+ series, GTX 10xx series and below unsupported"
               }}</span>
             </div>
           </div>
