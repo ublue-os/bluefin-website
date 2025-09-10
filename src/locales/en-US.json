@@ -51,7 +51,7 @@
       "DefaultSelection": "Select your primary GPU vendor"
     },
     "Kernel": {
-      "Question": "How aggressive do you want kernel updates? Newer devices may require newer kernels",
+      "Question": "How aggressive do you want kernel updates? This setting can be toggled after installation:",
       "Regular": "Stable kernel updates, best for stability",
       "HWE": "Regularly updated kernels, best for newer devices like Framework Computers"
     },
