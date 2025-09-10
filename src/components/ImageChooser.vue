@@ -36,17 +36,20 @@ const imageName: Ref<{
   base: string | undefined
   gpu: string | undefined
   stream: string | undefined
+  kernel: string | undefined
   imagesrc: string | undefined
 }> = ref({
   arch: undefined,
   base: "bluefin",
   gpu: undefined,
   stream: undefined,
+  kernel: undefined,
   imagesrc: undefined
 })
 
 const selectedRelease = ref<string | undefined>(undefined)
 const showArchitectureStep = ref(false)
+const showKernelStep = ref(false)
 const showGpuStep = ref(false)
 const showDownload = ref(false)
 
@@ -98,6 +101,11 @@ const getFormattedImageName = () => {
 
   final_name += "-" + imageName.value.stream
 
+  // Add HWE suffix for LTS streams with hardware enablement
+  if (imageName.value.stream == "lts" && imageName.value.kernel == "hwe") {
+    final_name += "-hwe"
+  }
+
   switch (imageName.value.arch) {
     case "x86":
       final_name += "-x86_64"
@@ -115,6 +123,7 @@ const selectRelease = (releaseId: string) => {
   imageName.value.stream = releaseId
   imageName.value.imagesrc = releases.find((r) => r.id === releaseId)?.image
   showArchitectureStep.value = true
+  showKernelStep.value = false
   showGpuStep.value = false
   showDownload.value = false
 }
@@ -129,6 +138,20 @@ const selectArchitecture = (arch: string) => {
     imageName.value.imagesrc = "./characters/achillobator.webp"
   }
 
+  // Show kernel step only for LTS stream, otherwise go to GPU step
+  if (imageName.value.stream == "lts") {
+    showKernelStep.value = true
+    showGpuStep.value = false
+  } else {
+    imageName.value.kernel = "regular" // Default for non-LTS
+    showKernelStep.value = false
+    showGpuStep.value = true
+  }
+  showDownload.value = false
+}
+
+const selectKernel = (kernel: string) => {
+  imageName.value.kernel = kernel
   showGpuStep.value = true
   showDownload.value = false
 }
@@ -162,9 +185,11 @@ const reset = () => {
   selectedRelease.value = undefined
   imageName.value.stream = undefined
   imageName.value.arch = undefined
+  imageName.value.kernel = undefined
   imageName.value.gpu = undefined
   imageName.value.imagesrc = undefined
   showArchitectureStep.value = false
+  showKernelStep.value = false
   showGpuStep.value = false
   showDownload.value = false
 }
@@ -306,8 +331,11 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- GPU Selection -->
-    <div v-else-if="showGpuStep && !imageName.gpu" class="step-selection">
+    <!-- Kernel Selection (only for LTS) -->
+    <div
+      v-else-if="showKernelStep && !imageName.kernel"
+      class="step-selection"
+    >
       <div class="step-header">
         <button
           class="back-button"
@@ -315,7 +343,40 @@ onMounted(() => {
             () => {
               showArchitectureStep = true
               imageName.arch = undefined
-              showGpuStep = false
+              showKernelStep = false
+            }
+          "
+        >
+          ← Back
+        </button>
+        <h3>{{ t("TryBluefin.Kernel.Question") }}</h3>
+      </div>
+      <div class="options-grid">
+        <button class="option-button" @click="selectKernel('regular')">
+          {{ t("TryBluefin.Kernel.Regular") }}
+        </button>
+        <button class="option-button" @click="selectKernel('hwe')">
+          {{ t("TryBluefin.Kernel.HWE") }}
+        </button>
+      </div>
+    </div>
+
+    <!-- GPU Selection -->
+    <div v-else-if="showGpuStep && !imageName.gpu" class="step-selection">
+      <div class="step-header">
+        <button
+          class="back-button"
+          @click="
+            () => {
+              if (imageName.stream === 'lts') {
+                showKernelStep = true
+                imageName.kernel = undefined
+                showGpuStep = false
+              } else {
+                showArchitectureStep = true
+                imageName.arch = undefined
+                showGpuStep = false
+              }
             }
           "
         >
@@ -373,6 +434,17 @@ onMounted(() => {
                 imageName.arch === "x86"
                   ? "Standard for most computers"
                   : "ARM-based systems"
+              }}</span>
+            </div>
+            <div v-if="imageName.stream === 'lts'" class="decision-item">
+              <span class="decision-label">Kernel:</span>
+              <span class="decision-value">{{
+                imageName.kernel === "hwe" ? "Hardware Enablement (HWE)" : "Regular LTS"
+              }}</span>
+              <span class="decision-subtitle">{{
+                imageName.kernel === "hwe"
+                  ? "Updated kernels for better hardware support"
+                  : "Stable kernel updates"
               }}</span>
             </div>
             <div class="decision-item">
