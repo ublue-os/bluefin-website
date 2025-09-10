@@ -63,6 +63,11 @@
       "DocumentationURL": "Hãy ghé thăm trang [Tài liệu về Bluefin](https://docs.projectbluefin.io/), chỉ mất khoảng 15 phút và bao gồm các hướng dẫn cài đặt chi tiết - hãy sẵn sàng cho thành công của mình, bạn đang bước vào một thế giới mới. <br/><br/><span style='font-weight: 900'>Bạn đang tìm Bluefin GTS?</span> Hiện tại các bản GTS ISOs chưa sẵn sàng nhưng sẽ quay trở lại vào Mùa xuân 2025.",
       "DeveloperNote": "Xem ngay [Giới thiệu về Bluefin DX](https://docs.projectbluefin.io/bluefin-dx).",
       "DollyChill": "Dolly chilling near your ISO link"
+    },
+    "Kernel": {
+      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Regular": "Bluefin LTS - For stable kernel updates",
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "Tin tức",

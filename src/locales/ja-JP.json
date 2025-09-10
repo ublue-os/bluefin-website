@@ -63,6 +63,11 @@
       "DocumentationURL": "[Bluefin ドキュメント](https://docs.projectbluefin.io/), をご覧ください。約 15 分で読め、インストール手順書も含まれています - 成功への準備をしてください、あなたは新しい世界に向かっています。<br/><br/><span style='font-weight: 900'>Bluefin GTS をお探しですか？</span> GTS ISO は現在利用できませんが、2025 年春に復活予定です。",
       "DeveloperNote": "[Bluefin DX の紹介](https://docs.projectbluefin.io/bluefin-dx) をご覧ください。",
       "DollyChill": "ISO リンクの近くでくつろぐ Dolly"
+    },
+    "Kernel": {
+      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Regular": "Bluefin LTS - For stable kernel updates",
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "ニュース",

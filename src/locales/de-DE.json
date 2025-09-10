@@ -70,6 +70,11 @@
       "DocumentationURL": "Lies die [Bluefin Dokumentation (Englisch)](https://docs.projectbluefin.io/). Es dauert etwa 15 Minuten und beinhaltet ein Installations-Handbuch - bereite Dich vor, Du betrittst eine neue Welt.",
       "DeveloperNote": "Lies die [Einführung zu Bluefin DX (Englisch)](https://docs.projectbluefin.io/bluefin-dx)",
       "DollyChill": "Dolly chillt bei deinem ISO Link"
+    },
+    "Kernel": {
+      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Regular": "Bluefin LTS - For stable kernel updates",
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "Neuigkeiten",

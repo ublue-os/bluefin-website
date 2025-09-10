@@ -56,6 +56,11 @@
       "Question": "Who is the vendor of your primary graphics card (GPU)? Older Nvidia cards are unsupported",
       "DefaultSelection": "Select your primary GPU vendor"
     },
+    "Kernel": {
+      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Regular": "Bluefin LTS - For stable kernel updates",
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
+    },
     "Stream": {
       "Question": "How aggressive do you like your updates? ",
       "DefaultSelection": "Select your update stream",

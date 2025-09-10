@@ -63,6 +63,11 @@
       "DocumentationURL": "Bekijk de [Bluefin Documentatie](https://docs.projectbluefin.io/), het duurt ongeveer 15 minuten en bevat een installatiehandleiding - bereid je voor op succes, je gaat een nieuwe wereld binnen. <br/><br/><span style='font-weight: 900'>Op zoek naar Bluefin GTS?</span> GTS ISO's zijn momenteel niet beschikbaar maar zullen terugkeren in het voorjaar van 2025.",
       "DeveloperNote": "Bekijk [Introductie tot Bluefin DX](https://docs.projectbluefin.io/bluefin-dx).",
       "DollyChill": "Dolly chillt bij je ISO-link"
+    },
+    "Kernel": {
+      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Regular": "Bluefin LTS - For stable kernel updates",
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "Nieuws",

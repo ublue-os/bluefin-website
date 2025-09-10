@@ -63,6 +63,11 @@
       "DocumentationURL": "Kontrolu la [Bluefin Dokumentadon](https://docs.projectbluefin.io/), ĝi daŭras ĉirkaŭ 15 minutojn kaj inkluzivas instalan gvidlibron - preparu vin por sukceso, vi iras en novan mondon. <br/><br/><span style='font-weight: 900'>Serĉante Bluefin GTS?</span> GTS ISO-j nuntempe ne haveblas sed revenos en Printempo 2025.",
       "DeveloperNote": "Kontrolu [Enkonduko al Bluefin DX](https://docs.projectbluefin.io/bluefin-dx).",
       "DollyChill": "Dolly malstreĉiĝanta apud via ISO-ligilo"
+    },
+    "Kernel": {
+      "Question": "How aggressive do you want kernel updates? Newer devices that require updated support",
+      "Regular": "Bluefin LTS - For stable kernel updates",
+      "HWE": "Bluefin LTS (With Hardware Enablement) - Updated kernels for better hardware support, choose this if you have a Framework computer"
     }
   },
   "NewsTitle": "Novaĵoj",
