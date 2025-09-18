@@ -63,7 +63,7 @@ const releases = [
       "The long term support experience. Coming late September 2025.",
     image: "./characters/achillobator.webp",
     supportedArch: ["x86", "arm"],
-    recommended: false,
+    recommended: false
   },
   {
     id: "gts",
@@ -270,7 +270,6 @@ onMounted(() => {
             <span v-if="release.recommended" class="recommended-badge"
               >Recommended</span
             >
-            <span v-if="release.beta" class="beta-badge">Beta</span>
 
             <div class="release-overlay">
               <div class="release-content">
@@ -647,21 +646,6 @@ onMounted(() => {
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font-size: 1.3rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  z-index: 10;
-  backdrop-filter: blur(10px);
-}
-
-.beta-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(var(--color-blue-rgb), 0.9);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
   z-index: 10;
