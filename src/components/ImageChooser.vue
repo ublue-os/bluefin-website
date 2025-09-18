@@ -64,7 +64,6 @@ const releases = [
     image: "./characters/achillobator.webp",
     supportedArch: ["x86", "arm"],
     recommended: false,
-    beta: true
   },
   {
     id: "gts",
