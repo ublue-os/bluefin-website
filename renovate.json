@@ -10,6 +10,13 @@
   "rebaseWhen": "conflicted",
   "packageRules": [
     {
+      "description": "Automerge stream-versions.yml updates from github-actions bot",
+      "matchFileNames": ["public/stream-versions.yml"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
       "description": "Automerge non-major updates",
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
