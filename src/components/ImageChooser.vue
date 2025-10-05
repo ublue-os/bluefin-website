@@ -60,7 +60,7 @@ const releases = [
     title: "Bluefin LTS",
     subtitle: "For professionals and AI/ML engineers",
     description:
-      "The long term support experience on an enterprise-grade foundation.",
+      "A long term support experience on an enterprise-grade foundation.",
     image: "./characters/achillobator.webp",
     supportedArch: ["x86", "arm"],
     recommended: false
