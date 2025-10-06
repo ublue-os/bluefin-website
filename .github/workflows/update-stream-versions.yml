@@ -43,7 +43,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@e9af275c3778a67411fcac2d613e8d4e9be452fd
+        uses: peter-evans/create-pull-request@46cdba753c74545733b821043d64bd6925fc4da9
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: |
