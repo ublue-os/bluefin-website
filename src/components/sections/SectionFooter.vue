@@ -7,9 +7,6 @@ import { useI18n } from "vue-i18n"
 const { t } = useI18n<MessageSchema>({
   useScope: "global"
 })
-
-// @ts-ignore
-import IframeResizer from "@iframe-resizer/vue/sfc"
 </script>
 
 <template>
