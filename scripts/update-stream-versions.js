@@ -75,7 +75,8 @@ function parseChangelogVersions(body) {
     kernel: "",
     gnome: "",
     mesa: "",
-    nvidia: ""
+    nvidia: "",
+    hwe: ""
   }
 
   // Split by lines and find the Major packages and Major GDX packages sections
@@ -134,6 +135,8 @@ function parseChangelogVersions(body) {
           versions.mesa = version
         } else if (packageName === "nvidia") {
           versions.nvidia = version
+        } else if (packageName === "hwe kernel") {
+          versions.hwe = version
         }
       }
     }
@@ -161,7 +164,8 @@ async function updateStreamVersions() {
         gnome: ltsVersions.gnome,
         kernel: ltsVersions.kernel,
         mesa: ltsVersions.mesa,
-        nvidia: ltsVersions.nvidia
+        nvidia: ltsVersions.nvidia,
+        hwe: ltsVersions.hwe
       }
     }
 
@@ -211,12 +215,14 @@ async function updateStreamVersions() {
 
     // Add each stream's data
     for (const [streamName, data] of Object.entries(updates)) {
+      const hweField = streamName === "lts" ? `\n  hwe: "${data.hwe}"` : ""
+
       yamlContent += `${streamName}:
   base: "${data.base}"
   gnome: "${data.gnome}"
   kernel: "${data.kernel}"
   mesa: "${data.mesa}"
-  nvidia: "${data.nvidia}"
+  nvidia: "${data.nvidia}"${hweField}
 
 `
     }
