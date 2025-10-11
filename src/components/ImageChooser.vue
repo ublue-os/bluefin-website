@@ -20,6 +20,7 @@ interface VersionInfo {
   kernel: string
   mesa: string
   nvidia: string
+  hwe: string | undefined
 }
 
 interface StreamVersions {
@@ -305,6 +306,13 @@ onMounted(() => {
                       streamVersions[release.id as keyof StreamVersions].kernel
                     }}</span>
                   </div>
+                  <div v-if="release.id === 'lts'" class="version-item">
+                    <span class="version-label">HWE Kernel:</span>
+                    <span class="version-value">{{
+                      streamVersions[release.id as keyof StreamVersions].hwe
+                    }}</span>
+                  </div>
+
                   <div class="version-item">
                     <span class="version-label">MESA:</span>
                     <span class="version-value">{{
@@ -665,6 +673,7 @@ onMounted(() => {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 150px;
 }
 
 .version-item {
