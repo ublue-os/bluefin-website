@@ -53,7 +53,7 @@
     "Kernel": {
       "Question": "What is your priority? This choice balances system stability with support for the newest hardware. You can change this later:",
       "Regular": "LTS Linux kernel: The most reliable option, perfect for most computers.",
-      "HWE": "Latest Linux kernel: Best for brand-new devices and getting the newest features. Choose this if you have a Framework Computer."
+      "HWE": "Latest Linux kernel: Best for brand-new devices and getting the newest features."
     },
     "Download": {
       "Iso": "Download the ISO",
