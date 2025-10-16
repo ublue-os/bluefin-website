@@ -37,6 +37,7 @@ Then, you can use `just` to run the common commands:
 
 -   `npm run dev`: Run the development server
 -   `npm run build`: Build for production
+-   `npm run preview`: Preview the production build locally
 
 </details>
 
