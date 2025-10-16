@@ -16,7 +16,7 @@ This website is built with [Vite](https://vitejs.dev/) and [Vue](https://vuejs.o
 
 - [Node.js](https://nodejs.org/) (v18 or higher)
 - [npm](https://www.npmjs.com/)
-- [just](https://github.com/casey/just)
+- Optional: [just](https://github.com/casey/just) (for simplified commands)
 
 ### Getting Started
 
