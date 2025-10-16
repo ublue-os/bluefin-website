@@ -6,8 +6,8 @@
 
 # build the website
 build:
-    npm run build
+	npm run build
 
 # serve the website locally
 serve:
-    npm run dev
+	npm run dev
