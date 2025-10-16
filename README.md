@@ -28,8 +28,9 @@ npm install
 
 Then, you can use `just` to run the common commands:
 
--   `just serve`: Run the development server
+-   `just dev`: Run the development server
 -   `just build`: Build for production
+-   `just preview`: Preview the production build locally
 
 <details>
 <summary>Don't have `just`? Use npm</summary>
