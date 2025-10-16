@@ -10,7 +10,7 @@
 
 ## Development
 
-This website is built with [Vite](https://vitejs.dev/) and [Vue](https://vuejs.org/). We use `just` to simplify common commands.
+This website is built with [Vite](https://vitejs.dev/) and [Vue](https://vuejs.org/). npm is the primary package manager; `just` is optional to simplify common commands.
 
 ### Prerequisites
 
