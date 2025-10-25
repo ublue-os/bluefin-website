@@ -50,6 +50,8 @@ export const LangDevsBoxOne = "Visual Studio Code with devcontainers"
 export const LangDevsBoxTwo = "Container centric terminal"
 export const LangDevsBoxThree = "Devpod for developer environments as code"
 export const LangDevsBoxFour = "Homebrew on-tap"
+export const LangDevsBoxFive = "Podman Desktop"
+export const LangDevsBoxSix = "JetBrains IDEs"
 export const LangDevsTowerImageURL = "./characters/devs.webp"
 export const LangDevsAppendix = `The inclusion of a [container runtime](https://podman.io) unlocks your team\'s potential. Use the same tools that power modern internet infrastructure on your desktop. Bluefin knows how to ship to production. 
 
