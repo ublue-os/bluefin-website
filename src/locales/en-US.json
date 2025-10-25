@@ -22,9 +22,9 @@
     "BoxOne": "Visual Studio Code with devcontainers",
     "BoxTwo": "Container centric terminal",
     "BoxThree": "Devpod for developer environments as code",
-    "BoxFour": "Homebrew on-tap",
-    "BoxFive": "Podman Desktop",
-    "BoxSix": "JetBrains IDEs",
+    "BoxFour": "Homebrew on-tap, same tools as your Mac",
+    "BoxFive": "Podman Desktop for graphical container management",
+    "BoxSix": "JetBrains IDEs one command away",
     "Appendix": "The inclusion of a [container runtime](https://podman.io) unlocks your team's potential. Use the same tools that power modern internet infrastructure on your desktop. Bluefin knows how to ship to production. \n\nWe target Linux operators who don't use Linux on the desktop because it has failed them. So we're taking the Linux desktop through its cloud-native journey and building it as a community. \n\n> Be the one who moves, not the one who is moved.\n> <cite>[Zavala][1]</cite>\n\n[1]: https://en.wikipedia.org/wiki/Lance_Reddick",
     "ArtworkDescription": "Character tower artwork",
     "TowerJoke": "<b>Tower</b> over your Backlog!"
