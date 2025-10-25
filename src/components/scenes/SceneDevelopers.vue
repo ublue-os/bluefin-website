@@ -100,6 +100,42 @@ const { t } = useI18n<MessageSchema>({
               </div>
               <p>{{ t("Devs.BoxFour") }}</p>
             </div>
+
+            <div class="brand-item">
+              <div>
+                <div class="icon-wrap">
+                  <img
+                    src="/brands/podman-desktop.svg"
+                    alt="Podman Desktop logo blur"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/brands/podman-desktop.svg"
+                    alt="Podman Desktop logo"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <p>{{ t("Devs.BoxFive") }}</p>
+            </div>
+
+            <div class="brand-item">
+              <div>
+                <div class="icon-wrap">
+                  <img
+                    src="/brands/jetbrains.png"
+                    alt="JetBrains logo blur"
+                    loading="lazy"
+                  />
+                  <img
+                    src="/brands/jetbrains.png"
+                    alt="JetBrains logo"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <p>{{ t("Devs.BoxSix") }}</p>
+            </div>
           </div>
 
           <div
