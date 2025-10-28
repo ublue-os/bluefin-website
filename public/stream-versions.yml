@@ -16,7 +16,7 @@ gts:
   gnome: "48.6-1"
   kernel: "6.16.8-200"
   mesa: "25.1.9-1"
-  nvidia: "{pkgrel:nvidia-driver}"
+  nvidia: "580.95.05-1"
 
 stable:
   base: "Fedora 42"
