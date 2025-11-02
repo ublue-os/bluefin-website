@@ -188,4 +188,3 @@ const rightNavLinks = [
   }
 }
 </style>
-</style>
