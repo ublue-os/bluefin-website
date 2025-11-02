@@ -21,7 +21,7 @@ const rightNavLinks = [
       <div class="navbar__items">
         <a href="https://projectbluefin.io" class="navbar__brand">
           <div class="navbar__logo">
-            <img src="/img/logo.svg" alt="Bluefin" />
+            <img src="/img/logo.svg" alt="Bluefin" loading="lazy" />
           </div>
           <b class="navbar__title text--truncate">Bluefin</b>
         </a>
