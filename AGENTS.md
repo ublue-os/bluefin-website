@@ -357,4 +357,16 @@ npx prettier --write src/  # Format code (~3-5s, may install prettier first)
 - **Always** do surgical improvements, especially when creating something from scratch, keep it simple so others can expand on it in the future. Focus on clean, readable code.
 - **Always** match conventions that exist, like font sizes, match the visual style and identity of the existing website
 
+### Attribution Requirements
 
+AI agents must disclose what tool and model they are using in the "Assisted-by" commit footer:
+
+```text
+Assisted-by: [Model Name] via [Tool Name]
+```
+
+Example:
+
+```text
+Assisted-by: GLM 4.6 via Claude Code
+```
