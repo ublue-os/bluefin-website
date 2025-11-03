@@ -18,7 +18,7 @@
   "Devs": {
     "Tag": "For",
     "Title": "Developers",
-    "Text": "Bluefin comes with an optional \"developer mode\" that transforms your device into a powerful workstation. It features container-focused workflows to get you started depending on where you're coming from, or bring your own. Wield the [industry's leading tools](https://landscape.cncf.io/) at your fingertips.",
+    "Text": "Bluefin comes with an optional \"developer mode\" that transforms your device into a powerful workstation. It features container-focused workflows to get you started depending on where you're coming from, or bring your own. There are [9.2 million cloud native developers](https://www.cncf.io/wp-content/uploads/2025/04/Blue-DN29-State-of-Cloud-Native-Development.pdf?ref=1985.co.in ) in the world, wield these [industry-leading tools](https://landscape.cncf.io/) with ease...",
     "BoxOne": "Visual Studio Code with devcontainers",
     "BoxTwo": "Container centric terminal",
     "BoxThree": "Devpod for developer environments as code",
