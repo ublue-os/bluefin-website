@@ -1,14 +1,4 @@
-<p align="center">
-  <a href="https://projectbluefin.io/"><img src="/public/meta.webp?raw=true" alt="Bluefin"/></a>
-</p>
-
-# Website for [Bluefin](https://github.com/ublue-os/bluefin)
-
-<p align="center">
-  <img src="/metrics.plugin.pagespeed.svg?raw=true" alt="Google Pagespeed Metrics"/>
-</p>
-
-## Development
+# Development
 
 This website is built with [Vite](https://vitejs.dev/) and [Vue](https://vuejs.org/). npm is the primary package manager; `just` is optional to simplify common commands.
 
