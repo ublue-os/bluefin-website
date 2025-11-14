@@ -1,0 +1,16 @@
+// Top navbar adjustments
+body {
+  padding-top: 60px;
+}
+
+// Ensure the first scene starts below the navbar
+.scene-landing {
+  margin-top: 0;
+}
+
+// Mobile adjustments
+@media (max-width: 768px) {
+  body {
+    padding-top: 56px;
+  }
+}

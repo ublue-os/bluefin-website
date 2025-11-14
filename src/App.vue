@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, provide, ref } from "vue"
+import TopNavbar from "./components/TopNavbar.vue"
 import Navigation from "./components/Navigation.vue"
 import PageLoading from "./components/PageLoading.vue"
 import ParallaxWrapper from "./components/sections/ParallaxWrapper.vue"
@@ -91,6 +92,7 @@ const { t } = useI18n<MessageSchema>({
   <Transition name="fade">
     <main>
       <PageLoading v-if="isLoading" />
+      <TopNavbar v-show="!isLoading" />
       <div v-show="!isLoading">
         <ParallaxWrapper>
           <SceneLanding />
